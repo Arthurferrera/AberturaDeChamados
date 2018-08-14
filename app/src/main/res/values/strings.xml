@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Abertura de Chamados</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_abrir_chamado">Abrir Chamado</string>
+</resources>
