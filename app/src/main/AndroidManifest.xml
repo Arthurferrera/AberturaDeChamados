@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -28,6 +28,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.gabriel.aberturadechamados.MainActivity" />
         </activity>
+        <activity
+            android:name=".VisualizarChamadoActivity"
+            android:label="@string/title_activity_visualizar_chamado"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.gabriel.aberturadechamados.MainActivity" />
+        </activity>
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
