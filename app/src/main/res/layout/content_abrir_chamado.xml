@@ -7,38 +7,64 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".AbrirChamadoActivity"
     tools:showIn="@layout/activity_abrir_chamado"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
-
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Titulo:"
-        android:textSize="15sp"
-        android:textAlignment="textStart"
-        />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Descrição:"
-        android:textSize="15sp"
-        android:textAlignment="textStart"
-        />
-    
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Titulo:"
+                android:textSize="15sp"
+                android:textAlignment="textStart"
+                android:layout_marginTop="20dp"
+                />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirmar"
-        />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/txt_titulo"
+                android:backgroundTint="@color/preto"
+                android:layout_marginTop="10dp"
+                />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descrição:"
+                android:textSize="15sp"
+                android:textAlignment="textStart"
+                android:layout_marginTop="20dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:inputType="text|textMultiLine"
+                android:id="@+id/txt_mensagem"
+                android:gravity="top"
+                android:backgroundTint="@color/preto"
+                android:layout_marginTop="10dp"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirmar"
+                android:id="@+id/btn_abrir_chamado"
+                android:layout_gravity="end"
+                android:layout_marginTop="15dp"
+                android:onClick="AbrirChamado"
+                />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
