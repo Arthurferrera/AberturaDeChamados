@@ -9,19 +9,10 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:paddingTop="10dp"
-        android:text="Lista de Chamados"
-        android:textAlignment="center"
-        android:textSize="30sp" />
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/list_view_chamados">
-
     </ListView>
 
 </LinearLayout>

@@ -38,19 +38,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         list_view_chamados.setOnItemClickListener(this);
 
         ArrayList<Chamado> listaChamados = new ArrayList<>();
-        listaChamados.add(new Chamado(titulo, mensagem));
         listaChamados.add(new Chamado("PC", "PC quebrado"));
-        listaChamados.add(new Chamado(titulo, mensagem));
         listaChamados.add(new Chamado("PC", "PC quebrado"));
-        listaChamados.add(new Chamado(titulo, mensagem));
         listaChamados.add(new Chamado("PC", "PC quebrado"));
-        listaChamados.add(new Chamado(titulo, mensagem));
         listaChamados.add(new Chamado("PC", "PC quebrado"));
-        listaChamados.add(new Chamado(titulo, mensagem));
         listaChamados.add(new Chamado("PC", "PC quebrado"));
-        listaChamados.add(new Chamado(titulo, mensagem));
         listaChamados.add(new Chamado("PC", "PC quebrado"));
-        listaChamados.add(new Chamado(titulo, mensagem));
 
         adaptador = new ChamadoAdapter(this, listaChamados);
         list_view_chamados.setAdapter(adaptador);
@@ -69,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Chamado item = adaptador.getItem(i);
         Intent intencao = new Intent(this, VisualizarChamadoActivity.class);
+        intencao.putExtra("titulo", item.getTitulo());
+        intencao.putExtra("mensagem", item.getMensagem());
         startActivity(intencao);
     }
 }

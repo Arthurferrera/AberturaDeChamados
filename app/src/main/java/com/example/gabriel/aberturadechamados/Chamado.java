@@ -1,17 +1,19 @@
 package com.example.gabriel.aberturadechamados;
 
-import java.util.Date;
-
 public class Chamado {
 
     private String titulo;
     private String mensagem;
     private Boolean status;
-    private Date data;
+    private String data;
 
     public Chamado(String titulo, String mensagem) {
         this.titulo = titulo;
         this.mensagem = mensagem;
+    }
+
+    public Chamado() {
+
     }
 
     public String getTitulo() {
@@ -38,11 +40,11 @@ public class Chamado {
         this.status = status;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 }

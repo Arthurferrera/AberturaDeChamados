@@ -68,7 +68,15 @@ public class AbrirChamadoActivity extends AppCompatActivity {
             setarDataHora();
             status = false;
 
-//            Toast.makeText(this, "Chamado "+titulo+" "+mensagem+" "+dataAberturaChamado+ " " + status, Toast.LENGTH_SHORT).show();
+            Chamado c = new Chamado();
+            c.setTitulo(titulo);
+            c.setMensagem(mensagem);
+            c.setData(dataAberturaChamado);
+            c.setStatus(status);
+
+            finish();
+
+            Toast.makeText(this, "Salvo com sucesso!", Toast.LENGTH_SHORT).show();
         }
     }
 

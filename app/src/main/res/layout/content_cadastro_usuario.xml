@@ -22,12 +22,16 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CNPJ:" />
+                android:text="CNPJ:"
+                />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_cnpj"
+                android:inputType="number"
+                android:maxLength="18"
+                android:hint="Digite apenas números"
                 />
 
             <TextView
@@ -82,7 +86,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cadastrar"
-                android:layout_gravity="end"/>
+                android:layout_gravity="end"
+                android:onClick="CadastrarUsuario"/>
 
         </LinearLayout>
     </ScrollView>
