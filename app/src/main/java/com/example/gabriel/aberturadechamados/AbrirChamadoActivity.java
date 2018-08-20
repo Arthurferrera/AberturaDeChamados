@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.gabriel.aberturadechamados.api.InserirChamadoApi;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -68,15 +70,11 @@ public class AbrirChamadoActivity extends AppCompatActivity {
             setarDataHora();
             status = false;
 
-            Chamado c = new Chamado();
-            c.setTitulo(titulo);
-            c.setMensagem(mensagem);
-            c.setData(dataAberturaChamado);
-            c.setStatus(status);
-
-            finish();
-
-            Toast.makeText(this, "Salvo com sucesso!", Toast.LENGTH_SHORT).show();
+            String url = "http://192.168.2.121/APIChamados/inserir.php?";
+            url += "titulo="+titulo+"&mensagem="+mensagem+"&data="+dataAberturaChamado+"&status=0";
+            new InserirChamadoApi(url, this).execute();
+//            finish();
+//            Toast.makeText(this, "Salvo com sucesso!", Toast.LENGTH_SHORT).show();
         }
     }
 
