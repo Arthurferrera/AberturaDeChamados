@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.api.InserirChamadoApi;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -44,6 +46,10 @@ public class AbrirChamadoActivity extends AppCompatActivity {
         EditText campoComFoco = null;
         boolean isValid = true;
 
+//        primeiro verfica o valor do campo, se for igual a 0, significa que está vazio
+//        depois mostra a mensagem de erro
+//        e seta a variavel isValid, como null, assim não é valido o formulario
+
         if(txt_titulo.getText().toString().length() == 0){
             campoComFoco = txt_titulo;
             txt_titulo.setError("Titulo obrigatório");
@@ -63,23 +69,33 @@ public class AbrirChamadoActivity extends AppCompatActivity {
     }
 
 //    método que faz o processo de gravar/abrir o chamado
-    public void AbrirChamado(View view) {
+    public void AbrirChamado(View view) throws UnsupportedEncodingException {
         if(ValidarCampos()){
+//            resgatando os valores dos inputs
             titulo = txt_titulo.getText().toString();
             mensagem = txt_mensagem.getText().toString();
+
+//            deixando o que foi digitado pelo usuario no padrao utf-8, para ser passado na url sem problemas
+            mensagem = URLEncoder.encode(mensagem, "UTF-8");
+            titulo = URLEncoder.encode(titulo, "UTF-8");
+
+//            chamando metodo que seta a data e hora atual
             setarDataHora();
+//            setando o status em false, pois todos cos chamados abertos vão ser pendentes, só muda o status se for resolvido
             status = false;
 
             String url = "http://192.168.2.121/APIChamados/inserir.php?";
-            url += "titulo="+titulo+"&mensagem="+mensagem+"&data="+dataAberturaChamado+"&status=0";
+            String parametros = "titulo="+titulo+"&mensagem="+mensagem+"&data="+dataAberturaChamado+"&status=0";
+            url += parametros;
             new InserirChamadoApi(url, this).execute();
 //            finish();
-//            Toast.makeText(this, "Salvo com sucesso!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Chamado cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+
         }
     }
 
 //    método pega a data e hora atual
-    public void setarDataHora(){
+    public void setarDataHora() throws UnsupportedEncodingException {
 //        setando a data e hora da consulta
         final Calendar c = Calendar.getInstance();
         int ano = c.get(Calendar.YEAR);
@@ -89,5 +105,7 @@ public class AbrirChamadoActivity extends AppCompatActivity {
         int minutos = c.get(Calendar.MINUTE);
         String dataAtual = String.format("%02d/%02d/%d ás %02d:%02d", dia, mes+1, ano, hora, minutos);
         dataAberturaChamado = dataAtual;
+//        tirando os espaços, deixando no formato utf-8
+        dataAberturaChamado = URLEncoder.encode(dataAberturaChamado, "UTF-8");
     }
 }

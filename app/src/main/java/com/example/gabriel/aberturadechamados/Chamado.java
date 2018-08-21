@@ -2,19 +2,11 @@ package com.example.gabriel.aberturadechamados;
 
 public class Chamado {
 
+    private int id;
     private String titulo;
     private String mensagem;
     private Boolean status;
     private String data;
-
-    public Chamado(String titulo, String mensagem) {
-        this.titulo = titulo;
-        this.mensagem = mensagem;
-    }
-
-    public Chamado() {
-
-    }
 
     public String getTitulo() {
         return titulo;
@@ -46,5 +38,13 @@ public class Chamado {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -1,14 +1,19 @@
 package com.example.gabriel.aberturadechamados;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -27,26 +32,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent intent = getIntent();
-        titulo = intent.getStringExtra("usuario");
-        mensagem = intent.getStringExtra("senha");
+//        Intent intent = getIntent();
+//        titulo = intent.getStringExtra("usuario");
+//        mensagem = intent.getStringExtra("senha");
 
 //        finds dos elementos
         fab = findViewById(R.id.fab);
         list_view_chamados = findViewById(R.id.list_view_chamados);
 
-        list_view_chamados.setOnItemClickListener(this);
-
-        ArrayList<Chamado> listaChamados = new ArrayList<>();
-        listaChamados.add(new Chamado("PC", "PC quebrado"));
-        listaChamados.add(new Chamado("PC", "PC quebrado"));
-        listaChamados.add(new Chamado("PC", "PC quebrado"));
-        listaChamados.add(new Chamado("PC", "PC quebrado"));
-        listaChamados.add(new Chamado("PC", "PC quebrado"));
-        listaChamados.add(new Chamado("PC", "PC quebrado"));
-
-        adaptador = new ChamadoAdapter(this, listaChamados);
+        adaptador = new ChamadoAdapter(this);
         list_view_chamados.setAdapter(adaptador);
+        list_view_chamados.setOnItemClickListener(this);
 
 //        ação do botão float
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,11 +55,60 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        adaptador.clear();
+
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... voids) {
+
+                String json = "";
+
+                final String url = "http://192.168.2.121/APIChamados/selecionar.php";
+                json = HttpConnection.get(url);
+
+                return json;
+            }
+
+            @Override
+            protected void onPostExecute(String json) {
+                super.onPostExecute(json);
+
+                if (json == null) json = "Sem Dados";
+                Log.d("onPostExecute", json);
+
+                ArrayList<Chamado> lstChamados = new ArrayList<>();
+                if (json != null) {
+                    try {
+                        JSONArray arrayChamados = new JSONArray(json);
+                        for (int i = 0; i < arrayChamados.length(); i++) {
+                            JSONObject chamadoJson = arrayChamados.getJSONObject(i);
+
+                            Chamado ch = new Chamado();
+                            ch.setId(chamadoJson.getInt("id"));
+                            ch.setTitulo(chamadoJson.getString("titulo"));
+                            ch.setMensagem(chamadoJson.getString("mensagem"));
+                            ch.setData(chamadoJson.getString("data"));
+//                            ch.setStatus(chamadoJson.getBoolean("status"));
+
+                            lstChamados.add(ch);
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                    adaptador.addAll(lstChamados);
+                }
+            }
+        }.execute();
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Chamado item = adaptador.getItem(i);
         Intent intencao = new Intent(this, VisualizarChamadoActivity.class);
-        intencao.putExtra("titulo", item.getTitulo());
-        intencao.putExtra("mensagem", item.getMensagem());
+        intencao.putExtra("idChamado", item.getId());
         startActivity(intencao);
     }
 }

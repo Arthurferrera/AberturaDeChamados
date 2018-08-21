@@ -2,6 +2,7 @@ package com.example.gabriel.aberturadechamados.api;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.HttpConnection;
@@ -33,7 +34,6 @@ public class InserirChamadoApi extends AsyncTask<Void, Void, String> {
                 JSONObject jsonObjeto = new JSONObject(s);
 
                 boolean sucesso = jsonObjeto.getBoolean("Sucesso");
-
                 if(sucesso){
                     Toast.makeText(activity, "Chamado cadastrado com sucesso", Toast.LENGTH_SHORT).show();
                     activity.finish();

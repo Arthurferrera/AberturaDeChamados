@@ -16,8 +16,11 @@ import java.util.Date;
 
 public class ChamadoAdapter extends ArrayAdapter<Chamado> {
 
-    public ChamadoAdapter(Context ctx, ArrayList<Chamado> lstChamados) {
-        super(ctx, 0, lstChamados);
+    ChamadoAdapter adapter;
+
+    public ChamadoAdapter(Context ctx) {
+        super(ctx, 0,  new ArrayList<Chamado>());
+        adapter = this;
     }
 
     @NonNull
@@ -26,18 +29,9 @@ public class ChamadoAdapter extends ArrayAdapter<Chamado> {
 
         View v = convertView;
 
-        if(v == null){
+        if(v == null) {
             v = LayoutInflater.from(getContext()).inflate(R.layout.list_view_item, null);
         }
-
-//        pegando a data e hora atual
-        final Calendar c = Calendar.getInstance();
-        int ano = c.get(Calendar.YEAR);
-        int mes = c.get(Calendar.MONTH);
-        int dia = c.get(Calendar.DAY_OF_MONTH);
-        int hora = c.get(Calendar.HOUR);
-        int minutos = c.get(Calendar.MINUTE);
-//        String dataAtual = String.format("%02d/%02d/%d ás %02d:%02d", dia, mes+1, ano, hora, minutos);
 
         // Pegando o contato daquela posição
         Chamado chamado = getItem(position);
@@ -50,7 +44,7 @@ public class ChamadoAdapter extends ArrayAdapter<Chamado> {
 //        verificar se falta algo no adapter
         lbl_titulo_chamado.setText(chamado.getTitulo());
         lbl_mensagem_chamado.setText(chamado.getMensagem());
-        lbl_data_chamado.setText(dia+"/"+mes+"/"+ano+" ás "+hora+":"+minutos);
+//        lbl_data_chamado.setText(chamado.getData());
 
         return v;
     }
