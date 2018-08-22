@@ -19,17 +19,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    Toolbar toolbar;
-    FloatingActionButton fab;
     ListView list_view_chamados;
-    ChamadoAdapter adaptador;
+    ChamadoAdapter adapter;
     String titulo, mensagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 //        Intent intent = getIntent();
@@ -37,11 +35,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //        mensagem = intent.getStringExtra("senha");
 
 //        finds dos elementos
-        fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         list_view_chamados = findViewById(R.id.list_view_chamados);
 
-        adaptador = new ChamadoAdapter(this);
-        list_view_chamados.setAdapter(adaptador);
+        adapter = new ChamadoAdapter(this);
+        list_view_chamados.setAdapter(adapter);
         list_view_chamados.setOnItemClickListener(this);
 
 //        ação do botão float
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onResume() {
         super.onResume();
 
-        adaptador.clear();
+        adapter.clear();
 
         new AsyncTask<Void, Void, String>() {
             @Override
@@ -98,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-                    adaptador.addAll(lstChamados);
+                    adapter.addAll(lstChamados);
                 }
             }
         }.execute();
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Chamado item = adaptador.getItem(i);
+        Chamado item = adapter.getItem(i);
         Intent intencao = new Intent(this, VisualizarChamadoActivity.class);
         intencao.putExtra("idChamado", item.getId());
         startActivity(intencao);

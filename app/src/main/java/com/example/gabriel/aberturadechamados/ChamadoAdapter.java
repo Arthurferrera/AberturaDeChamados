@@ -44,7 +44,7 @@ public class ChamadoAdapter extends ArrayAdapter<Chamado> {
 //        verificar se falta algo no adapter
         lbl_titulo_chamado.setText(chamado.getTitulo());
         lbl_mensagem_chamado.setText(chamado.getMensagem());
-//        lbl_data_chamado.setText(chamado.getData());
+        lbl_data_chamado.setText(chamado.getData());
 
         return v;
     }

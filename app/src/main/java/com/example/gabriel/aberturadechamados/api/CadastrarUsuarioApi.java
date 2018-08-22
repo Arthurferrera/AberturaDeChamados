@@ -9,12 +9,12 @@ import com.example.gabriel.aberturadechamados.HttpConnection;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class InserirChamadoApi extends AsyncTask<Void, Void, String> {
+public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
 
     private String url;
     private Activity activity;
 
-    public InserirChamadoApi(String url, Activity activity){
+    public CadastrarUsuarioApi(String url, Activity activity){
         this.url = url;
         this.activity = activity;
     }
@@ -29,14 +29,14 @@ public class InserirChamadoApi extends AsyncTask<Void, Void, String> {
         super.onPostExecute(s);
 
         if(s != null){
-            try {
-                JSONObject jsonObjeto = new JSONObject(s);
-                boolean sucesso = jsonObjeto.getBoolean("Sucesso");
-                if(sucesso){
-                    Toast.makeText(activity, "Chamado cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+            try{
+                JSONObject jsonObject = new JSONObject(s);
+                boolean sucesso = jsonObject.getBoolean("Sucesso");
+                if (sucesso){
+                    Toast.makeText(activity, "Cadastro efetuado!", Toast.LENGTH_SHORT).show();
                     activity.finish();
                 }
-            } catch (JSONException e) {
+            } catch (JSONException e){
                 e.printStackTrace();
             }
         }

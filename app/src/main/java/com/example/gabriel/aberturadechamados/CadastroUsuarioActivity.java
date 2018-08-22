@@ -11,9 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.gabriel.aberturadechamados.api.CadastrarUsuarioApi;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
     EditText txt_cnpj, txt_razao_social, txt_nome, txt_usuario, txt_senha;
+    String cnpj, razaoSocial, nome, usuario, senha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,12 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private boolean ValidarCampos(){
         EditText campoComFoco = null;
         boolean isValid = true;
+
+        if(txt_cnpj.getText().toString().length() < 18){
+            campoComFoco = txt_cnpj;
+            txt_cnpj.setError("CNPJ inválido");
+            isValid = false;
+        }
 
         if(txt_cnpj.getText().toString().length() == 0){
             campoComFoco = txt_cnpj;
@@ -76,11 +88,28 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         return isValid;
     }
 
-    public void CadastrarUsuario(View view) {
+    public void CadastrarUsuario(View view) throws UnsupportedEncodingException {
         if(ValidarCampos()){
-            String cnpj = String.valueOf(txt_cnpj.getText());
-            Toast.makeText(getApplicationContext(), cnpj, Toast.LENGTH_SHORT).show();
-            finish();
+
+            cnpj = txt_cnpj.getText().toString();
+            razaoSocial = txt_razao_social.getText().toString();
+            nome = txt_nome.getText().toString();
+            usuario = txt_usuario.getText().toString().toLowerCase();
+            senha = txt_senha.getText().toString();
+
+            cnpj = URLEncoder.encode(cnpj, "UTF-8");
+            razaoSocial = URLEncoder.encode(razaoSocial, "UTF-8");
+            nome = URLEncoder.encode(nome, "UTF-8");
+            usuario = URLEncoder.encode(usuario, "UTF-8");
+            senha = URLEncoder.encode(senha, "UTF-8");
+
+            String url = "http://192.168.2.121/APIChamados/cadastroUsuario.php?";
+            String parametros = "cnpj="+cnpj+"&razaoSocial="+razaoSocial+"&nome="+nome+"&usuario="+usuario+"&senha="+senha;
+            url += parametros;
+            new CadastrarUsuarioApi(url, this).execute();
+//            String cnpj = String.valueOf(txt_cnpj.getText());
+            Toast.makeText(getApplicationContext(), url, Toast.LENGTH_LONG).show();
+//            finish();
         }
     }
 }
