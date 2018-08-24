@@ -67,7 +67,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
 //                    titulo = titulo.trim();
                     mensagem = objeto.optString("mensagem");
                     Log.d("onPostExecute", titulo+""+mensagem);
-                    lbl_visualizar_titulo_chamado.setText(titulo);
+//                    lbl_visualizar_titulo_chamado.setText(titulo);
                     lbl_visualizar_mensagem.setText(objeto.optString("mensagem"));
                     lbl_visualizar_data_chamado.setText(objeto.optString("data"));
                     status = objeto.optBoolean("status");

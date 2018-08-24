@@ -88,8 +88,6 @@ public class AbrirChamadoActivity extends AppCompatActivity {
             String parametros = "titulo="+titulo+"&mensagem="+mensagem+"&data="+dataAberturaChamado+"&status=0";
             url += parametros;
             new InserirChamadoApi(url, this).execute();
-//            finish();
-//            Toast.makeText(this, "Chamado cadastrado com sucesso", Toast.LENGTH_SHORT).show();
 
         }
     }

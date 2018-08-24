@@ -18,8 +18,8 @@ import java.net.URLEncoder;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
-    EditText txt_cnpj, txt_razao_social, txt_nome, txt_usuario, txt_senha;
-    String cnpj, razaoSocial, nome, usuario, senha;
+    EditText txt_cnpj, txt_razao_social, txt_nome, txt_usuario, txt_senha, txt_confirma_senha;
+    String cnpj, razaoSocial, nome, usuario, senha, confirmaSenha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         txt_nome = findViewById(R.id.txt_nome);
         txt_usuario = findViewById(R.id.txt_usuario);
         txt_senha = findViewById(R.id.txt_senha);
+        txt_confirma_senha = findViewById(R.id.txt_confirma_senha);
 
         txt_cnpj.addTextChangedListener(MaskUtil.insert(txt_cnpj, MaskType.CNPJ));
     }
@@ -82,6 +83,13 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             txt_senha.setError("Sehna obrigatória");
             isValid = false;
         }
+        if(txt_confirma_senha.getText().toString().length() == 0){
+            if(campoComFoco == null){
+                campoComFoco = txt_confirma_senha;
+            }
+            txt_confirma_senha.setError("Confirmação obrigatória");
+            isValid = false;
+        }
         if(campoComFoco != null){
             campoComFoco.requestFocus();
         }
@@ -96,20 +104,25 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             nome = txt_nome.getText().toString();
             usuario = txt_usuario.getText().toString().toLowerCase();
             senha = txt_senha.getText().toString();
+            confirmaSenha = txt_confirma_senha.getText().toString();
 
-            cnpj = URLEncoder.encode(cnpj, "UTF-8");
-            razaoSocial = URLEncoder.encode(razaoSocial, "UTF-8");
-            nome = URLEncoder.encode(nome, "UTF-8");
-            usuario = URLEncoder.encode(usuario, "UTF-8");
-            senha = URLEncoder.encode(senha, "UTF-8");
+            if (confirmaSenha.equals(senha)){
+                cnpj = URLEncoder.encode(cnpj, "UTF-8");
+                razaoSocial = URLEncoder.encode(razaoSocial, "UTF-8");
+                nome = URLEncoder.encode(nome, "UTF-8");
+                usuario = URLEncoder.encode(usuario, "UTF-8");
+                senha = URLEncoder.encode(senha, "UTF-8");
 
-            String url = "http://192.168.2.121/APIChamados/cadastroUsuario.php?";
-            String parametros = "cnpj="+cnpj+"&razaoSocial="+razaoSocial+"&nome="+nome+"&usuario="+usuario+"&senha="+senha;
-            url += parametros;
-            new CadastrarUsuarioApi(url, this).execute();
-//            String cnpj = String.valueOf(txt_cnpj.getText());
-            Toast.makeText(getApplicationContext(), url, Toast.LENGTH_LONG).show();
-//            finish();
+                String url = "http://192.168.2.121/APIChamados/cadastroUsuario.php?";
+                String parametros = "cnpj="+cnpj+"&razaoSocial="+razaoSocial+"&nome="+nome+"&usuario="+usuario+"&senha="+senha;
+                url += parametros;
+                new CadastrarUsuarioApi(url, this).execute();
+//              String cnpj = String.valueOf(txt_cnpj.getText());
+//              Toast.makeText(getApplicationContext(), url, Toast.LENGTH_LONG).show();
+//              finish();
+            }else{
+                Toast.makeText(this, "Senhas não conferem", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

@@ -44,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_razao_social"
+                android:maxLength="70"
                 />
 
             <TextView
@@ -56,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_nome"
+                android:maxLength="60"
                 />
 
             <TextView
@@ -70,6 +72,7 @@
                 android:id="@+id/txt_usuario"
                 android:inputType="text"
                 android:digits="abcdefghijklmnopqrstuvwxyz"
+                android:maxLength="25"
                 />
 
             <TextView
@@ -80,9 +83,19 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:id="@+id/txt_senha"
                 android:inputType="textPassword"
+                android:maxLength="20"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/txt_confirma_senha"
+                android:inputType="textPassword"
+                android:hint="Confirme a senha..."
+                android:maxLength="20"
                 />
 
             <Button

@@ -1,6 +1,7 @@
 package com.example.gabriel.aberturadechamados;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,7 +23,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     ListView list_view_chamados;
     ChamadoAdapter adapter;
-    String titulo, mensagem;
+    String nomeUsuario;
+    int idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +32,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        Intent intent = getIntent();
-//        titulo = intent.getStringExtra("usuario");
-//        mensagem = intent.getStringExtra("senha");
 
 //        finds dos elementos
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -56,6 +55,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onResume() {
         super.onResume();
 
+        Intent intent = getIntent();
+        idUsuario = intent.getIntExtra("idUsuario", 0);
+        nomeUsuario = intent.getStringExtra("nomeUsuario");
+        Toast.makeText(this, "Bem vindo, "+nomeUsuario+" "+idUsuario, Toast.LENGTH_SHORT).show();
+
         adapter.clear();
 
         new AsyncTask<Void, Void, String>() {
@@ -64,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 String json = "";
 
-                final String url = "http://192.168.2.121/APIChamados/selecionar.php";
+                final String url = "http://192.168.2.121/APIChamados/selecionar.php?idUsuario="+idUsuario;
                 json = HttpConnection.get(url);
 
                 return json;
@@ -89,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             ch.setTitulo(chamadoJson.getString("titulo"));
                             ch.setMensagem(chamadoJson.getString("mensagem"));
                             ch.setData(chamadoJson.getString("data"));
-//                            ch.setStatus(chamadoJson.getBoolean("status"));
 
                             lstChamados.add(ch);
                         }
