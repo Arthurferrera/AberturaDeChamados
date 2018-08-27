@@ -1,7 +1,6 @@
 package com.example.gabriel.aberturadechamados;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.api.LoginApi;
 
@@ -22,33 +20,26 @@ public class LoginActivity extends AppCompatActivity {
     TextView lbl_cadastro_usuario;
     Button btn_entrar;
     String usuario, senha;
+    private SharedPreferencesConfig preferencesConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        SharedPreferences prefs = getSharedPreferences("preferencias", 0);
-//        boolean jaLogou = prefs.getBoolean("estaLogado", false);
-//
-//        if (jaLogou){
-//            Intent intencao = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(intencao);
-//        } else {
-//            Intent intencao = new Intent(getApplicationContext(), LoginActivity.class);
-//            startActivity(intencao);
-//        }
-//
-//        SharedPreferences prefa = getSharedPreferences("preferencias", 0);
-//        SharedPreferences.Editor editor = prefa.edit();
-//        editor.putBoolean("estaLogado", true);
-//        editor.commit();
+        preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
 
 //        finds dos elementos
         txt_usuario = findViewById(R.id.txt_usuario);
         txt_senha = findViewById(R.id.txt_senha);
         btn_entrar = findViewById(R.id.btn_entrar);
         lbl_cadastro_usuario = findViewById(R.id.lbl_cadastro_usuario);
+
+        if (preferencesConfig.readLoginStatus()){
+                Intent intencao = new Intent(getApplicationContext(), MenuActivity.class);
+                startActivity(intencao);
+                finish();
+        }
     }
 
 //    método que valida os campos, para não ficarem vazios
@@ -74,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
         return isValid;
     }
 
-
 //    método que faz a autenticação do usuario
     public void Autencicacao(View view) throws UnsupportedEncodingException {
         if(ValidarCampos()){
@@ -88,12 +78,6 @@ public class LoginActivity extends AppCompatActivity {
             String parametros = "usuario="+usuario+"&senha="+senha;
             url += parametros;
             new LoginApi(url, this).execute();
-//            if (usuario) {
-//                Intent intencao = new Intent(getApplicationContext(), MainActivity.class);
-//                intencao.putExtra("usuario", txt_usuario.getText());
-//                intencao.putExtra("senha", txt_senha.getText());
-//                startActivity(intencao);
-//            }
         }
     }
 

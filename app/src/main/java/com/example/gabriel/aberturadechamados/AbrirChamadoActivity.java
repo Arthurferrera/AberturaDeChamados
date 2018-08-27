@@ -26,6 +26,9 @@ public class AbrirChamadoActivity extends AppCompatActivity {
     String titulo,mensagem;
     Boolean status;
     String dataAberturaChamado;
+    int idUsuario;
+
+    private SharedPreferencesConfig preferencesConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class AbrirChamadoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
 
 //        finds dos elementos
         txt_titulo = findViewById(R.id.txt_titulo);
@@ -74,6 +79,7 @@ public class AbrirChamadoActivity extends AppCompatActivity {
 //            resgatando os valores dos inputs
             titulo = txt_titulo.getText().toString();
             mensagem = txt_mensagem.getText().toString();
+            idUsuario = Integer.parseInt(preferencesConfig.readUsuarioId());
 
 //            deixando o que foi digitado pelo usuario no padrao utf-8, para ser passado na url sem problemas
             mensagem = URLEncoder.encode(mensagem, "UTF-8");
@@ -85,7 +91,7 @@ public class AbrirChamadoActivity extends AppCompatActivity {
             status = false;
 
             String url = "http://192.168.2.121/APIChamados/inserir.php?";
-            String parametros = "titulo="+titulo+"&mensagem="+mensagem+"&data="+dataAberturaChamado+"&status=0";
+            String parametros = "titulo="+titulo+"&mensagem="+mensagem+"&data="+dataAberturaChamado+"&status=0&idUsuario="+idUsuario;
             url += parametros;
             new InserirChamadoApi(url, this).execute();
 

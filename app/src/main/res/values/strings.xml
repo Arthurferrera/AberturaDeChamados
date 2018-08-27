@@ -6,4 +6,15 @@
     <string name="title_activity_visualizar_chamado">Visualizar Chamado</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuário</string>
+
+    <string name="login_preferences">com.example.gabriel.aberturadechamados_login_preferences</string>
+    <string name="login_status_preferences">com.example.gabriel.aberturadechamados_login_status_preferences</string>
+    <string name="usuario_nome">com.example.gabriel.aberturachamados_usuario_nome</string>
+    <string name="usuario_id">com.example.gabriel.aberturachamados_usuario_id</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
 </resources>
