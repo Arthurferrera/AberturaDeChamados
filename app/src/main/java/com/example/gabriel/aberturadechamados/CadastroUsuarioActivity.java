@@ -29,13 +29,14 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+//        finds dos elementos
         txt_cnpj = findViewById(R.id.txt_cnpj);
         txt_razao_social = findViewById(R.id.txt_razao_social);
         txt_nome = findViewById(R.id.txt_nome);
         txt_usuario = findViewById(R.id.txt_usuario);
         txt_senha = findViewById(R.id.txt_senha);
         txt_confirma_senha = findViewById(R.id.txt_confirma_senha);
-
+//        setando mascara para o campo
         txt_cnpj.addTextChangedListener(MaskUtil.insert(txt_cnpj, MaskType.CNPJ));
     }
 
@@ -97,8 +98,11 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     }
 
     public void CadastrarUsuario(View view) throws UnsupportedEncodingException {
+
+//        verifica se os campos estão vazios
         if(ValidarCampos()){
 
+//            pegando os valores dos campos
             cnpj = txt_cnpj.getText().toString();
             razaoSocial = txt_razao_social.getText().toString();
             nome = txt_nome.getText().toString();
@@ -106,21 +110,22 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             senha = txt_senha.getText().toString();
             confirmaSenha = txt_confirma_senha.getText().toString();
 
+//            verificando se as senhas digitadas são iguais
             if (confirmaSenha.equals(senha)){
+//                deixando os textos no padrao UTF-8, para poder ser enviado na url
                 cnpj = URLEncoder.encode(cnpj, "UTF-8");
                 razaoSocial = URLEncoder.encode(razaoSocial, "UTF-8");
                 nome = URLEncoder.encode(nome, "UTF-8");
                 usuario = URLEncoder.encode(usuario, "UTF-8");
                 senha = URLEncoder.encode(senha, "UTF-8");
 
+//                setando url, os parametros e instanciando a api
                 String url = "http://192.168.2.121/APIChamados/cadastroUsuario.php?";
                 String parametros = "cnpj="+cnpj+"&razaoSocial="+razaoSocial+"&nome="+nome+"&usuario="+usuario+"&senha="+senha;
                 url += parametros;
                 new CadastrarUsuarioApi(url, this).execute();
-//              String cnpj = String.valueOf(txt_cnpj.getText());
-//              Toast.makeText(getApplicationContext(), url, Toast.LENGTH_LONG).show();
-//              finish();
             }else{
+//                caso as senhas não sejam iguais, mostra ma mensagem de erro
                 Toast.makeText(this, "Senhas não conferem", Toast.LENGTH_SHORT).show();
             }
         }

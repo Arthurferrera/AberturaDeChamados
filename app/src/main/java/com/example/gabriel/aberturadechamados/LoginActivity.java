@@ -1,7 +1,6 @@
 package com.example.gabriel.aberturadechamados;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+//        instanciando o SharedPreferencesConfig
         preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
 
 //        finds dos elementos
@@ -35,8 +35,11 @@ public class LoginActivity extends AppCompatActivity {
         btn_entrar = findViewById(R.id.btn_entrar);
         lbl_cadastro_usuario = findViewById(R.id.lbl_cadastro_usuario);
 
+//        lendo o status do login, caso valido,
+//        redireciona para a pagina principal do app
+//        e finaliza a tela de login
         if (preferencesConfig.readLoginStatus()){
-                Intent intencao = new Intent(getApplicationContext(), MenuActivity.class);
+                Intent intencao = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intencao);
                 finish();
         }
@@ -67,13 +70,16 @@ public class LoginActivity extends AppCompatActivity {
 
 //    método que faz a autenticação do usuario
     public void Autencicacao(View view) throws UnsupportedEncodingException {
+//        verificando se os campos estão vazios
         if(ValidarCampos()){
+//            resgatando os valores digitados
             usuario = txt_usuario.getText().toString();
             senha = txt_senha.getText().toString();
-
+//            setando no padrao UTF-8, para a url
             usuario = URLEncoder.encode(usuario, "UTF-8");
             senha = URLEncoder.encode(senha, "UTF-8");
 
+//            setando parametros e url da API e instanciando a API
             String url = "http://192.168.2.121/APIChamados/login.php?";
             String parametros = "usuario="+usuario+"&senha="+senha;
             url += parametros;

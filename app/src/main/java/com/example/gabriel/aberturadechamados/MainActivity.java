@@ -1,13 +1,18 @@
 package com.example.gabriel.aberturadechamados;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,12 +39,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+//        instanciando o SharedPreferencesConfig
         preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
 
 //        finds dos elementos
         FloatingActionButton fab = findViewById(R.id.fab);
         list_view_chamados = findViewById(R.id.list_view_chamados);
 
+//        setando o adapter  e o click do item da lista
         adapter = new ChamadoAdapter(this);
         list_view_chamados.setAdapter(adapter);
         list_view_chamados.setOnItemClickListener(this);
@@ -58,15 +65,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onResume() {
         super.onResume();
 
-        Intent intent = getIntent();
-        idUsuario = intent.getIntExtra("idUsuario", 0);
-        nomeUsuario = intent.getStringExtra("nomeUsuario");
-
+//        pegando as informações do usuario gravados no celular
         nomeUsuario = preferencesConfig.readUsuarioNome();
         idUsuario = Integer.parseInt(preferencesConfig.readUsuarioId());
 
-        Toast.makeText(this, "Bem vindo, "+nomeUsuario+" "+idUsuario, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, nomeUsuario+" Bem vindo", Toast.LENGTH_SHORT).show();
 
+//        limpando o adapter da lista, para não duplicar
         adapter.clear();
 
         new AsyncTask<Void, Void, String>() {
@@ -74,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             protected String doInBackground(Void... voids) {
 
                 String json = "";
-
+//                URL da api
                 final String url = "http://192.168.2.121/APIChamados/selecionar.php?idUsuario="+idUsuario;
                 json = HttpConnection.get(url);
 
@@ -112,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }.execute();
     }
 
+//    método que seta o click de um item da lista
+//    chama a tela de visualização, passando o id do item
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Chamado item = adapter.getItem(i);
@@ -120,19 +127,40 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivity(intencao);
     }
 
-    public void Sair(View view) {
+//    método que faz o logoff do aplicativo
+    public void Sair() {
         preferencesConfig.writeLoginStatus(false);
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 
-    public void SairTela(){
-        preferencesConfig.writeLoginStatus(false);
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
+//    cria o menu superior
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
-    public void testeMenu(View view) {
-        startActivity(new Intent(this, MenuActivity.class));
+//    setando as opções do menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_sair){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Sair");
+            builder.setMessage("Tem certeza que deseja sair do aplicativo?");
+            final Activity activity = this;
+            builder.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Sair();
+                }
+            });
+            builder.setNegativeButton("NÃO", null);
+            builder.create().show();
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

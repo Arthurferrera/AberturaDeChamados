@@ -44,17 +44,24 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
                     if (usuarioExiste){
                         Toast.makeText(activity, "Usuário existe, tente outro!", Toast.LENGTH_SHORT).show();
                     } else {
-//                        resgata o objeto retornado do salvar usuario
-                        JSONObject jsonObject = new JSONObject(s);
-                        boolean sucesso = jsonObject.getBoolean("Sucesso");
-//                    Toast.makeText(activity, "jhj"+sucesso, Toast.LENGTH_SHORT).show();
-//                        verifica se o usuario foi cadastrado
-                        if (sucesso) {
-                            Toast.makeText(activity, "Cadastro efetuado!", Toast.LENGTH_SHORT).show();
-                            activity.finish();
+//                        resgata o objeto retornado da verificação do cnpj
+                        JSONObject cnpjExisteJson = new JSONObject(s);
+                        boolean cnpjExiste = cnpjExisteJson.getBoolean("cnpjExiste");
+//                        verifica se o cnpj ja está cadastrado
+                        if (cnpjExiste){
+                            Toast.makeText(activity, "CNPJ já está cadastrado, tente outro!", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(activity, "Erro ao realizar o cadastro. Tente Novamente mais tarde.", Toast.LENGTH_SHORT).show();
-                            activity.finish();
+//                          resgata o objeto retornado do salvar usuario
+                            JSONObject jsonObject = new JSONObject(s);
+                            boolean sucesso = jsonObject.getBoolean("Sucesso");
+//                          verifica se o usuario foi cadastrado
+                            if (sucesso) {
+                                Toast.makeText(activity, "Cadastro efetuado!", Toast.LENGTH_SHORT).show();
+                                activity.finish();
+                            } else {
+                                Toast.makeText(activity, "Erro ao realizar o cadastro. Tente Novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                                activity.finish();
+                            }
                         }
                     }
                 }

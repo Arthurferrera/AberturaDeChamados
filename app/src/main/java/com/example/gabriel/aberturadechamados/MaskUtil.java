@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 public class MaskUtil {
 
+//    setando o formato da mascara
     private static final String CPFMask = "###.###.###-##";
     private static final String CNPJMask = "##.###.###/####-##";
 

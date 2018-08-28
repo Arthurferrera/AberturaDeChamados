@@ -9,20 +9,6 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sair"
-        android:id="@+id/btn_sair"
-        android:onClick="Sair"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Menu Lateral"
-        android:id="@+id/btn_teste"
-        android:onClick="testeMenu"/>
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

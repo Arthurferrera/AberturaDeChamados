@@ -50,15 +50,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.gabriel.aberturadechamados.LoginActivity" />
         </activity>
-        <activity
-            android:name=".MenuActivity"
-            android:label="@string/title_activity_menu"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.gabriel.aberturadechamados.MainActivity" />
-        </activity>
     </application>
 
 </manifest>
