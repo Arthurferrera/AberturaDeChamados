@@ -77,6 +77,13 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             txt_usuario.setError("Usuário obrigatório");
             isValid = false;
         }
+        if(txt_senha.getText().toString().length() < 6){
+            if(campoComFoco == null){
+                campoComFoco = txt_senha;
+            }
+            txt_senha.setError("Minímo de 6 caracteres");
+            isValid = false;
+        }
         if(txt_senha.getText().toString().length() == 0){
             if(campoComFoco == null){
                 campoComFoco = txt_senha;

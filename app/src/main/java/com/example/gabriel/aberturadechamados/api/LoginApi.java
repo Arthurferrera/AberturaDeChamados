@@ -1,6 +1,7 @@
 package com.example.gabriel.aberturadechamados.api;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
     private String url;
     private Activity activity;
     private SharedPreferencesConfig preferencesConfig;
+    private  AlertDialog alerta;
 
     public LoginApi(String url, Activity activity) {
         this.url = url;
@@ -59,7 +61,12 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
                     activity.finish();
                 } else {
 //                    caso o login não for valido, mostra uma mensagem
-                    Toast.makeText(activity, "Login inválido!", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    builder.setTitle("Erro!");
+                    builder.setMessage("Usuário ou Senha incorreta.");
+                    builder.setNegativeButton("OK", null);
+                    alerta = builder.create();
+                    alerta.show();
                 }
             } catch (JSONException e){
                 e.printStackTrace();

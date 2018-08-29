@@ -1,6 +1,8 @@
 package com.example.gabriel.aberturadechamados.api;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -13,6 +15,7 @@ public class InserirChamadoApi extends AsyncTask<Void, Void, String> {
 
     private String url;
     private Activity activity;
+    private AlertDialog alerta;
 
     public InserirChamadoApi(String url, Activity activity){
         this.url = url;
@@ -35,11 +38,27 @@ public class InserirChamadoApi extends AsyncTask<Void, Void, String> {
                 boolean sucesso = jsonObjeto.getBoolean("Sucesso");
 //                verificando
                 if(sucesso){
-                    Toast.makeText(activity, "Chamado cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-                    activity.finish();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    builder.setTitle("Enviado!");
+                    builder.setMessage("Seu chamado foi enviado com sucesso!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            activity.finish();
+                        }
+                    });
+                    builder.create().show();
                 } else {
-                    Toast.makeText(activity, "Erro ao realizar o cadastro. Tente Novamente mais tarde.", Toast.LENGTH_SHORT).show();
-                    activity.finish();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    builder.setTitle("Erro!");
+                    builder.setMessage("Erro ao realizar o cadastro. Tente Novamente mais tarde.");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            activity.finish();
+                        }
+                    });
+                    builder.create().show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

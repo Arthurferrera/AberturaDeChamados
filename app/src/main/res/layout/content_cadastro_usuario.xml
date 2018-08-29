@@ -32,6 +32,8 @@
                 android:inputType="number"
                 android:maxLength="18"
                 android:hint="Digite apenas números"
+                android:backgroundTint="@color/preto"
+                android:textCursorDrawable="@drawable/cursor"
                 />
 
             <TextView
@@ -45,12 +47,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_razao_social"
                 android:maxLength="70"
+                android:backgroundTint="@color/preto"
+                android:textCursorDrawable="@drawable/cursor"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nome:"
+                android:text="Nome completo:"
                 />
 
             <EditText
@@ -58,12 +62,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_nome"
                 android:maxLength="60"
+                android:backgroundTint="@color/preto"
+                android:textCursorDrawable="@drawable/cursor"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Usuário:"
+                android:text="Nome de usuário:"
                 />
 
             <EditText
@@ -73,6 +79,8 @@
                 android:inputType="text"
                 android:digits="abcdefghijklmnopqrstuvwxyz"
                 android:maxLength="25"
+                android:backgroundTint="@color/preto"
+                android:textCursorDrawable="@drawable/cursor"
                 />
 
             <TextView
@@ -87,6 +95,8 @@
                 android:id="@+id/txt_senha"
                 android:inputType="textPassword"
                 android:maxLength="20"
+                android:backgroundTint="@color/preto"
+                android:textCursorDrawable="@drawable/cursor"
                 />
 
             <EditText
@@ -96,6 +106,8 @@
                 android:inputType="textPassword"
                 android:hint="Confirme a senha..."
                 android:maxLength="20"
+                android:backgroundTint="@color/preto"
+                android:textCursorDrawable="@drawable/cursor"
                 />
 
             <Button
@@ -103,7 +115,10 @@
                 android:layout_height="wrap_content"
                 android:text="Cadastrar"
                 android:layout_gravity="end"
-                android:onClick="CadastrarUsuario"/>
+                android:onClick="CadastrarUsuario"
+                android:textColor="@color/colorWhite"
+                android:background="@color/vermelho"
+                />
 
         </LinearLayout>
     </ScrollView>

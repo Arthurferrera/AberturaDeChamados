@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.api.LoginApi;
 
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             usuario = URLEncoder.encode(usuario, "UTF-8");
             senha = URLEncoder.encode(senha, "UTF-8");
 
+//            Toast.makeText(this, usuario+" - "+senha, Toast.LENGTH_SHORT).show();
 //            setando parametros e url da API e instanciando a API
             String url = "http://192.168.2.121/APIChamados/login.php?";
             String parametros = "usuario="+usuario+"&senha="+senha;

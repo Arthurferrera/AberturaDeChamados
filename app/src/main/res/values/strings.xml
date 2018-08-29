@@ -7,6 +7,7 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuário</string>
 
+    <!--strings que são gravadas na memória do celular-->
     <string name="login_preferences">com.example.gabriel.aberturadechamados_login_preferences</string>
     <string name="login_status_preferences">com.example.gabriel.aberturadechamados_login_status_preferences</string>
     <string name="usuario_nome">com.example.gabriel.aberturachamados_usuario_nome</string>

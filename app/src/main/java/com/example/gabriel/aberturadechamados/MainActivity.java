@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 String json = "";
 //                URL da api
-                final String url = "http://192.168.2.121/APIChamados/selecionar.php?idUsuario="+idUsuario;
+                final String url = "http://192.168.2.121/APIChamados/selecionarPendencias.php?idUsuario="+idUsuario;
                 json = HttpConnection.get(url);
 
                 return json;
@@ -90,9 +90,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             protected void onPostExecute(String json) {
                 super.onPostExecute(json);
 
+//                verifica se o json está, nulo
                 if (json == null) json = "Sem Dados";
                 Log.d("onPostExecute", json);
 
+//                cria a lista de chamados, resgata o array de json
+//                percorre o array de json, pegando todos os objetos,
+//                adiciona à lista de chamados, e a lista ao adapter
                 ArrayList<Chamado> lstChamados = new ArrayList<>();
                 if (json != null) {
                     try {
@@ -128,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 //    método que faz o logoff do aplicativo
+//    mudando o stats do login, para falso
     public void Sair() {
         preferencesConfig.writeLoginStatus(false);
         startActivity(new Intent(this, LoginActivity.class));

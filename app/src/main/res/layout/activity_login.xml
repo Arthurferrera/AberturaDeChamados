@@ -24,15 +24,6 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/logosincaesp" />
 
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Login"-->
-            <!--android:textAlignment="center"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_marginTop="40dp"-->
-            <!--android:textSize="45sp"/>-->
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,7 +36,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:hint="Usuário..." />
+                android:hint="Usuário..."
+                android:backgroundTint="@color/preto"
+                android:textCursorDrawable="@drawable/cursor"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,6 +55,8 @@
                 android:layout_marginTop="5dp"
                 android:hint="Senha..."
                 android:inputType="textPassword"
+                android:backgroundTint="@color/preto"
+                android:textCursorDrawable="@drawable/cursor"
                 />
 
             <LinearLayout

@@ -1,6 +1,7 @@
 package com.example.gabriel.aberturadechamados.api;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -13,6 +14,11 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
 
     private String url;
     private Activity activity;
+    private AlertDialog alerta;
+    private String mensagem = "Senha deve conter:" +
+            "- Mínimo uma letra maiuscula" +
+            "- Mínimo uma letra minuscula" +
+            "- Mínimo um número";
 
     public CadastrarUsuarioApi(String url, Activity activity){
         this.url = url;
@@ -51,17 +57,29 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
                         if (cnpjExiste){
                             Toast.makeText(activity, "CNPJ já está cadastrado, tente outro!", Toast.LENGTH_SHORT).show();
                         } else {
-//                          resgata o objeto retornado do salvar usuario
-                            JSONObject jsonObject = new JSONObject(s);
-                            boolean sucesso = jsonObject.getBoolean("Sucesso");
-//                          verifica se o usuario foi cadastrado
-                            if (sucesso) {
-                                Toast.makeText(activity, "Cadastro efetuado!", Toast.LENGTH_SHORT).show();
-                                activity.finish();
+                            JSONObject senhaJson = new JSONObject(s);
+                            boolean senhaBoa = senhaJson.getBoolean("senhaValidada");
+                            if (senhaBoa){
+//                              resgata o objeto retornado do salvar usuario
+                                JSONObject jsonObject = new JSONObject(s);
+                                boolean sucesso = jsonObject.getBoolean("Sucesso");
+//                              verifica se o usuario foi cadastrado
+                                if (sucesso) {
+                                    Toast.makeText(activity, "Cadastro efetuado!", Toast.LENGTH_SHORT).show();
+                                    activity.finish();
+                                } else {
+                                    Toast.makeText(activity, "Erro ao realizar o cadastro. Tente Novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                                    activity.finish();
+                                }
                             } else {
-                                Toast.makeText(activity, "Erro ao realizar o cadastro. Tente Novamente mais tarde.", Toast.LENGTH_SHORT).show();
-                                activity.finish();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                                builder.setTitle("Aviso!");
+                                builder.setMessage(mensagem);
+                                builder.setPositiveButton("Entendi", null);
+                                alerta = builder.create();
+                                alerta.show();
                             }
+
                         }
                     }
                 }

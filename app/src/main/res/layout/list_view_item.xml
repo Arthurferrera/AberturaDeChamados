@@ -25,7 +25,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Decrição do chamado aqui!"
-            android:id="@+id/lbl_mensagem_chamado"/>
+            android:id="@+id/lbl_mensagem_chamado"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:scrollHorizontally="true"
+            android:fadeScrollbars="false"/>
 
     </LinearLayout>
 
@@ -35,6 +41,7 @@
         android:id="@+id/lbl_data_chamado"
         android:text="dd/mm/aaaa"
         android:textAlignment="center"
-        android:gravity="center_vertical"/>
+        android:gravity="center_vertical"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
