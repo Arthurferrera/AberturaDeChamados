@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+//        não permite que o teclado apareça assim que a tela iniciar
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 //        instanciando o SharedPreferencesConfig
         preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
@@ -46,7 +49,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-//    método que valida os campos, para não ficarem vazios
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+//        limpando os inputs
+        txt_usuario.setText("");
+        txt_senha.setText("");
+    }
+
+    //    método que valida os campos, para não ficarem vazios
     private boolean ValidarCampos(){
         EditText campoComFoco = null;
         boolean isValid = true;
@@ -74,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
 //        verificando se os campos estão vazios
         if(ValidarCampos()){
 //            resgatando os valores digitados
-            usuario = txt_usuario.getText().toString();
+            usuario = txt_usuario.getText().toString().toLowerCase();
             senha = txt_senha.getText().toString();
 //            setando no padrao UTF-8, para a url
             usuario = URLEncoder.encode(usuario, "UTF-8");

@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -37,7 +38,10 @@ public class AbrirChamadoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        não permite que o teclado apareça assim que a tela iniciar
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+//        instanciando o sharedPreferences
         preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
 
 //        finds dos elementos
@@ -79,6 +83,7 @@ public class AbrirChamadoActivity extends AppCompatActivity {
 //            resgatando os valores dos inputs
             titulo = txt_titulo.getText().toString();
             mensagem = txt_mensagem.getText().toString();
+//            pegando o idUsuario que está gravado em um tipo de 'sessão'
             idUsuario = Integer.parseInt(preferencesConfig.readUsuarioId());
 
 //            deixando o que foi digitado pelo usuario no padrao utf-8, para ser passado na url sem problemas

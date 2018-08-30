@@ -1,12 +1,14 @@
 package com.example.gabriel.aberturadechamados;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,9 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -59,6 +59,25 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(intencao);
             }
         });
+
+////        Pega o fragmentManager
+//        FragmentManager fm = getSupportFragmentManager();
+//
+////        Abre uma tranação e adiciona
+//        FragmentTransaction ft = fm.beginTransaction();
+//        ft.add(R.id.fragment_content, new MainFragment());
+//        ft.commit();
+//
+////        substitui um Fragment
+//        ft = fm.beginTransaction();
+//        ft.replace(R.id.fragment_content, new MainFragment());
+//        ft.commit();
+//
+////        remove um fragment
+//        Fragment fragment = fm.findFragmentById(R.id.fragment_content);
+//        ft = fm.beginTransaction();
+//        ft.remove(fragment);
+//        ft.commit();
     }
 
     @Override
@@ -69,8 +88,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         nomeUsuario = preferencesConfig.readUsuarioNome();
         idUsuario = Integer.parseInt(preferencesConfig.readUsuarioId());
 
-//        Toast.makeText(this, nomeUsuario+" Bem vindo", Toast.LENGTH_SHORT).show();
-
 //        limpando o adapter da lista, para não duplicar
         adapter.clear();
 
@@ -79,10 +96,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             protected String doInBackground(Void... voids) {
 
                 String json = "";
-//                URL da api
+//                URL da API
                 final String url = "http://192.168.2.121/APIChamados/selecionarPendencias.php?idUsuario="+idUsuario;
                 json = HttpConnection.get(url);
-
                 return json;
             }
 

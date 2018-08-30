@@ -64,7 +64,7 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     builder.setTitle("Erro!");
                     builder.setMessage("Usuário ou Senha incorreta.");
-                    builder.setNegativeButton("OK", null);
+                    builder.setPositiveButton("OK", null);
                     alerta = builder.create();
                     alerta.show();
                 }

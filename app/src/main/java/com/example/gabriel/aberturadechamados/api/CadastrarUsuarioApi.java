@@ -15,10 +15,6 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
     private String url;
     private Activity activity;
     private AlertDialog alerta;
-    private String mensagem = "Senha deve conter:" +
-            "- Mínimo uma letra maiuscula" +
-            "- Mínimo uma letra minuscula" +
-            "- Mínimo um número";
 
     public CadastrarUsuarioApi(String url, Activity activity){
         this.url = url;
@@ -74,7 +70,7 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                                 builder.setTitle("Aviso!");
-                                builder.setMessage(mensagem);
+                                builder.setMessage("A senha deve conter letras e números");
                                 builder.setPositiveButton("Entendi", null);
                                 alerta = builder.create();
                                 alerta.show();

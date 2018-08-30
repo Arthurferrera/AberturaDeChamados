@@ -69,7 +69,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
 //                    e setando as variaveis com os valores obtidos dele
                     JSONObject objeto = new JSONObject(retorno);
                     titulo = objeto.optString("titulo");
-                    titulo = titulo.trim();
+                    titulo = titulo.trim(); //TIIRA OS ESPAÇOS INUTEIS
                     mensagem = objeto.optString("mensagem");
                     data = objeto.optString("data");
                     status = objeto.getInt("status");
