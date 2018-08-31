@@ -1,6 +1,5 @@
-    package com.example.gabriel.aberturadechamados;
+package com.example.gabriel.aberturadechamados;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -8,10 +7,11 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,16 +20,23 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
 
     TextView lbl_visualizar_titulo_chamado, lbl_visualizar_mensagem, lbl_visualizar_data_chamado, lbl_visualizar_status_chamado, lbl_visualizar_observacao;
     Integer idChamado;
-    String titulo, mensagem, data;
+    String titulo, mensagem, data, nivelUsuario, observacao;
     Integer status;
+    SharedPreferencesConfig preferencesConfig;
+
+    TextView txt_observacao;
+    Switch sw_status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizar_chamado);
+//        setContentView(R.layout.content_dialog_atualizar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
 
 //        pegando o intent
         Intent intent = getIntent();
@@ -41,6 +48,10 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         lbl_visualizar_status_chamado = findViewById(R.id.lbl_visualizar_status_chamado);
         lbl_visualizar_observacao = findViewById(R.id.lbl_visualizar_observacao);
 
+//        finds dos itens do dialog
+        txt_observacao =  findViewById(R.id.txt_observacao);
+        sw_status = findViewById(R.id.sw_status);
+
 //        resgatando os parametros passados pelo intent
         idChamado = intent.getIntExtra("idChamado", 0);
     }
@@ -48,6 +59,8 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        nivelUsuario = preferencesConfig.readNivelusuario();
 
 //        setando a url da api
         final String url = "http://192.168.2.121/APIChamados/selecionarumChamado.php?id="+idChamado;
@@ -93,5 +106,41 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                 }
             }
         }.execute();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_visualizar_adm, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_atualizar){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("AtualIzar chamado");
+            builder.setView(R.layout.content_dialog_atualizar);
+            builder.setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+//                    observacao = txt_observacao.getText().toString();
+//                    if (sw_status.isChecked()){
+//                        status = 1;
+//                    } else {
+//                        status = 0;
+//                    }
+
+                    Toast.makeText(getApplicationContext(), "asdafad", Toast
+                    .LENGTH_SHORT).show();
+                }
+            });
+            builder.setNegativeButton("Cancelar", null);
+            builder.create().show();
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 }

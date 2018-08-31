@@ -43,9 +43,15 @@ public class LoginActivity extends AppCompatActivity {
 //        redireciona para a pagina principal do app
 //        e finaliza a tela de login
         if (preferencesConfig.readLoginStatus()){
+            if (preferencesConfig.readNivelusuario().equals("Administrador")){
+                Intent intencao = new Intent(getApplicationContext(), MainAdmActivity.class);
+                startActivity(intencao);
+                finish();
+            } else if(preferencesConfig.readNivelusuario().equals("Cliente")){
                 Intent intencao = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intencao);
                 finish();
+            }
         }
     }
 

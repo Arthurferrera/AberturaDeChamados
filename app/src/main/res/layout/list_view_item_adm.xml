@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_horizontal"
+    >
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Nome Empresa"
+            android:textAlignment="viewStart"
+            android:id="@+id/lbl_nome_empresa"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Nome Usuário"
+            android:textAlignment="viewStart"
+            android:id="@+id/lbl_nome_usuario"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Titulo Chamado"
+            android:textAlignment="viewStart"
+            android:id="@+id/lbl_titulo_chamado_adm"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Decrição do chamado aqui!"
+            android:id="@+id/lbl_mensagem_chamado_adm"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:scrollHorizontally="true"
+            android:fadeScrollbars="false"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lbl_data_chamado_adm"
+        android:text="dd/mm/aaaa às 19:00"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

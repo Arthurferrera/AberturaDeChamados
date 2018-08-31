@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.HttpConnection;
 import com.example.gabriel.aberturadechamados.MainActivity;
+import com.example.gabriel.aberturadechamados.MainAdmActivity;
 import com.example.gabriel.aberturadechamados.SharedPreferencesConfig;
 
 import org.json.JSONException;
@@ -47,18 +48,29 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
 //                    resgatando o objeto do usuario
                     JSONObject usuarioJson = jsonObject.getJSONObject("usuario");
                     String nomeUsuario = usuarioJson.getString("nome");
+                    String nivelUsuario = usuarioJson.getString("nivelUsuario");
+                    nivelUsuario = nivelUsuario.trim();
                     int idUsuario = usuarioJson.getInt("id");
 
 //                    gravando as informações de login e usuario
                     preferencesConfig.writeUsuarioId(idUsuario);
                     preferencesConfig.writeUsuarioNome(nomeUsuario);
+                    preferencesConfig.writeNivelUsuario(nivelUsuario);
                     preferencesConfig.writeLoginStatus(true);
 
 //                    redirecionando para a tela principal do app
 //                    passando algumas informações do usuario
-                    Intent intencao = new Intent(activity, MainActivity.class);
-                    activity.startActivity(intencao);
-                    activity.finish();
+                    if (nivelUsuario.equals("Administrador")){
+                        Intent intencao = new Intent(activity, MainAdmActivity.class);
+                        activity.startActivity(intencao);
+                        activity.finish();
+                    } else if(nivelUsuario.equals("Cliente")){
+                        Intent intencao = new Intent(activity, MainActivity.class);
+                        activity.startActivity(intencao);
+                        activity.finish();
+                    } else {
+                        Toast.makeText(activity, "erro", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
 //                    caso o login não for valido, mostra uma mensagem
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);

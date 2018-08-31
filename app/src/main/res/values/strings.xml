@@ -12,4 +12,6 @@
     <string name="login_status_preferences">com.example.gabriel.aberturadechamados_login_status_preferences</string>
     <string name="usuario_nome">com.example.gabriel.aberturachamados_usuario_nome</string>
     <string name="usuario_id">com.example.gabriel.aberturachamados_usuario_id</string>
+    <string name="nivel_usuario">com.example.gabriel.aberturachamados_nivel_usuario</string>
+    <string name="title_activity_main_adm">Gerenciamento de Chamados</string>
 </resources>

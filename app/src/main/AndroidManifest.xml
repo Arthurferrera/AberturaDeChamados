@@ -50,6 +50,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.gabriel.aberturadechamados.LoginActivity" />
         </activity>
+        <activity
+            android:name=".MainAdmActivity"
+            android:label="@string/title_activity_main_adm"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

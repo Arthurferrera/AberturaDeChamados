@@ -33,7 +33,7 @@ public class ChamadoAdapter extends ArrayAdapter<Chamado> {
             v = LayoutInflater.from(getContext()).inflate(R.layout.list_view_item, null);
         }
 
-        // Pegando o contato daquela posição
+        // Pegando o chamado daquela posição
         Chamado chamado = getItem(position);
 
         // Acessando os elementos visuais

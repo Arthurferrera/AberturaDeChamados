@@ -55,4 +55,18 @@ public class SharedPreferencesConfig {
         id = sharedPreferences.getString(context.getResources().getString(R.string.usuario_id), "");
         return id;
     }
+
+//    método que grava o nivel do usario logado
+    public void writeNivelUsuario(String nivel){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getResources().getString(R.string.nivel_usuario), nivel);
+        editor.commit();
+    }
+
+//    método que lê o nivel do usario logado
+    public String readNivelusuario(){
+        String nivel = "";
+        nivel = sharedPreferences.getString(context.getResources().getString(R.string.nivel_usuario), "");
+        return nivel;
+    }
 }

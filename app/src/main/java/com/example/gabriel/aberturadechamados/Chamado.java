@@ -7,6 +7,8 @@ public class Chamado {
     private String mensagem;
     private Boolean status;
     private String data;
+    private String nomeUsuario;
+    private String nomeEmpresa;
 
     public String getTitulo() {
         return titulo;
@@ -46,5 +48,21 @@ public class Chamado {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
+
+    public String getNomeEmpresa() {
+        return nomeEmpresa;
+    }
+
+    public void setNomeEmpresa(String nomeEmpresa) {
+        this.nomeEmpresa = nomeEmpresa;
     }
 }
