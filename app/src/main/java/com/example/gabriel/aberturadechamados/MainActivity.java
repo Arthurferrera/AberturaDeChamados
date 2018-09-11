@@ -22,6 +22,8 @@ import android.widget.ListView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 String json = "";
 //                URL da API
-                final String url = "http://192.168.2.121/APIChamados/selecionarPendencias.php?idUsuario="+idUsuario;
+                final String url = "http://192.168.137.1/APIChamados/selecionarPendencias.php?idUsuario="+idUsuario;
                 json = HttpConnection.get(url);
                 return json;
             }
@@ -124,8 +126,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             ch.setId(chamadoJson.getInt("id"));
                             ch.setTitulo(chamadoJson.getString("titulo"));
                             ch.setMensagem(chamadoJson.getString("mensagem"));
-                            ch.setData(chamadoJson.getString("data"));
-
+                            String dataAbertura = chamadoJson.getString("data");
+                            DateFormat df = new SimpleDateFormat("dd-MM-yyyy" +
+                                    "");
+                            dataAbertura = df.format(dataAbertura);
+                            ch.setData(dataAbertura);
                             lstChamados.add(ch);
                         }
                     } catch (Exception ex) {

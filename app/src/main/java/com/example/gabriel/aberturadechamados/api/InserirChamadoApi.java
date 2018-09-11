@@ -40,7 +40,7 @@ public class InserirChamadoApi extends AsyncTask<Void, Void, String> {
                 if(sucesso){
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     builder.setTitle("Enviado!");
-                    builder.setMessage("Seu chamado foi enviado com sucesso!");
+                    builder.setMessage("Seu chamado foi enviado com sucesso!\nEm breve entraremos em contato.");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

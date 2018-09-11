@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
 //            Toast.makeText(this, usuario+" - "+senha, Toast.LENGTH_SHORT).show();
 //            setando parametros e url da API e instanciando a API
-            String url = "http://192.168.2.121/APIChamados/login.php?";
+            String url = "http://192.168.137.1/APIChamados/login.php?";
             String parametros = "usuario="+usuario+"&senha="+senha;
             url += parametros;
             new LoginApi(url, this).execute();

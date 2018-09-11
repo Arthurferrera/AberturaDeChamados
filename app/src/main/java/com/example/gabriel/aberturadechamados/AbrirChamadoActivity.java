@@ -95,8 +95,8 @@ public class AbrirChamadoActivity extends AppCompatActivity {
 //            setando o status em false, pois todos cos chamados abertos vão ser pendentes, só muda o status se for resolvido
             status = false;
 
-            String url = "http://192.168.2.121/APIChamados/inserir.php?";
-            String parametros = "titulo="+titulo+"&mensagem="+mensagem+"&data="+dataAberturaChamado+"&status=0&idUsuario="+idUsuario;
+            String url = "http://192.168.137.1/APIChamados/inserir.php?";
+            String parametros = "titulo="+titulo+"&mensagem="+mensagem+"&status=0&idUsuario="+idUsuario;
             url += parametros;
             new InserirChamadoApi(url, this).execute();
 

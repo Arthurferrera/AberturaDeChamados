@@ -130,7 +130,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                 senha = URLEncoder.encode(senha, "UTF-8");
 
 //                setando url, os parametros e instanciando a api
-                String url = "http://192.168.2.121/APIChamados/cadastroUsuario.php?";
+                String url = "http://192.168.137.1/APIChamados/cadastroUsuario.php?";
                 String parametros = "cnpj="+cnpj+"&razaoSocial="+razaoSocial+"&nome="+nome+"&usuario="+usuario+"&senha="+senha;
                 url += parametros;
                 new CadastrarUsuarioApi(url, this).execute();

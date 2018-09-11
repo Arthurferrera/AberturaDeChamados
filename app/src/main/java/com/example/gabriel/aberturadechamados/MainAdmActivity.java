@@ -20,7 +20,12 @@ import android.widget.ListView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainAdmActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -70,7 +75,7 @@ public class MainAdmActivity extends AppCompatActivity implements AdapterView.On
             protected String doInBackground(Void... voids) {
 
                 String json = "";
-                final String url = "http://192.168.2.121/APIChamados/selecionarChamadosAdm.php";
+                final String url = "http://192.168.137.1/APIChamados/selecionarChamadosAdm.php";
                 json = HttpConnection.get(url);
                 return json;
             }
@@ -95,7 +100,13 @@ public class MainAdmActivity extends AppCompatActivity implements AdapterView.On
                             ch.setId(chamadoJson.getInt("id"));
                             ch.setTitulo(chamadoJson.getString("titulo"));
                             ch.setMensagem(chamadoJson.getString("mensagem"));
-                            ch.setData(chamadoJson.getString("data"));
+                            //TODO:FORMATAR A DATA NA VISUALIZAÇÃO DA LISTA(DD/MM/AAAA)
+                            //TODO:FORMATAR A DATA NA VSUALIZAÇÃO DO CHAMADO (DDMM/AAAA ÁS 10:09:09
+                            String dataAbertura = chamadoJson.getString("data");
+                            DateFormat df = new SimpleDateFormat("dd-MM-yyyy" +
+                                    "");
+                            dataAbertura = df.format(dataAbertura);
+                            ch.setData(dataAbertura);
 //                            ch.setStatus(chamadoJson.getBoolean("status"));
                             ch.setNomeEmpresa(chamadoJson.getString("razaoSocial"));
                             ch.setNomeUsuario(chamadoJson.getString("nome"));

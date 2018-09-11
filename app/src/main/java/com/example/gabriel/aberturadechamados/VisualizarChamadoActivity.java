@@ -63,7 +63,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         nivelUsuario = preferencesConfig.readNivelusuario();
 
 //        setando a url da api
-        final String url = "http://192.168.2.121/APIChamados/selecionarumChamado.php?id="+idChamado;
+        final String url = "http://192.168.137.1/APIChamados/selecionarumChamado.php?id="+idChamado;
 
         new AsyncTask<Void, Void, Void>(){
             String retorno = "";

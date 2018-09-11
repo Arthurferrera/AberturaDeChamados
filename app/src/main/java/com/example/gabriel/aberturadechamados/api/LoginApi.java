@@ -48,7 +48,7 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
 //                    resgatando o objeto do usuario
                     JSONObject usuarioJson = jsonObject.getJSONObject("usuario");
                     String nomeUsuario = usuarioJson.getString("nome");
-                    String nivelUsuario = usuarioJson.getString("nivelUsuario");
+                    String nivelUsuario = usuarioJson.getString("nivel");
                     nivelUsuario = nivelUsuario.trim();
                     int idUsuario = usuarioJson.getInt("id");
 
