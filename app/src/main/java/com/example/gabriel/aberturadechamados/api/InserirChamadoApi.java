@@ -15,7 +15,6 @@ public class InserirChamadoApi extends AsyncTask<Void, Void, String> {
 
     private String url;
     private Activity activity;
-    private AlertDialog alerta;
 
     public InserirChamadoApi(String url, Activity activity){
         this.url = url;

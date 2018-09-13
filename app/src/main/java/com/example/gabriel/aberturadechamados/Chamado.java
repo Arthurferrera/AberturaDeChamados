@@ -9,6 +9,8 @@ public class Chamado {
     private String data;
     private String nomeUsuario;
     private String nomeEmpresa;
+    private String observacao;
+    private String dataObservacao;
 
     public String getTitulo() {
         return titulo;
@@ -65,4 +67,12 @@ public class Chamado {
     public void setNomeEmpresa(String nomeEmpresa) {
         this.nomeEmpresa = nomeEmpresa;
     }
+
+    public String getObservacao() { return observacao; }
+
+    public void setObservacao(String observacao) { this.observacao = observacao; }
+
+    public String getDataObservacao() { return dataObservacao; }
+
+    public void setDataObservacao(String dataObservacao) { this.dataObservacao = dataObservacao; }
 }

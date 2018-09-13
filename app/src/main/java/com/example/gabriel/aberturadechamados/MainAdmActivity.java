@@ -26,6 +26,7 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainAdmActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -102,12 +103,10 @@ public class MainAdmActivity extends AppCompatActivity implements AdapterView.On
                             ch.setMensagem(chamadoJson.getString("mensagem"));
                             //TODO:FORMATAR A DATA NA VISUALIZAÇÃO DA LISTA(DD/MM/AAAA)
                             //TODO:FORMATAR A DATA NA VSUALIZAÇÃO DO CHAMADO (DDMM/AAAA ÁS 10:09:09
-                            String dataAbertura = chamadoJson.getString("data");
-                            DateFormat df = new SimpleDateFormat("dd-MM-yyyy" +
-                                    "");
-                            dataAbertura = df.format(dataAbertura);
-                            ch.setData(dataAbertura);
-//                            ch.setStatus(chamadoJson.getBoolean("status"));
+                            JSONObject dataJson = chamadoJson.getJSONObject("data");
+                            String data  = dataJson.getString("date");
+//                            DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(data);
+                            Log.d("dataJson", ""+data);
                             ch.setNomeEmpresa(chamadoJson.getString("razaoSocial"));
                             ch.setNomeUsuario(chamadoJson.getString("nome"));
 

@@ -52,11 +52,9 @@
                     android:id="@+id/sw_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:showText="true"
-                    android:splitTrack="false"
-                    android:textOff="Não"
-                    android:textOn="Sim" />
+                    android:textColor="@color/preto"
+                    android:backgroundTint="@color/preto"
+                    />
 
             </LinearLayout>
         </LinearLayout>

@@ -29,7 +29,6 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:minHeight="150dp"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:textAlignment="center"
@@ -75,19 +74,29 @@
                     android:id="@+id/lbl_visualizar_status_chamado"/>
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Obervações:"
-                android:textStyle="bold"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="10dp"
-                android:textSize="20sp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/lbl_visualizar_observacao"/>
+                android:minHeight="400dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/linear_obs">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:text="Obervações:"
+                    android:textStyle="bold"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="20sp"/>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="375dp"
+                    android:id="@+id/list_view_obs">
+                </ListView>
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

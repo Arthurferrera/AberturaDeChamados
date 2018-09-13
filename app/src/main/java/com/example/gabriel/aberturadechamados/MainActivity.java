@@ -126,10 +126,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             ch.setId(chamadoJson.getInt("id"));
                             ch.setTitulo(chamadoJson.getString("titulo"));
                             ch.setMensagem(chamadoJson.getString("mensagem"));
-                            String dataAbertura = chamadoJson.getString("data");
-                            DateFormat df = new SimpleDateFormat("dd-MM-yyyy" +
-                                    "");
-                            dataAbertura = df.format(dataAbertura);
+                            JSONObject dataJson = chamadoJson.getJSONObject("data");
+                            String dataAbertura  = dataJson.getString("date");
                             ch.setData(dataAbertura);
                             lstChamados.add(ch);
                         }

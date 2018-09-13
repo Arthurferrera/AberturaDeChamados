@@ -32,7 +32,8 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:minHeight="35dp"
+            android:layout_height="wrap_content"
             android:text="Titulo Chamado"
             android:textAlignment="viewStart"
             android:id="@+id/lbl_titulo_chamado_adm"
