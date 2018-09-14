@@ -11,7 +11,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/scrollChamado">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,36 +21,66 @@
             android:padding="16dp">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/lbl_titulo_chamado"
-                android:textSize="30sp"
-                android:textAlignment="center"
-                android:layout_marginTop="20dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Titulo:"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textAlignment="center"
-                android:layout_marginTop="25dp"
-                android:id="@+id/lbl_visualzar_mensagem"/>
+                android:minHeight="30dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:textAlignment="gravity"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:id="@+id/lbl_titulo_chamado"
+                android:layout_marginBottom="15dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Descrição"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:minHeight="30dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:textAlignment="gravity"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:id="@+id/lbl_visualzar_mensagem"
+                android:layout_marginBottom="15dp"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Aberto em:"/>
+                    android:text="Aberto em:"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
+                    android:paddingLeft="15dp"
                     android:textSize="15sp"
                     android:id="@+id/lbl_visualizar_data_chamado"/>
 
@@ -58,18 +89,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Status do Chamado:"/>
+                    android:text="Status do Chamado:"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
+                    android:paddingLeft="15dp"
                     android:textSize="15sp"
                     android:id="@+id/lbl_visualizar_status_chamado"/>
             </LinearLayout>

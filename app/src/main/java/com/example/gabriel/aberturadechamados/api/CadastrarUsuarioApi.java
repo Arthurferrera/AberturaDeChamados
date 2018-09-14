@@ -64,7 +64,7 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
                                     Toast.makeText(activity, "Cadastro efetuado!", Toast.LENGTH_SHORT).show();
                                     activity.finish();
                                 } else {
-                                    Toast.makeText(activity, "Erro ao realizar o cadastro. Tente Novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(activity, "Erro ao realizar o cadastro. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
                                     activity.finish();
                                 }
                             } else {

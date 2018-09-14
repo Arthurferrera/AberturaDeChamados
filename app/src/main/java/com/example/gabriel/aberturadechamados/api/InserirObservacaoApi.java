@@ -2,10 +2,12 @@ package com.example.gabriel.aberturadechamados.api;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.HttpConnection;
+import com.example.gabriel.aberturadechamados.VisualizarChamadoActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

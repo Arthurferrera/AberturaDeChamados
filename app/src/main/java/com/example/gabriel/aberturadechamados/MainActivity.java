@@ -61,25 +61,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(intencao);
             }
         });
-
-////        Pega o fragmentManager
-//        FragmentManager fm = getSupportFragmentManager();
-//
-////        Abre uma tranação e adiciona
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.add(R.id.fragment_content, new MainFragment());
-//        ft.commit();
-//
-////        substitui um Fragment
-//        ft = fm.beginTransaction();
-//        ft.replace(R.id.fragment_content, new MainFragment());
-//        ft.commit();
-//
-////        remove um fragment
-//        Fragment fragment = fm.findFragmentById(R.id.fragment_content);
-//        ft = fm.beginTransaction();
-//        ft.remove(fragment);
-//        ft.commit();
     }
 
     @Override

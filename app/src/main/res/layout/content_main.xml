@@ -14,19 +14,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/list_view_chamados">
     </ListView>
-    
-    <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:id="@+id/fragment_content">-->
-    <!--</FrameLayout>-->
-
-    <!--<fragment-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--class="com.example.gabriel.aberturadechamados.MainFragment"-->
-        <!--tools:layout="@layout/main_fragment"-->
-        <!--android:id="@+id/mainFragment">-->
-    <!--</fragment>-->
 
 </LinearLayout>

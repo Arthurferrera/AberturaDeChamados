@@ -53,7 +53,16 @@
         <activity
             android:name=".MainAdmActivity"
             android:label="@string/title_activity_main_adm"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".VisualizarAdmActivity"
+            android:label="@string/title_activity_visualizar_adm"
+            android:parentActivityName=".MainAdmActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.gabriel.aberturadechamados.MainAdmActivity" />
+        </activity>
     </application>
 
 </manifest>

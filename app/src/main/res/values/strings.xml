@@ -6,6 +6,8 @@
     <string name="title_activity_visualizar_chamado">Visualizar Chamado</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuário</string>
+    <string name="title_activity_main_adm">Gerenciamento de Chamados</string>
+    <string name="title_activity_visualizar_adm">Visualizar Chamado</string>
 
     <!--strings que são gravadas na memória do celular-->
     <string name="login_preferences">com.example.gabriel.aberturadechamados_login_preferences</string>
@@ -13,5 +15,4 @@
     <string name="usuario_nome">com.example.gabriel.aberturachamados_usuario_nome</string>
     <string name="usuario_id">com.example.gabriel.aberturachamados_usuario_id</string>
     <string name="nivel_usuario">com.example.gabriel.aberturachamados_nivel_usuario</string>
-    <string name="title_activity_main_adm">Gerenciamento de Chamados</string>
 </resources>

@@ -126,7 +126,7 @@ public class MainAdmActivity extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Chamado item = adapterAdm.getItem(i);
-        Intent intencao = new Intent(this, VisualizarChamadoActivity.class);
+        Intent intencao = new Intent(this, VisualizarAdmActivity.class);
         intencao.putExtra("idChamado", item.getId());
         startActivity(intencao);
     }

@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -138,6 +139,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 //                caso as senhas não sejam iguais, mostra ma mensagem de erro
                 Toast.makeText(this, "Senhas não conferem", Toast.LENGTH_SHORT).show();
             }
+
+//            String url = "http://192.168.137.1/APIChamados/cadastroUsuario.php?cnpj=21.770.521/0001-06&razaoSocial=testando&nome=teste&usuario=tt&senha=12345q";
         }
     }
 }

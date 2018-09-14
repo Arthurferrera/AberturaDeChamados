@@ -1,16 +1,15 @@
 package com.example.gabriel.aberturadechamados;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,10 +18,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.api.InserirObservacaoApi;
 
@@ -34,32 +31,28 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import static com.example.gabriel.aberturadechamados.R.layout.activity_abrir_chamado;
-import static com.example.gabriel.aberturadechamados.R.layout.activity_login;
-import static com.example.gabriel.aberturadechamados.R.layout.activity_visualizar_chamado;
-import static com.example.gabriel.aberturadechamados.R.layout.content_dialog_atualizar;
+public class VisualizarAdmActivity extends AppCompatActivity {
 
-public class VisualizarChamadoActivity extends AppCompatActivity {
-
-    TextView lbl_visualizar_titulo_chamado, lbl_visualizar_mensagem, lbl_visualizar_data_chamado, lbl_visualizar_status_chamado, lbl_visualizar_observacao;
+    TextView lbl_visualizar_titulo_chamado, lbl_visualizar_mensagem, lbl_visualizar_data_chamado, lbl_visualizar_status_chamado, lbl_solicitante, lbl_empresa, lbl_cnpj;
     Integer idChamado;
-    String titulo, mensagem, data, nivelUsuario;
+    String titulo, mensagem, data, nivelUsuario, observacao, solicitante, empresa, cnpj;
     Integer status;
     SharedPreferencesConfig preferencesConfig;
+    Boolean statusChamado;
     ObservacaoAdapter adapter;
     ListView list_view_obs;
     LinearLayout linear_obs;
-    ScrollView scroll;
 
     View rootview;
     EditText txt_observacao;
     Switch sw_status;
     LayoutInflater layoutInflater;
+    Activity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_visualizar_chamado);
+        setContentView(R.layout.activity_visualizar_adm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -76,12 +69,14 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         lbl_visualizar_status_chamado = findViewById(R.id.lbl_visualizar_status_chamado);
         list_view_obs = findViewById(R.id.list_view_obs);
         linear_obs = findViewById(R.id.linear_obs);
-        scroll = findViewById(R.id.scrollChamado);
+        lbl_solicitante = findViewById(R.id.lbl_solicitante);
+        lbl_empresa = findViewById(R.id.lbl_empresa);
+        lbl_cnpj = findViewById(R.id.lbl_cnpj);
 
         adapter = new ObservacaoAdapter(this);
         list_view_obs.setAdapter(adapter);
 
-        layoutInflater = LayoutInflater.from(VisualizarChamadoActivity.this);
+        layoutInflater = LayoutInflater.from(VisualizarAdmActivity.this);
         rootview = layoutInflater.inflate(R.layout.content_dialog_atualizar, null, false);
 
         txt_observacao = rootview.findViewById(R.id.txt_observacao);
@@ -94,9 +89,6 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-//        TODO: Fazer o scroll ir para o topo sempre que iniciar/voltar a activity
-//        scroll.fullScroll(ScrollView.FOCUS_UP);
 
         adapter.clear();
 
@@ -129,11 +121,16 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                     JSONObject dataJson = chamadoJson.getJSONObject("data");
                     data  = dataJson.getString("date");
                     status = chamadoJson.getInt("status");
+                    solicitante = chamadoJson.getString("nome");
+                    empresa = chamadoJson.getString("razaoSocial");
+                    cnpj = chamadoJson.getString("cnpj");
 
                     JSONArray observacaoJson = objeto.getJSONArray("obs");
+                    Log.d("obsJson", ""+observacaoJson);
                     if (observacaoJson.length() == 0 || observacaoJson.equals(null)){
                         linear_obs.setVisibility(View.GONE);
                     } else {
+//                       JSONArray arrayObs = new JSONArray(observacaoJson);
                         for (int i =0; i < observacaoJson.length(); i++){
 
                             JSONObject obsJson = observacaoJson.getJSONObject(i);
@@ -146,10 +143,14 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                         }
                     }
 
+
 //                    setando os editText
                     lbl_visualizar_titulo_chamado.setText(titulo);
                     lbl_visualizar_mensagem.setText(mensagem);
                     lbl_visualizar_data_chamado.setText(data);
+                    lbl_solicitante.setText(solicitante);
+                    lbl_empresa.setText(empresa);
+                    lbl_cnpj.setText(cnpj);
 
 //                    verificando qual o status do chamado,
 //                    1 foi resolvido e 0 não
@@ -166,5 +167,78 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                 adapter.addAll(listObsChamado);
             }
         }.execute();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (nivelUsuario.equals("Administrador")){
+            getMenuInflater().inflate(R.menu.menu_visualizar_adm, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_atualizar){
+            final AlertDialog.Builder builder = new AlertDialog.Builder(VisualizarAdmActivity.this);
+            builder.setTitle("AtualIzar chamado");
+            builder.setView(rootview);
+
+            builder.setCancelable(false).setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which){
+                    SalvarObs();
+                    onResume();
+
+                }
+            })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private boolean ValidarCampos(){
+        EditText campoComFoco = null;
+        boolean isValid = true;
+
+        if (txt_observacao.getText().toString().length() == 0){
+            campoComFoco = txt_observacao;
+            txt_observacao.setError("Mensagem obrigatória");
+            isValid = false;
+        }
+        if(campoComFoco != null){
+            campoComFoco.requestFocus();
+        }
+        return isValid;
+    }
+
+    private void SalvarObs(){
+        if (ValidarCampos()){
+            observacao = txt_observacao.getText().toString();
+            statusChamado = sw_status.isChecked();
+
+            try {
+                observacao = URLEncoder.encode(observacao, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            String url = "http://192.168.137.1/APIChamados/inserirObservacao.php?";
+            String parametros = "observacao="+observacao+"&statusChamado="+statusChamado+"&idChamado="+idChamado;
+            url += parametros;
+            new InserirObservacaoApi(url, this).execute();
+//                        Toast.makeText(VisualizarChamadoActivity.this,"EditText value " + observacao + " status "+ statusChamado, Toast.LENGTH_SHORT).show();
+        }
     }
 }
