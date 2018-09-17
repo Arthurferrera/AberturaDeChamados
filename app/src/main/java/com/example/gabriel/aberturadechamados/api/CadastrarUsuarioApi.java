@@ -3,12 +3,18 @@ package com.example.gabriel.aberturadechamados.api;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.AsyncTask;
+import android.text.LoginFilter;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.HttpConnection;
+import com.example.gabriel.aberturadechamados.LoginActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
 
@@ -61,8 +67,12 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
                                 boolean sucesso = jsonObject.getBoolean("Sucesso");
 //                              verifica se o usuario foi cadastrado
                                 if (sucesso) {
-                                    Toast.makeText(activity, "Cadastro efetuado!", Toast.LENGTH_SHORT).show();
-                                    activity.finish();
+//                                    TODO: FAZER O LOGIN AUTOMATICO ASSIM QUE EFETUAR O CADASTRO
+//                                    LoginActivity login = new LoginActivity();
+//                                    login.AutenticacaoCadastro();
+
+//                                    Toast.makeText(activity, "Cadastro efetuado!", Toast.LENGTH_SHORT).show();
+//                                    activity.finish();
                                 } else {
                                     Toast.makeText(activity, "Erro ao realizar o cadastro. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
                                     activity.finish();
@@ -70,7 +80,7 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                                 builder.setTitle("Aviso!");
-                                builder.setMessage("A senha deve conter letras e números");
+                                builder.setMessage("A senha deve conter letras e números.");
                                 builder.setPositiveButton("Entendi", null);
                                 alerta = builder.create();
                                 alerta.show();

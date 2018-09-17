@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 //    método que faz a autenticação do usuario
-    public void Autencicacao(View view) throws UnsupportedEncodingException {
+    public void Autenticacao(View view) throws UnsupportedEncodingException {
 //        verificando se os campos estão vazios
         if(ValidarCampos()){
 //            resgatando os valores digitados
@@ -104,7 +104,20 @@ public class LoginActivity extends AppCompatActivity {
             String parametros = "usuario="+usuario+"&senha="+senha;
             url += parametros;
             new LoginApi(url, this).execute();
+            onResume();
         }
+    }
+
+    //    método que faz a autenticação do usuario
+    public void AutenticacaoCadastro() throws UnsupportedEncodingException {
+            usuario = URLEncoder.encode(usuario, "UTF-8");
+            senha = URLEncoder.encode(senha, "UTF-8");
+//            Toast.makeText(this, usuario+" - "+senha, Toast.LENGTH_SHORT).show();
+//            setando parametros e url da API e instanciando a API
+            String url = "http://192.168.137.1/APIChamados/login.php?";
+            String parametros = "usuario="+usuario+"&senha="+senha;
+            url += parametros;
+            new LoginApi(url, this).execute();
     }
 
 //    ação do link que redireciona para a tela de cadastro
