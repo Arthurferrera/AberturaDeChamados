@@ -15,4 +15,7 @@
     <string name="usuario_nome">com.example.gabriel.aberturachamados_usuario_nome</string>
     <string name="usuario_id">com.example.gabriel.aberturachamados_usuario_id</string>
     <string name="nivel_usuario">com.example.gabriel.aberturachamados_nivel_usuario</string>
+
+    <!--URL da api, declarada aqui, para ser acessada de qualquer tela-->
+    <string name="api_key">http://192.168.137.1/APIChamados/</string>
 </resources>

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     ListView list_view_chamados;
     ChamadoAdapter adapter;
-    String nomeUsuario;
+    String nomeUsuario, API_URL;
     int idUsuario;
     private SharedPreferencesConfig preferencesConfig;
 
@@ -40,6 +41,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Toast.makeText(this, "Bem Vindo !", Toast.LENGTH_SHORT);
+
+        API_URL = getString(R.string.api_key);
 
 //        instanciando o SharedPreferencesConfig
         preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
@@ -80,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 String json = "";
 //                URL da API
-                final String url = "http://192.168.137.1/APIChamados/selecionarPendencias.php?idUsuario="+idUsuario;
+                final String url = API_URL + "selecionarPendencias.php?idUsuario="+idUsuario;
                 json = HttpConnection.get(url);
                 return json;
             }
@@ -109,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             ch.setMensagem(chamadoJson.getString("mensagem"));
                             JSONObject dataJson = chamadoJson.getJSONObject("data");
                             String dataAbertura  = dataJson.getString("date");
+                            dataAbertura = converterData(dataAbertura);
                             ch.setData(dataAbertura);
                             lstChamados.add(ch);
                         }
@@ -167,5 +173,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public String converterData(String dataTotal){
+//      separa a data quando entre a data e a hora
+        String[] data = dataTotal.split(" ");
+
+//      separa a data a partir do '-', e converte para o padrão brasileiro
+        String [] dataSeparada = data[0].split("-");
+        String dataConvertida = dataSeparada[2]+"/"+dataSeparada[1]+"/"+dataSeparada[0];
+
+//      separa a hora a partir do ':', e deixa somente no padrão HH:MM
+        String [] horaSeparada = data[1].split(":");
+        String horaConvertida = horaSeparada[0]+":"+horaSeparada[1];
+
+//       concatenando data e hora para ser mostrado
+        String dataCerta = dataConvertida+" "+horaConvertida;
+
+        return dataCerta;
     }
 }

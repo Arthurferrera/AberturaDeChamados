@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText txt_usuario, txt_senha;
     TextView lbl_cadastro_usuario;
     Button btn_entrar;
-    String usuario, senha;
+    String usuario, senha, API_URL;
     private SharedPreferencesConfig preferencesConfig;
 
     @Override
@@ -29,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 //        não permite que o teclado apareça assim que a tela iniciar
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        API_URL = getString(R.string.api_key);
 
 //        instanciando o SharedPreferencesConfig
         preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
@@ -60,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onResume();
 
 //        limpando os inputs
-        txt_usuario.setText("");
         txt_senha.setText("");
     }
 
@@ -100,24 +101,12 @@ public class LoginActivity extends AppCompatActivity {
 
 //            Toast.makeText(this, usuario+" - "+senha, Toast.LENGTH_SHORT).show();
 //            setando parametros e url da API e instanciando a API
-            String url = "http://192.168.137.1/APIChamados/login.php?";
+            String url = API_URL + "login.php?";
             String parametros = "usuario="+usuario+"&senha="+senha;
             url += parametros;
             new LoginApi(url, this).execute();
             onResume();
         }
-    }
-
-    //    método que faz a autenticação do usuario
-    public void AutenticacaoCadastro() throws UnsupportedEncodingException {
-            usuario = URLEncoder.encode(usuario, "UTF-8");
-            senha = URLEncoder.encode(senha, "UTF-8");
-//            Toast.makeText(this, usuario+" - "+senha, Toast.LENGTH_SHORT).show();
-//            setando parametros e url da API e instanciando a API
-            String url = "http://192.168.137.1/APIChamados/login.php?";
-            String parametros = "usuario="+usuario+"&senha="+senha;
-            url += parametros;
-            new LoginApi(url, this).execute();
     }
 
 //    ação do link que redireciona para a tela de cadastro

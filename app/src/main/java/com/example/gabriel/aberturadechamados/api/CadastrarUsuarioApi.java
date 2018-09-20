@@ -4,23 +4,27 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.text.LoginFilter;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.HttpConnection;
 import com.example.gabriel.aberturadechamados.LoginActivity;
+import com.example.gabriel.aberturadechamados.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
 
     private String url;
     private Activity activity;
     private AlertDialog alerta;
+    String API_URL = activity.getString(R.string.api_key);
 
     public CadastrarUsuarioApi(String url, Activity activity){
         this.url = url;
@@ -67,12 +71,13 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
                                 boolean sucesso = jsonObject.getBoolean("Sucesso");
 //                              verifica se o usuario foi cadastrado
                                 if (sucesso) {
-//                                    TODO: FAZER O LOGIN AUTOMATICO ASSIM QUE EFETUAR O CADASTRO
-//                                    LoginActivity login = new LoginActivity();
-//                                    login.AutenticacaoCadastro();
-
-//                                    Toast.makeText(activity, "Cadastro efetuado!", Toast.LENGTH_SHORT).show();
-//                                    activity.finish();
+                                    String usuario = jsonObject.getString("usuario");
+                                    String senha = jsonObject.getString("senha");
+                                    try {
+                                        AutenticacaoCadastro(usuario, senha);
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
+                                    }
                                 } else {
                                     Toast.makeText(activity, "Erro ao realizar o cadastro. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
                                     activity.finish();
@@ -93,5 +98,18 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
                 e.printStackTrace();
             }
         }
+    }
+
+    //    método que faz a autenticação do usuario
+    public void AutenticacaoCadastro(String usuario, String senha) throws UnsupportedEncodingException {
+
+        usuario = URLEncoder.encode(usuario, "UTF-8");
+        senha = URLEncoder.encode(senha, "UTF-8");
+        
+//      setando parametros e url da API e instanciando a API
+        String url = API_URL + "login.php?";
+        String parametros = "usuario="+usuario+"&senha="+senha;
+        url += parametros;
+        new LoginApi(url, activity).execute();
     }
 }

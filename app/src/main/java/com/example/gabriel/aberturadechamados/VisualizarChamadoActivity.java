@@ -43,7 +43,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
 
     TextView lbl_visualizar_titulo_chamado, lbl_visualizar_mensagem, lbl_visualizar_data_chamado, lbl_visualizar_status_chamado, lbl_visualizar_observacao;
     Integer idChamado;
-    String titulo, mensagem, data, nivelUsuario;
+    String titulo, mensagem, data, nivelUsuario, API_URL;
     Integer status;
     SharedPreferencesConfig preferencesConfig;
     ObservacaoAdapter adapter;
@@ -63,6 +63,8 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        API_URL = getString(R.string.api_key);
 
         preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
 
@@ -103,7 +105,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         nivelUsuario = preferencesConfig.readNivelusuario();
 
 //        setando a url da api
-        final String url = "http://192.168.137.1/APIChamados/selecionarumChamado.php?id="+idChamado;
+        final String url = API_URL + "selecionarumChamado.php?id="+idChamado;
 
         new AsyncTask<Void, Void, Void>(){
             String retorno = "";
@@ -141,7 +143,9 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                             ch.setObservacao(obsJson.getString("observacao"));
 
                             JSONObject dataObsJson = obsJson.getJSONObject("dataHora");
-                            ch.setDataObservacao(dataObsJson.getString("date"));
+                            String dataObs = dataObsJson.getString("date");
+                            dataObs = converterData(dataObs);
+                            ch.setDataObservacao(dataObs);
                             listObsChamado.add(ch);
                         }
                     }
@@ -149,6 +153,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
 //                    setando os editText
                     lbl_visualizar_titulo_chamado.setText(titulo);
                     lbl_visualizar_mensagem.setText(mensagem);
+                    data = converterData(data);
                     lbl_visualizar_data_chamado.setText(data);
 
 //                    verificando qual o status do chamado,
@@ -166,5 +171,23 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                 adapter.addAll(listObsChamado);
             }
         }.execute();
+    }
+
+    public String converterData(String dataTotal){
+//      separa a data quando entre a data e a hora
+        String[] data = dataTotal.split(" ");
+
+//      separa a data a partir do '-', e converte para o padrão brasileiro
+        String [] dataSeparada = data[0].split("-");
+        String dataConvertida = dataSeparada[2]+"/"+dataSeparada[1]+"/"+dataSeparada[0];
+
+//      separa a hora a partir do ':', e deixa somente no padrão HH:MM
+        String [] horaSeparada = data[1].split(":");
+        String horaConvertida = horaSeparada[0]+":"+horaSeparada[1];
+
+//       concatenando data e hora para ser mostrado
+        String dataCerta = dataConvertida+" "+horaConvertida;
+
+        return dataCerta;
     }
 }

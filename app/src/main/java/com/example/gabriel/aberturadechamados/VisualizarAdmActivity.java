@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,13 +30,15 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class VisualizarAdmActivity extends AppCompatActivity {
 
     TextView lbl_visualizar_titulo_chamado, lbl_visualizar_mensagem, lbl_visualizar_data_chamado, lbl_visualizar_status_chamado, lbl_solicitante, lbl_empresa, lbl_cnpj;
     Integer idChamado;
-    String titulo, mensagem, data, nivelUsuario, observacao, solicitante, empresa, cnpj;
+    String titulo, mensagem, data, nivelUsuario, observacao, solicitante, empresa, cnpj, API_URL;
     Integer status;
     SharedPreferencesConfig preferencesConfig;
     Boolean statusChamado;
@@ -47,7 +50,6 @@ public class VisualizarAdmActivity extends AppCompatActivity {
     EditText txt_observacao;
     Switch sw_status;
     LayoutInflater layoutInflater;
-    Activity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        API_URL = getString(R.string.api_key);
 
         preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
 
@@ -95,7 +99,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         nivelUsuario = preferencesConfig.readNivelusuario();
 
 //        setando a url da api
-        final String url = "http://192.168.137.1/APIChamados/selecionarumChamado.php?id="+idChamado;
+        final String url = API_URL + "selecionarumChamado.php?id="+idChamado;
 
         new AsyncTask<Void, Void, Void>(){
             String retorno = "";
@@ -138,15 +142,17 @@ public class VisualizarAdmActivity extends AppCompatActivity {
                             ch.setObservacao(obsJson.getString("observacao"));
 
                             JSONObject dataObsJson = obsJson.getJSONObject("dataHora");
-                            ch.setDataObservacao(dataObsJson.getString("date"));
+                            String dataTotal = dataObsJson.getString("date");
+                            dataTotal = converterData(dataTotal);
+                            ch.setDataObservacao(dataTotal);
                             listObsChamado.add(ch);
                         }
                     }
 
-
 //                    setando os editText
                     lbl_visualizar_titulo_chamado.setText(titulo);
                     lbl_visualizar_mensagem.setText(mensagem);
+                    data = converterData(data);
                     lbl_visualizar_data_chamado.setText(data);
                     lbl_solicitante.setText(solicitante);
                     lbl_empresa.setText(empresa);
@@ -203,8 +209,6 @@ public class VisualizarAdmActivity extends AppCompatActivity {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -234,11 +238,24 @@ public class VisualizarAdmActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            String url = "http://192.168.137.1/APIChamados/inserirObservacao.php?";
+            String url = API_URL + "inserirObservacao.php?";
             String parametros = "observacao="+observacao+"&statusChamado="+statusChamado+"&idChamado="+idChamado;
             url += parametros;
             new InserirObservacaoApi(url, this).execute();
-//                        Toast.makeText(VisualizarChamadoActivity.this,"EditText value " + observacao + " status "+ statusChamado, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public String converterData(String dataTotal){
+//      separa a data quando entre a data e a hora
+        String[] data = dataTotal.split(" ");
+//      separa a data a partir do '-', e converte para o padrão brasileiro
+        String [] dataSeparada = data[0].split("-");
+        String dataConvertida = dataSeparada[2]+"/"+dataSeparada[1]+"/"+dataSeparada[0];
+//      separa a hora a partir do ':', e deixa somente no padrão HH:MM
+        String [] horaSeparada = data[1].split(":");
+        String horaConvertida = horaSeparada[0]+":"+horaSeparada[1];
+//       concatenando data e hora para ser mostrado
+        String dataCerta = dataConvertida+" "+horaConvertida;
+        return dataCerta;
     }
 }

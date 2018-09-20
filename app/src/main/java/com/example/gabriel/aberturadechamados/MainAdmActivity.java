@@ -32,7 +32,7 @@ public class MainAdmActivity extends AppCompatActivity implements AdapterView.On
 
     ListView list_view_chamados_adm;
     ChamadoAdapterAdm adapterAdm;
-    String nomeUsuario, nivelUsuario;
+    String nomeUsuario, API_URL;
     int idUsuario;
     private SharedPreferencesConfig preferencesConfig;
 
@@ -43,6 +43,8 @@ public class MainAdmActivity extends AppCompatActivity implements AdapterView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        API_URL = getString(R.string.api_key);
+
         preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
 
         list_view_chamados_adm = findViewById(R.id.list_view_chamados_adm);
@@ -51,14 +53,6 @@ public class MainAdmActivity extends AppCompatActivity implements AdapterView.On
         list_view_chamados_adm.setAdapter(adapterAdm);
         list_view_chamados_adm.setOnItemClickListener(this);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
     @Override
@@ -67,7 +61,6 @@ public class MainAdmActivity extends AppCompatActivity implements AdapterView.On
 
         nomeUsuario = preferencesConfig.readUsuarioNome();
         idUsuario = Integer.parseInt(preferencesConfig.readUsuarioId());
-//        nivelUsuario = preferencesConfig.readNivelusuario();
 
         adapterAdm.clear();
 
@@ -76,7 +69,7 @@ public class MainAdmActivity extends AppCompatActivity implements AdapterView.On
             protected String doInBackground(Void... voids) {
 
                 String json = "";
-                final String url = "http://192.168.137.1/APIChamados/selecionarChamadosAdm.php";
+                final String url = API_URL + "selecionarChamadosAdm.php";
                 json = HttpConnection.get(url);
                 return json;
             }
@@ -101,12 +94,6 @@ public class MainAdmActivity extends AppCompatActivity implements AdapterView.On
                             ch.setId(chamadoJson.getInt("id"));
                             ch.setTitulo(chamadoJson.getString("titulo"));
                             ch.setMensagem(chamadoJson.getString("mensagem"));
-                            //TODO:FORMATAR A DATA NA VISUALIZAÇÃO DA LISTA(DD/MM/AAAA)
-                            //TODO:FORMATAR A DATA NA VSUALIZAÇÃO DO CHAMADO (DDMM/AAAA ÁS 10:09:09
-                            JSONObject dataJson = chamadoJson.getJSONObject("data");
-                            String data  = dataJson.getString("date");
-//                            DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(data);
-                            Log.d("dataJson", ""+data);
                             ch.setNomeEmpresa(chamadoJson.getString("razaoSocial"));
                             ch.setNomeUsuario(chamadoJson.getString("nome"));
 
@@ -167,5 +154,23 @@ public class MainAdmActivity extends AppCompatActivity implements AdapterView.On
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public String converterData(String dataTotal){
+//      separa a data quando entre a data e a hora
+        String[] data = dataTotal.split(" ");
+
+//      separa a data a partir do '-', e converte para o padrão brasileiro
+        String [] dataSeparada = data[0].split("-");
+        String dataConvertida = dataSeparada[2]+"/"+dataSeparada[1]+"/"+dataSeparada[0];
+
+//      separa a hora a partir do ':', e deixa somente no padrão HH:MM
+        String [] horaSeparada = data[1].split(":");
+        String horaConvertida = horaSeparada[0]+":"+horaSeparada[1];
+
+//       concatenando data e hora para ser mostrado
+        String dataCerta = dataConvertida+" "+horaConvertida;
+
+        return dataCerta;
     }
 }

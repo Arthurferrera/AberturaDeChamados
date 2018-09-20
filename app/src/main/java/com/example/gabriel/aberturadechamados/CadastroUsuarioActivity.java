@@ -21,7 +21,7 @@ import java.net.URLEncoder;
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
     EditText txt_cnpj, txt_razao_social, txt_nome, txt_usuario, txt_senha, txt_confirma_senha;
-    String cnpj, razaoSocial, nome, usuario, senha, confirmaSenha;
+    String cnpj, razaoSocial, nome, usuario, senha, confirmaSenha, API_URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        não permite que o teclado apareça assim que a tela iniciar
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        API_URL = getString(R.string.api_key);
 
 //        finds dos elementos
         txt_cnpj = findViewById(R.id.txt_cnpj);
@@ -44,7 +46,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         txt_cnpj.addTextChangedListener(MaskUtil.insert(txt_cnpj, MaskType.CNPJ));
     }
 
-    //    método que valida se os campos estão vazios
+//    método que valida se os campos estão vazios
     private boolean ValidarCampos(){
         EditText campoComFoco = null;
         boolean isValid = true;
@@ -54,7 +56,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             txt_cnpj.setError("CNPJ inválido");
             isValid = false;
         }
-
         if(txt_cnpj.getText().toString().length() == 0){
             campoComFoco = txt_cnpj;
             txt_cnpj.setError("CNPJ obrigatório");
@@ -131,7 +132,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                 senha = URLEncoder.encode(senha, "UTF-8");
 
 //                setando url, os parametros e instanciando a api
-                String url = "http://192.168.137.1/APIChamados/cadastroUsuario.php?";
+                String url = API_URL + "cadastroUsuario.php?";
                 String parametros = "cnpj="+cnpj+"&razaoSocial="+razaoSocial+"&nome="+nome+"&usuario="+usuario+"&senha="+senha;
                 url += parametros;
                 new CadastrarUsuarioApi(url, this).execute();
@@ -139,8 +140,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 //                caso as senhas não sejam iguais, mostra ma mensagem de erro
                 Toast.makeText(this, "Senhas não conferem", Toast.LENGTH_SHORT).show();
             }
-
-//            String url = "http://192.168.137.1/APIChamados/cadastroUsuario.php?cnpj=21.770.521/0001-06&razaoSocial=testando&nome=teste&usuario=tt&senha=12345q";
         }
     }
 }

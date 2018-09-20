@@ -26,7 +26,7 @@ public class AbrirChamadoActivity extends AppCompatActivity {
 
     String titulo,mensagem;
     Boolean status;
-    String dataAberturaChamado;
+    String dataAberturaChamado, API_URL;
     int idUsuario;
 
     private SharedPreferencesConfig preferencesConfig;
@@ -40,6 +40,8 @@ public class AbrirChamadoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        não permite que o teclado apareça assim que a tela iniciar
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        API_URL = getString(R.string.api_key);
 
 //        instanciando o sharedPreferences
         preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
@@ -95,7 +97,7 @@ public class AbrirChamadoActivity extends AppCompatActivity {
 //            setando o status em false, pois todos cos chamados abertos vão ser pendentes, só muda o status se for resolvido
             status = false;
 
-            String url = "http://192.168.137.1/APIChamados/inserir.php?";
+            String url = API_URL + "inserir.php?";
             String parametros = "titulo="+titulo+"&mensagem="+mensagem+"&status=0&idUsuario="+idUsuario;
             url += parametros;
             new InserirChamadoApi(url, this).execute();
