@@ -15,18 +15,17 @@
         android:id="@+id/scroll">
 
         <LinearLayout
-            android:layout_width
-                ="match_parent"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="16dp"
             android:layout_marginBottom="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="15dp"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -50,10 +49,11 @@
             </LinearLayout>
 
             <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="15dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp"
+                android:padding="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +80,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="15dp"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -107,7 +108,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="15dp"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -134,7 +136,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="15dp"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -161,7 +164,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="15dp"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -182,7 +186,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -204,14 +209,15 @@
                 android:minHeight="400dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:id="@+id/linear_obs">
+                android:id="@+id/linear_obs"
+                android:layout_marginTop="20dp"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:text="Obervações:"
                     android:textStyle="bold"
-                    android:layout_marginTop="40dp"
                     android:layout_marginBottom="10dp"
                     android:textSize="20sp"/>
 
@@ -219,6 +225,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="375dp"
                     android:id="@+id/list_view_obs">
+                    <!--TODO:Arrumar do listView-Scroll-->
                 </ListView>
 
             </LinearLayout>

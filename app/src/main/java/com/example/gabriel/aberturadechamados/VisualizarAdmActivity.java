@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -67,6 +68,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
 //        finds dos elementos
+        FloatingActionButton fab = findViewById(R.id.fab);
         lbl_visualizar_titulo_chamado = findViewById(R.id.lbl_titulo_chamado);
         lbl_visualizar_mensagem = findViewById(R.id.lbl_visualzar_mensagem);
         lbl_visualizar_data_chamado = findViewById(R.id.lbl_visualizar_data_chamado);
@@ -88,6 +90,37 @@ public class VisualizarAdmActivity extends AppCompatActivity {
 
 //        resgatando os parametros passados pelo intent
         idChamado = intent.getIntExtra("idChamado", 0);
+
+        //        ação do botão float
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(VisualizarAdmActivity.this);
+                builder.setTitle("AtualIzar chamado");
+                builder.setView(rootview);
+
+                builder.setCancelable(false).setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        if (ValidarCampos()){
+                            SalvarObs();
+                            onResume();
+                            zerarAlert();
+                        }
+
+                    }
+                })
+                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                zerarAlert();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
     }
 
     @Override
@@ -175,43 +208,6 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         }.execute();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (nivelUsuario.equals("Administrador")){
-            getMenuInflater().inflate(R.menu.menu_visualizar_adm, menu);
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_atualizar){
-            final AlertDialog.Builder builder = new AlertDialog.Builder(VisualizarAdmActivity.this);
-            builder.setTitle("AtualIzar chamado");
-            builder.setView(rootview);
-
-            builder.setCancelable(false).setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which){
-                    SalvarObs();
-                    onResume();
-
-                }
-            })
-                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private boolean ValidarCampos(){
         EditText campoComFoco = null;
         boolean isValid = true;
@@ -228,7 +224,6 @@ public class VisualizarAdmActivity extends AppCompatActivity {
     }
 
     private void SalvarObs(){
-        if (ValidarCampos()){
             observacao = txt_observacao.getText().toString();
             statusChamado = sw_status.isChecked();
 
@@ -242,7 +237,6 @@ public class VisualizarAdmActivity extends AppCompatActivity {
             String parametros = "observacao="+observacao+"&statusChamado="+statusChamado+"&idChamado="+idChamado;
             url += parametros;
             new InserirObservacaoApi(url, this).execute();
-        }
     }
 
     public String converterData(String dataTotal){
@@ -257,5 +251,11 @@ public class VisualizarAdmActivity extends AppCompatActivity {
 //       concatenando data e hora para ser mostrado
         String dataCerta = dataConvertida+" "+horaConvertida;
         return dataCerta;
+    }
+
+    public void zerarAlert(){
+        ((ViewGroup)rootview.getParent()).removeView(rootview);
+        txt_observacao.setText("");
+        sw_status.setChecked(false);
     }
 }

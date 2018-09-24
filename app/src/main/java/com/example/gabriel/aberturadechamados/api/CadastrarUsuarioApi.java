@@ -105,7 +105,7 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
 
         usuario = URLEncoder.encode(usuario, "UTF-8");
         senha = URLEncoder.encode(senha, "UTF-8");
-        
+
 //      setando parametros e url da API e instanciando a API
         String url = API_URL + "login.php?";
         String parametros = "usuario="+usuario+"&senha="+senha;
