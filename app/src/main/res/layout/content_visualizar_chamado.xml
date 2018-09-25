@@ -7,22 +7,23 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".VisualizarChamadoActivity"
     tools:showIn="@layout/activity_visualizar_chamado"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollChamado">
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/scrollChamado">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="16dp">-->
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Titulo:"
                 android:textSize="16sp"
                 android:gravity="center_vertical"
@@ -33,7 +34,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:minHeight="30dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:textAlignment="gravity"
                 android:gravity="center_vertical"
@@ -42,93 +43,94 @@
                 android:layout_marginBottom="15dp"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Descrição"
-                android:textSize="16sp"
-                android:gravity="center_vertical"
-                android:textStyle="bold"
-                android:layout_marginBottom="5dp"
-                />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_vertical"
+        android:text="Descrição:"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:minHeight="30dp"
-                android:layout_height="match_parent"
-                android:paddingLeft="10dp"
-                android:textAlignment="gravity"
-                android:gravity="center_vertical"
-                android:textSize="16sp"
-                android:id="@+id/lbl_visualzar_mensagem"
-                android:layout_marginBottom="15dp"
-                />
+    <TextView
+        android:id="@+id/lbl_visualzar_mensagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_vertical"
+        android:minHeight="30dp"
+        android:paddingLeft="10dp"
+        android:textAlignment="gravity"
+        android:textSize="15sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Aberto em:"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="Status do Chamado: "
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="15dp"
-                    android:textSize="15sp"
-                    android:id="@+id/lbl_visualizar_data_chamado"/>
+        <TextView
+            android:id="@+id/lbl_visualizar_status_chamado"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:textSize="15sp" />
+    </LinearLayout>
 
-            </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Aberto em:  "
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Status do Chamado:"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/lbl_visualizar_data_chamado"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:textSize="15sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="15dp"
-                    android:textSize="15sp"
-                    android:id="@+id/lbl_visualizar_status_chamado"/>
-            </LinearLayout>
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:minHeight="400dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/linear_obs">
+    <LinearLayout
+        android:id="@+id/linear_obs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:text="Obervações:"
-                    android:textStyle="bold"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="20sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="Respostas:"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="375dp"
-                    android:id="@+id/list_view_obs">
-                </ListView>
+        <ListView
+            android:id="@+id/list_view_obs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
 
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
+        <!--</LinearLayout>-->
+    <!--</ScrollView>-->
 </LinearLayout>

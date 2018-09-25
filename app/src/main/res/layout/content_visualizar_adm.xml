@@ -7,228 +7,216 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".VisualizarAdmActivity"
     tools:showIn="@layout/activity_visualizar_adm"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <ScrollView
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/scroll">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:padding="16dp">-->
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scroll">
+        android:layout_height="30dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="Solicitante: "
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lbl_solicitante"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginBottom="10dp">
+            android:gravity="center_vertical"
+            android:minHeight="30dp"
+            android:paddingLeft="10dp"
+            android:textAlignment="gravity"
+            android:textSize="15sp" />
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                android:padding="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Solicitante:"
-                    android:textSize="16sp"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold"
-                    />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="Empresa: "
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:minHeight="30dp"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:textAlignment="gravity"
-                    android:gravity="center_vertical"
-                    android:id="@+id/lbl_solicitante"
-                    android:textSize="16sp"
-                    />
-            </LinearLayout>
+        <TextView
+            android:id="@+id/lbl_empresa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:minHeight="30dp"
+            android:paddingLeft="10dp"
+            android:textAlignment="gravity"
+            android:textSize="15sp" />
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                android:padding="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Empresa:"
-                android:textSize="16sp"
-                android:gravity="center_vertical"
-                android:textStyle="bold"
-                />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="CNPJ: "
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:minHeight="30dp"
-                android:layout_height="match_parent"
-                android:paddingLeft="10dp"
-                android:textAlignment="gravity"
-                android:gravity="center_vertical"
-                android:id="@+id/lbl_empresa"
-                android:textSize="16sp"
-                />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/lbl_cnpj"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:minHeight="30dp"
+            android:paddingLeft="10dp"
+            android:textAlignment="gravity"
+            android:textSize="15sp" />
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                android:padding="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="CNPJ:"
-                    android:textSize="16sp"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold"
-                    />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="Titulo: "
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:minHeight="30dp"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:textAlignment="gravity"
-                    android:gravity="center_vertical"
-                    android:id="@+id/lbl_cnpj"
-                    android:textSize="16sp"
-                    />
-            </LinearLayout>
+        <TextView
+            android:id="@+id/lbl_titulo_chamado"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:textAlignment="gravity"
+            android:textSize="15sp" />
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                android:padding="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:minHeight="30dp"
+        android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Titulo:"
-                    android:textSize="16sp"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold"
-                    />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Descrição: "
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:minHeight="30dp"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:textAlignment="gravity"
-                    android:gravity="center_vertical"
-                    android:textSize="16sp"
-                    android:id="@+id/lbl_titulo_chamado"
-                    />
-            </LinearLayout>
+        <TextView
+            android:id="@+id/lbl_visualzar_mensagem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:maxHeight="75dp"
+            android:paddingLeft="10dp"
+            android:text="teste de tamanho do text viewteste de tamanho do text view teste de tamanho do text view teste de tamanho do text view teste de tamanho do text view 2  "
+            android:textSize="15sp" />
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                android:padding="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Descrição"
-                    android:textSize="16sp"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold"
-                    />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Aberto em: "
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:minHeight="30dp"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:textAlignment="gravity"
-                    android:gravity="center_vertical"
-                    android:textSize="16sp"
-                    android:id="@+id/lbl_visualzar_mensagem"
-                    />
-            </LinearLayout>
+        <TextView
+            android:id="@+id/lbl_visualizar_data_chamado"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:textSize="15sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                android:padding="16dp">
+    </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Aberto em:"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="15dp"
-                    android:textSize="15sp"
-                    android:id="@+id/lbl_visualizar_data_chamado"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Status do Chamado: "
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-            </LinearLayout>
+        <TextView
+            android:id="@+id/lbl_visualizar_status_chamado"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:textSize="15sp" />
+    </LinearLayout>
+        <!--</LinearLayout>-->
+    <!--</ScrollView>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp">
+    <LinearLayout
+        android:id="@+id/linear_obs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Status do Chamado:"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="Respostas"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="15dp"
-                    android:textSize="15sp"
-                    android:id="@+id/lbl_visualizar_status_chamado"/>
-            </LinearLayout>
+        <ListView
+            android:id="@+id/list_view_obs"
+            android:layout_width="match_parent"
+            android:layout_height="375dp"
+            android:minHeight="30dp">
+            <!--TODO:Arrumar do listView-Scroll-->
+        </ListView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:minHeight="400dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/linear_obs"
-                android:layout_marginTop="20dp"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:text="Obervações:"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="20sp"/>
-
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="375dp"
-                    android:id="@+id/list_view_obs">
-                    <!--TODO:Arrumar do listView-Scroll-->
-                </ListView>
-
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 </LinearLayout>

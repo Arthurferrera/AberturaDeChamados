@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -51,10 +52,11 @@ public class VisualizarAdmActivity extends AppCompatActivity {
     EditText txt_observacao;
     Switch sw_status;
     LayoutInflater layoutInflater;
+    ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+            super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizar_adm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,6 +80,9 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         lbl_solicitante = findViewById(R.id.lbl_solicitante);
         lbl_empresa = findViewById(R.id.lbl_empresa);
         lbl_cnpj = findViewById(R.id.lbl_cnpj);
+//        scrollView = findViewById(R.id.scroll);
+//
+//        scrollView.smoothScrollTo(0,0);
 
         adapter = new ObservacaoAdapter(this);
         list_view_obs.setAdapter(adapter);

@@ -78,7 +78,6 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         lbl_visualizar_status_chamado = findViewById(R.id.lbl_visualizar_status_chamado);
         list_view_obs = findViewById(R.id.list_view_obs);
         linear_obs = findViewById(R.id.linear_obs);
-        scroll = findViewById(R.id.scrollChamado);
 
         adapter = new ObservacaoAdapter(this);
         list_view_obs.setAdapter(adapter);
@@ -96,9 +95,6 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-//        TODO: Fazer o scroll ir para o topo sempre que iniciar/voltar a activity
-//        scroll.fullScroll(ScrollView.FOCUS_UP);
 
         adapter.clear();
 

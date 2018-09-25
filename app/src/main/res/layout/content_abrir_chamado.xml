@@ -29,13 +29,13 @@
                 />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
                 android:id="@+id/txt_titulo"
-                android:backgroundTint="@color/preto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textCursorDrawable="@drawable/cursor"
-                />
+                android:backgroundTint="@color/preto"
+                android:maxLength="50"
+                android:textCursorDrawable="@drawable/cursor" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -47,15 +47,14 @@
                 />
 
             <EditText
+                android:id="@+id/txt_mensagem"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:inputType="text|textMultiLine"
-                android:id="@+id/txt_mensagem"
-                android:gravity="top"
-                android:backgroundTint="@color/preto"
-                android:textCursorDrawable="@drawable/cursor"
                 android:layout_marginTop="10dp"
-                />
+                android:backgroundTint="@color/preto"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                android:textCursorDrawable="@drawable/cursor" />
 
             <Button
                 android:layout_width="wrap_content"
