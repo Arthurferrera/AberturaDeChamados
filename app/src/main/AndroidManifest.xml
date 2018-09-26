@@ -63,6 +63,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.gabriel.aberturadechamados.MainAdmActivity" />
         </activity>
+        <activity
+            android:name=".MainMenuActivity"
+            android:label="@string/title_activity_main_menu"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
