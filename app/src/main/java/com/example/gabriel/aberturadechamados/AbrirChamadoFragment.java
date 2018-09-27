@@ -1,13 +1,17 @@
 package com.example.gabriel.aberturadechamados;
 
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.api.InserirChamadoApi;
 
@@ -28,14 +32,11 @@ public class AbrirChamadoFragment extends Fragment {
     Boolean status;
     String dataAberturaChamado, API_URL;
     int idUsuario;
-
     private SharedPreferencesConfig preferencesConfig;
-
 
     public AbrirChamadoFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +53,16 @@ public class AbrirChamadoFragment extends Fragment {
         txt_titulo = view.findViewById(R.id.txt_titulo);
         txt_mensagem = view.findViewById(R.id.txt_mensagem);
         btn_abrir_chamado = view.findViewById(R.id.btn_abrir_chamado);
-
+        btn_abrir_chamado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    AbrirChamado();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         return view;
     }
 
@@ -84,7 +94,7 @@ public class AbrirChamadoFragment extends Fragment {
     }
 
     //    método que faz o processo de gravar/abrir o chamado
-    public void AbrirChamado(View view) throws UnsupportedEncodingException {
+    public void AbrirChamado() throws UnsupportedEncodingException {
         if(ValidarCampos()){
 //            resgatando os valores dos inputs
             titulo = txt_titulo.getText().toString();
@@ -105,7 +115,7 @@ public class AbrirChamadoFragment extends Fragment {
             String parametros = "titulo="+titulo+"&mensagem="+mensagem+"&status=0&idUsuario="+idUsuario;
             url += parametros;
             new InserirChamadoApi(url, getActivity()).execute();
-
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new PendentesFragment()).commit();
         }
     }
 

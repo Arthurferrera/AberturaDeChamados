@@ -17,15 +17,17 @@
     <string name="nivel_usuario">com.example.gabriel.aberturachamados_nivel_usuario</string>
 
     <!--URL da api, declarada aqui, para ser acessada de qualquer tela-->
-    <string name="api_key">http://192.168.137.1/APIChamados/</string>
+    <string name="api_key">http://192.168.137.1/WebChamados/APIChamados/</string>
     <string name="title_activity_main_menu">SINCAESP - Chamados</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Frutamina</string>
-    <string name="nav_header_pessoa">Arthur Ferreira</string>
-    <!--<string name="nav_header_empresa">Navigation header</string>-->
+    <string name="nav_header_navigation">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main_menu_adm">MainMenuAdmActivity</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
 </resources>

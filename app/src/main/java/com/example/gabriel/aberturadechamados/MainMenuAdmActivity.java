@@ -1,13 +1,9 @@
 package com.example.gabriel.aberturadechamados;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,9 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-public class MainMenuActivity extends AppCompatActivity
+public class MainMenuAdmActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SharedPreferencesConfig preferencesConfig;
@@ -27,7 +22,7 @@ public class MainMenuActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.activity_main_menu_adm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -43,7 +38,7 @@ public class MainMenuActivity extends AppCompatActivity
         preferencesConfig = new SharedPreferencesConfig(this);
 
         if (savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().add(R.id.frame_content, new PendentesFragment()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.frame_content_adm, new PendentesAdmFragment()).commit();
         }
     }
 
@@ -60,7 +55,7 @@ public class MainMenuActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.main_menu_adm, menu);
         return true;
     }
 
@@ -85,13 +80,11 @@ public class MainMenuActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_pendentes) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new PendentesFragment()).commit();
-        } else if (id == R.id.nav_resolvidos) {
+        if (id == R.id.nav_pendentesAdm) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new PendentesAdmFragment()).commit();
+        } else if (id == R.id.nav_resolvidosAdm) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new ResolvidosFragment()).commit();
-        } else if (id == R.id.nav_abrirChamado) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new AbrirChamadoFragment()).commit();
-        } else if (id == R.id.nav_sair) {
+        } else if (id == R.id.nav_sairAdm) {
             preferencesConfig.writeLoginStatus(false);
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finish();

@@ -1,0 +1,6 @@
+<root>
+    <item
+        name='android.app.FragmentManager java.util.List&lt;android.app.Fragment&gt; getFragments()'>
+        <annotation name='android.support.annotation.Nullable' />
+    </item>
+</root>

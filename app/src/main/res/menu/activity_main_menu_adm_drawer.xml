@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_pendentesAdm"
+            android:icon="@drawable/ic_pendentes"
+            android:title="Pendentes" />
+        <item
+            android:id="@+id/nav_resolvidosAdm"
+            android:icon="@drawable/ic_resolvidos"
+            android:title="Resolvidos" />
+    </group>
+
+    <group>
+        <item
+            android:id="@+id/nav_sairAdm"
+            android:icon="@drawable/ic_exit"
+            android:title="Sair" />
+    </group>
+</menu>

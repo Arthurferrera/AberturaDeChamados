@@ -10,6 +10,7 @@ import com.example.gabriel.aberturadechamados.HttpConnection;
 import com.example.gabriel.aberturadechamados.MainActivity;
 import com.example.gabriel.aberturadechamados.MainAdmActivity;
 import com.example.gabriel.aberturadechamados.MainMenuActivity;
+import com.example.gabriel.aberturadechamados.MainMenuAdmActivity;
 import com.example.gabriel.aberturadechamados.SharedPreferencesConfig;
 
 import org.json.JSONException;
@@ -59,23 +60,21 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
                     preferencesConfig.writeNivelUsuario(nivelUsuario);
                     preferencesConfig.writeLoginStatus(true);
 
-                        Intent intencao = new Intent(activity, MainMenuActivity.class);
-                        activity.startActivity(intencao);
-                        activity.finish();
+
 
 //                    redirecionando para a tela principal do app
 //                    passando algumas informações do usuario
-//                    if (nivelUsuario.equals("Administrador")){
-//                        Intent intencao = new Intent(activity, MainAdmActivity.class);
-//                        activity.startActivity(intencao);
-//                        activity.finish();
-//                    } else if(nivelUsuario.equals("Cliente")){
-//                        Intent intencao = new Intent(activity, MainActivity.class);
-//                        activity.startActivity(intencao);
-//                        activity.finish();
-//                    } else {
-//                        Toast.makeText(activity, "erro", Toast.LENGTH_SHORT).show();
-//                    }
+                    if (nivelUsuario.equals("Administrador")){
+                        Intent intencao = new Intent(activity, MainMenuAdmActivity.class);
+                        activity.startActivity(intencao);
+                        activity.finish();
+                    } else if(nivelUsuario.equals("Cliente")){
+                        Intent intencao = new Intent(activity, MainMenuActivity.class);
+                        activity.startActivity(intencao);
+                        activity.finish();
+                    } else {
+                        Toast.makeText(activity, "erro", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
 //                    caso o login não for valido, mostra uma mensagem
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);

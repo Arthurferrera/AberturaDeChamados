@@ -4,9 +4,17 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.preference.PreferenceFragment;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.HttpConnection;
+import com.example.gabriel.aberturadechamados.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,13 +45,13 @@ public class InserirChamadoApi extends AsyncTask<Void, Void, String> {
                 boolean sucesso = jsonObjeto.getBoolean("Sucesso");
 //                verificando
                 if(sucesso){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     builder.setTitle("Enviado!");
                     builder.setMessage("Seu chamado foi enviado com sucesso!\nEm breve entraremos em contato.");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            activity.finish();
+                            dialog.cancel();
                         }
                     });
                     builder.create().show();
@@ -54,7 +62,7 @@ public class InserirChamadoApi extends AsyncTask<Void, Void, String> {
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            activity.finish();
+                            dialog.cancel();
                         }
                     });
                     builder.create().show();
