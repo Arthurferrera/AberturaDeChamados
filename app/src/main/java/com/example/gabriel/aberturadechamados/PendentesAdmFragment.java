@@ -1,6 +1,7 @@
 package com.example.gabriel.aberturadechamados;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -22,9 +24,9 @@ import java.util.ArrayList;
  */
 public class PendentesAdmFragment extends Fragment {
 
-    ListView list_view_chamados_adm;
-    ChamadoAdapter adapterAdm;
-    String nomeUsuario, API_URL;
+    ListView list_view_pendentes_adm;
+    ChamadoAdapterAdm adapterAdm;
+    String API_URL;
     int idUsuario;
     private SharedPreferencesConfig preferencesConfig;
 
@@ -32,7 +34,6 @@ public class PendentesAdmFragment extends Fragment {
     public PendentesAdmFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,12 +50,17 @@ public class PendentesAdmFragment extends Fragment {
         preferencesConfig = new SharedPreferencesConfig(getActivity());
 
 //        finds dos elementos
-        list_view_chamados_adm = view.findViewById(R.id.list_view_chamados_adm);
+        list_view_pendentes_adm = view.findViewById(R.id.list_pendentes_adm);
 
 //        setando o adapter  e o click do item da lista
-        adapterAdm = new ChamadoAdapter(getActivity());
-        list_view_chamados_adm.setAdapter(adapterAdm);
-//        list_view_chamados.setOnItemClickListener();
+        adapterAdm = new ChamadoAdapterAdm(getActivity());
+        list_view_pendentes_adm.setAdapter(adapterAdm);
+        list_view_pendentes_adm.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AbrirVisualizar(position);
+            }
+        });
 
         return view;
     }
@@ -64,7 +70,6 @@ public class PendentesAdmFragment extends Fragment {
         super.onResume();
 
 //        pegando as informações do usuario gravados no celular
-        nomeUsuario = preferencesConfig.readUsuarioNome();
         idUsuario = Integer.parseInt(preferencesConfig.readUsuarioId());
 
 //        limpando o adapter da lista, para não duplicar
@@ -75,7 +80,8 @@ public class PendentesAdmFragment extends Fragment {
             protected String doInBackground(Void... voids) {
 
                 String json = "";
-                final String url = API_URL + "selecionarChamadosAdm.php";
+//                URL da API
+                final String url = API_URL + "selecionarChamadosAdm.php?status=0";
                 json = HttpConnection.get(url);
                 return json;
             }
@@ -85,10 +91,13 @@ public class PendentesAdmFragment extends Fragment {
             protected void onPostExecute(String json) {
                 super.onPostExecute(json);
 
+//                verifica se o json retornou nulo
                 if(json == null) json = "Sem dados";
                 Log.d("onPostExecute", json);
 
-
+//                cria a lista de chamados, resgata o array de json
+//                percorre o array de json, pegando todos os objetos,
+//                adiciona à lista de chamados, e a lista ao adapter
                 ArrayList<Chamado> lstChamado = new ArrayList<>();
                 if (json != null){
                     try {
@@ -114,21 +123,11 @@ public class PendentesAdmFragment extends Fragment {
         }.execute();
     }
 
-    public String converterData(String dataTotal){
-//      separa a data quando entre a data e a hora
-        String[] data = dataTotal.split(" ");
-
-//      separa a data a partir do '-', e converte para o padrão brasileiro
-        String [] dataSeparada = data[0].split("-");
-        String dataConvertida = dataSeparada[2]+"/"+dataSeparada[1]+"/"+dataSeparada[0];
-
-//      separa a hora a partir do ':', e deixa somente no padrão HH:MM
-        String [] horaSeparada = data[1].split(":");
-        String horaConvertida = horaSeparada[0]+":"+horaSeparada[1];
-
-//       concatenando data e hora para ser mostrado
-        String dataCerta = dataConvertida+" "+horaConvertida;
-
-        return dataCerta;
+    public void AbrirVisualizar(int i) {
+        Chamado item = adapterAdm.getItem(i);
+        Intent intencao = new Intent(getActivity()
+                , VisualizarAdmActivity.class);
+        intencao.putExtra("idChamado", item.getId());
+        startActivity(intencao);
     }
 }

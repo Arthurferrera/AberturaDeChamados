@@ -13,26 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/main_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".AbrirChamadoActivity"
             android:label="@string/title_activity_abrir_chamado"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".MainMenuActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.gabriel.aberturadechamados.MainActivity" />
+                android:value="com.example.gabriel.aberturadechamados.MainMenuActivity" />
         </activity>
         <activity
             android:name=".VisualizarChamadoActivity"
             android:label="@string/title_activity_visualizar_chamado"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".MainMenuActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.gabriel.aberturadechamados.MainActivity" />
+                android:value="com.example.gabriel.aberturadechamados.MainMenuActivity" />
         </activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -51,17 +47,13 @@
                 android:value="com.example.gabriel.aberturadechamados.LoginActivity" />
         </activity>
         <activity
-            android:name=".MainAdmActivity"
-            android:label="@string/title_activity_main_adm"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".VisualizarAdmActivity"
             android:label="@string/title_activity_visualizar_adm"
-            android:parentActivityName=".MainAdmActivity"
+            android:parentActivityName=".MainMenuAdmActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.gabriel.aberturadechamados.MainAdmActivity" />
+                android:value="com.example.gabriel.aberturadechamados.MainMenuAdmActivity" />
         </activity>
         <activity
             android:name=".MainMenuActivity"

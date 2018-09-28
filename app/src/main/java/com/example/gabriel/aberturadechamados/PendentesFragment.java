@@ -27,7 +27,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PendentesFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class PendentesFragment extends Fragment {
 
     ListView list_view_chamados;
     ChamadoAdapter adapter;
@@ -58,7 +58,12 @@ public class PendentesFragment extends Fragment implements AdapterView.OnItemCli
 //        setando o adapter  e o click do item da lista
         adapter = new ChamadoAdapter(getActivity());
         list_view_chamados.setAdapter(adapter);
-//        list_view_chamados.setOnItemClickListener();
+        list_view_chamados.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AbrirVisualizar(position);
+            }
+        });
 
 ////        ação do botão float
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -133,8 +138,7 @@ public class PendentesFragment extends Fragment implements AdapterView.OnItemCli
 
     //    método que seta o click de um item da lista
 //    chama a tela de visualização, passando o id do item
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void AbrirVisualizar(int i) {
         Chamado item = adapter.getItem(i);
         Intent intencao = new Intent(getActivity(), VisualizarChamadoActivity.class);
         intencao.putExtra("idChamado", item.getId());

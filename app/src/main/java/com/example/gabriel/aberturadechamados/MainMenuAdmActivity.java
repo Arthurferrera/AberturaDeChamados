@@ -14,10 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.gabriel.aberturadechamados.api.DeslogarApi;
+
 public class MainMenuAdmActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SharedPreferencesConfig preferencesConfig;
+    String API_URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class MainMenuAdmActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         preferencesConfig = new SharedPreferencesConfig(this);
+        API_URL = getString(R.string.api_key);
 
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().add(R.id.frame_content_adm, new PendentesAdmFragment()).commit();
@@ -81,13 +85,14 @@ public class MainMenuAdmActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_pendentesAdm) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new PendentesAdmFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content_adm, new PendentesAdmFragment()).commit();
         } else if (id == R.id.nav_resolvidosAdm) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new ResolvidosFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content_adm, new ResolvidosAdmFragment()).commit();
         } else if (id == R.id.nav_sairAdm) {
-            preferencesConfig.writeLoginStatus(false);
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            finish();
+            Integer idUser = Integer.valueOf(preferencesConfig.readUsuarioId());
+            String nivel = preferencesConfig.readNivelusuario();
+            String url = API_URL + "deslogar.php?id="+idUser+"&nivel"+nivel;
+            new DeslogarApi(url, this);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

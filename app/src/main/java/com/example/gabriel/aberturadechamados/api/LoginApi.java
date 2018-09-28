@@ -7,8 +7,6 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.HttpConnection;
-import com.example.gabriel.aberturadechamados.MainActivity;
-import com.example.gabriel.aberturadechamados.MainAdmActivity;
 import com.example.gabriel.aberturadechamados.MainMenuActivity;
 import com.example.gabriel.aberturadechamados.MainMenuAdmActivity;
 import com.example.gabriel.aberturadechamados.SharedPreferencesConfig;

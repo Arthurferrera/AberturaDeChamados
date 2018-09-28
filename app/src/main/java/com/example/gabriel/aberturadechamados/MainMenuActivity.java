@@ -19,10 +19,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.gabriel.aberturadechamados.api.DeslogarApi;
+
 public class MainMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SharedPreferencesConfig preferencesConfig;
+    String API_URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class MainMenuActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         preferencesConfig = new SharedPreferencesConfig(this);
+        API_URL = getString(R.string.api_key);
 
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().add(R.id.frame_content, new PendentesFragment()).commit();
@@ -92,9 +96,11 @@ public class MainMenuActivity extends AppCompatActivity
         } else if (id == R.id.nav_abrirChamado) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new AbrirChamadoFragment()).commit();
         } else if (id == R.id.nav_sair) {
-            preferencesConfig.writeLoginStatus(false);
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            finish();
+            Integer idUser = Integer.valueOf(preferencesConfig.readUsuarioId());
+            String nivel = preferencesConfig.readNivelusuario();
+            String url = API_URL + "deslogar.php?id="+idUser+"&nivel"+nivel;
+            new DeslogarApi(url, this);
+//            TODO: continuar daqui, atualizar o status para deslogar
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -1,8 +1,6 @@
 package com.example.gabriel.aberturadechamados;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,20 +18,19 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ResolvidosFragment extends Fragment {
+public class ResolvidosAdmFragment extends Fragment {
 
-    ListView list_view_resolvidos;
-    ChamadoAdapter adapter;
+    ListView list_resolvidos_adm;
+    ChamadoAdapterAdm adapter;
     String API_URL;
     int idUsuario;
     private SharedPreferencesConfig preferencesConfig;
 
 
-    public ResolvidosFragment() {
+    public ResolvidosAdmFragment() {
         // Required empty public constructor
     }
 
@@ -41,17 +38,17 @@ public class ResolvidosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_resolvidos, container, false);
+        View view = inflater.inflate(R.layout.fragment_resolvidos_adm, container, false);
 
         preferencesConfig = new SharedPreferencesConfig(getActivity());
 
         API_URL = getString(R.string.api_key);
 
-        list_view_resolvidos = view.findViewById(R.id.list_view_resolvidos);
+        list_resolvidos_adm = view.findViewById(R.id.list_resolvidos_adm);
 
-        adapter = new ChamadoAdapter(getActivity());
-        list_view_resolvidos.setAdapter(adapter);
-        list_view_resolvidos.setOnItemClickListener(new ListView.OnItemClickListener() {
+        adapter = new ChamadoAdapterAdm(getActivity());
+        list_resolvidos_adm.setAdapter(adapter);
+        list_resolvidos_adm.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AbrirVisualizar(position);
@@ -78,7 +75,7 @@ public class ResolvidosFragment extends Fragment {
 
                 String json = "";
 //                URL da API
-                final String url = API_URL + "selecionarResolvidos.php?idUsuario="+idUsuario;
+                final String url = API_URL + "selecionarChamadosAdm.php?status=1";
                 json = HttpConnection.get(url);
                 return json;
             }
@@ -105,10 +102,9 @@ public class ResolvidosFragment extends Fragment {
                             ch.setId(chamadoJson.getInt("id"));
                             ch.setTitulo(chamadoJson.getString("titulo"));
                             ch.setMensagem(chamadoJson.getString("mensagem"));
-                            JSONObject dataJson = chamadoJson.getJSONObject("data");
-                            String dataAbertura  = dataJson.getString("date");
-                            dataAbertura = converterData(dataAbertura);
-                            ch.setData(dataAbertura);
+                            ch.setNomeEmpresa(chamadoJson.getString("razaoSocial"));
+                            ch.setNomeUsuario(chamadoJson.getString("nome"));
+
                             lstChamados.add(ch);
                         }
                     } catch (JSONException e) {
@@ -120,29 +116,10 @@ public class ResolvidosFragment extends Fragment {
         }.execute();
     }
 
-    public String converterData(String dataTotal){
-//      separa a data quando entre a data e a hora
-        String[] data = dataTotal.split(" ");
-
-//      separa a data a partir do '-', e converte para o padrão brasileiro
-        String [] dataSeparada = data[0].split("-");
-        String dataConvertida = dataSeparada[2]+"/"+dataSeparada[1]+"/"+dataSeparada[0];
-
-//      separa a hora a partir do ':', e deixa somente no padrão HH:MM
-        String [] horaSeparada = data[1].split(":");
-        String horaConvertida = horaSeparada[0]+":"+horaSeparada[1];
-
-//       concatenando data e hora para ser mostrado
-        String dataCerta = dataConvertida+" "+horaConvertida;
-
-        return dataCerta;
-    }
-
-    //    método que seta o click de um item da lista
-//    chama a tela de visualização, passando o id do item
     public void AbrirVisualizar(int i) {
         Chamado item = adapter.getItem(i);
-        Intent intencao = new Intent(getActivity(), VisualizarChamadoActivity.class);
+        Intent intencao = new Intent(getActivity()
+                , VisualizarAdmActivity.class);
         intencao.putExtra("idChamado", item.getId());
         startActivity(intencao);
     }

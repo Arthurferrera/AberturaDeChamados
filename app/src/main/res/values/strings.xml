@@ -6,7 +6,6 @@
     <string name="title_activity_visualizar_chamado">Visualizar Chamado</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuário</string>
-    <string name="title_activity_main_adm">Gerenciamento de Chamados</string>
     <string name="title_activity_visualizar_adm">Visualizar Chamado</string>
 
     <!--strings que são gravadas na memória do celular-->
@@ -22,11 +21,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_navigation">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_sobre">Sobre</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main_menu_adm">MainMenuAdmActivity</string>
+    <string name="title_activity_main_menu_adm">SINCAESP - Chamados</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>

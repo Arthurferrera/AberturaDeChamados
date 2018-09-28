@@ -80,9 +80,6 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         lbl_solicitante = findViewById(R.id.lbl_solicitante);
         lbl_empresa = findViewById(R.id.lbl_empresa);
         lbl_cnpj = findViewById(R.id.lbl_cnpj);
-//        scrollView = findViewById(R.id.scroll);
-//
-//        scrollView.smoothScrollTo(0,0);
 
         adapter = new ObservacaoAdapter(this);
         list_view_obs.setAdapter(adapter);
@@ -96,7 +93,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
 //        resgatando os parametros passados pelo intent
         idChamado = intent.getIntExtra("idChamado", 0);
 
-        //        ação do botão float
+//        ação do botão float
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,7 +155,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
                     JSONObject objeto = new JSONObject(retorno);
                     JSONObject chamadoJson = objeto.getJSONObject("chamado");
                     titulo = chamadoJson.optString("titulo");
-                    titulo = titulo.trim(); //TIIRA OS ESPAÇOS INUTEIS
+                    titulo = titulo.trim(); //TIIRA OS ESPAÇOS NO COMEÇO E NO FINAL DA STRING
                     mensagem = chamadoJson.optString("mensagem");
                     JSONObject dataJson = chamadoJson.getJSONObject("data");
                     data  = dataJson.getString("date");
@@ -168,7 +165,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
                     cnpj = chamadoJson.getString("cnpj");
 
                     JSONArray observacaoJson = objeto.getJSONArray("obs");
-                    Log.d("obsJson", ""+observacaoJson);
+//                    Log.d("obsJson", ""+observacaoJson);
                     if (observacaoJson.length() == 0 || observacaoJson.equals(null)){
                         linear_obs.setVisibility(View.GONE);
                     } else {

@@ -36,13 +36,11 @@ public class ChamadoAdapterAdm extends ArrayAdapter<Chamado> {
         TextView lbl_nome_usuario = v.findViewById(R.id.lbl_nome_usuario);
         TextView lbl_titulo_chamado_adm = v.findViewById(R.id.lbl_titulo_chamado_adm);
         TextView lbl_mensagem_chamado_adm = v.findViewById(R.id.lbl_mensagem_chamado_adm);
-        TextView lbl_data_chamado_adm = v.findViewById(R.id.lbl_data_chamado_adm);
 
         lbl_nome_empresa.setText(chamado.getNomeEmpresa());
         lbl_nome_usuario.setText(chamado.getNomeUsuario());
         lbl_titulo_chamado_adm.setText(chamado.getTitulo());
         lbl_mensagem_chamado_adm.setText(chamado.getMensagem());
-        lbl_data_chamado_adm.setText(chamado.getData());
 
         return v;
     }
