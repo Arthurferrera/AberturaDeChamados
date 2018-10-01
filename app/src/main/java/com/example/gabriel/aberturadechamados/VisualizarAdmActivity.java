@@ -47,6 +47,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
     ObservacaoAdapter adapter;
     ListView list_view_obs;
     LinearLayout linear_obs;
+    FloatingActionButton fab;
 
     View rootview;
     EditText txt_observacao;
@@ -70,7 +71,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
 //        finds dos elementos
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         lbl_visualizar_titulo_chamado = findViewById(R.id.lbl_titulo_chamado);
         lbl_visualizar_mensagem = findViewById(R.id.lbl_visualzar_mensagem);
         lbl_visualizar_data_chamado = findViewById(R.id.lbl_visualizar_data_chamado);
@@ -198,6 +199,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
                     if (status == 1){
                         lbl_visualizar_status_chamado.setText("Resolvido");
                         lbl_visualizar_status_chamado.setTextColor(getResources().getColor(R.color.verde));
+                        fab.setVisibility(View.GONE);
                     } else if (status == 0){
                         lbl_visualizar_status_chamado.setText("Pendente");
                         lbl_visualizar_status_chamado.setTextColor(getResources().getColor(R.color.vermelho));

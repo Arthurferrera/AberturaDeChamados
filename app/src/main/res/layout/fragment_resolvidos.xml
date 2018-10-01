@@ -5,18 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ResolvidosFragment">
 
-   <TextView
-       android:id="@+id/textView"
-       android:layout_width="match_parent"
-       android:layout_height="50dp"
-       android:gravity="center"
-       android:text="Resolvidos"
-       android:textSize="24sp" />
-
    <ListView
        android:id="@+id/list_view_resolvidos"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginTop="50dp"></ListView>
+       android:layout_height="wrap_content"></ListView>
 
 </RelativeLayout>

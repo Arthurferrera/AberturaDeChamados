@@ -3,6 +3,7 @@ package com.example.gabriel.aberturadechamados.api;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.HttpConnection;
 import com.example.gabriel.aberturadechamados.LoginActivity;
@@ -41,6 +42,8 @@ public class DeslogarApi extends AsyncTask<Void, Void, String> {
                     preferencesConfig.writeLoginStatus(false);
                     activity.startActivity(new Intent(activity, LoginActivity.class));
                     activity.finish();
+                } else {
+                    Toast.makeText(activity, "Erro ao tentar sair, tente novamente mais tarde", Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

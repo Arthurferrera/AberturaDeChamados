@@ -13,12 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.api.DeslogarApi;
 
 public class MainMenuAdmActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    Toolbar toolbar;
     private SharedPreferencesConfig preferencesConfig;
     String API_URL;
 
@@ -26,7 +28,7 @@ public class MainMenuAdmActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_adm);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -86,15 +88,19 @@ public class MainMenuAdmActivity extends AppCompatActivity
 
         if (id == R.id.nav_pendentesAdm) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content_adm, new PendentesAdmFragment()).commit();
+            toolbar.setTitle(getString(R.string.activity_pendentes));
         } else if (id == R.id.nav_resolvidosAdm) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content_adm, new ResolvidosAdmFragment()).commit();
+            toolbar.setTitle(getString(R.string.activity_resolvidos));
         } else if (id == R.id.nav_sairAdm) {
             Integer idUser = Integer.valueOf(preferencesConfig.readUsuarioId());
             String nivel = preferencesConfig.readNivelusuario();
-            String url = API_URL + "deslogar.php?id="+idUser+"&nivel"+nivel;
+            String url = API_URL + "deslogar.php?id="+idUser+"&nivel="+nivel;
+//            Toast.makeText(this, url, Toast.LENGTH_LONG).show();
             new DeslogarApi(url, this);
+//            TODO: continuar daqui, atualizar o status para deslogar e deslogar
         }
-
+//        setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

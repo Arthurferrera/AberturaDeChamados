@@ -24,6 +24,7 @@ import com.example.gabriel.aberturadechamados.api.DeslogarApi;
 public class MainMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    Toolbar toolbar;
     private SharedPreferencesConfig preferencesConfig;
     String API_URL;
 
@@ -31,7 +32,7 @@ public class MainMenuActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -91,18 +92,21 @@ public class MainMenuActivity extends AppCompatActivity
 
         if (id == R.id.nav_pendentes) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new PendentesFragment()).commit();
+            toolbar.setTitle(getString(R.string.activity_pendentes));
         } else if (id == R.id.nav_resolvidos) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new ResolvidosFragment()).commit();
+            toolbar.setTitle(getString(R.string.activity_resolvidos));
         } else if (id == R.id.nav_abrirChamado) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new AbrirChamadoFragment()).commit();
         } else if (id == R.id.nav_sair) {
             Integer idUser = Integer.valueOf(preferencesConfig.readUsuarioId());
             String nivel = preferencesConfig.readNivelusuario();
-            String url = API_URL + "deslogar.php?id="+idUser+"&nivel"+nivel;
+            String url = API_URL + "deslogar.php?id="+idUser+"&nivel="+nivel;
             new DeslogarApi(url, this);
-//            TODO: continuar daqui, atualizar o status para deslogar
+//            TODO: continuar daqui, atualizar o status para deslogar e deslogar
         }
 
+//        setSupportActionBar();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
