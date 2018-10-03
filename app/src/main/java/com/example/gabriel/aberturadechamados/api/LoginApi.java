@@ -28,6 +28,7 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... voids) {
+
         return HttpConnection.get(url);
     }
 
@@ -58,8 +59,6 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
                     preferencesConfig.writeNivelUsuario(nivelUsuario);
                     preferencesConfig.writeLoginStatus(true);
 
-
-
 //                    redirecionando para a tela principal do app
 //                    passando algumas informações do usuario
                     if (nivelUsuario.equals("Administrador")){
@@ -71,16 +70,28 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
                         activity.startActivity(intencao);
                         activity.finish();
                     } else {
-                        Toast.makeText(activity, "erro", Toast.LENGTH_SHORT).show();
+//                        caso o nivel de usuario não tenha permissão para acessar o app
+                        Toast.makeText(activity, "Tipo de usuário não tem permissão para acessar o aplicativo, ou não está cadastrado", Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    boolean logado = jsonObject.getBoolean("logado");
+                    if (logado){
+//                    caso o login ja esteja ativo, mostra uma mensagem de aviso
+                        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                        builder.setTitle("Aviso!");
+                        builder.setMessage("Este usuário já possui um login ativo.\nFavor verificar se está logado em outro aparelho.");
+                        builder.setPositiveButton("OK", null);
+                        alerta = builder.create();
+                        alerta.show();
+                    } else {
 //                    caso o login não for valido, mostra uma mensagem
-                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                    builder.setTitle("Erro!");
-                    builder.setMessage("Usuário ou Senha incorreta.");
-                    builder.setPositiveButton("OK", null);
-                    alerta = builder.create();
-                    alerta.show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                        builder.setTitle("Erro!");
+                        builder.setMessage("Usuário ou Senha incorreta.");
+                        builder.setPositiveButton("OK", null);
+                        alerta = builder.create();
+                        alerta.show();
+                    }
                 }
             } catch (JSONException e){
                 e.printStackTrace();

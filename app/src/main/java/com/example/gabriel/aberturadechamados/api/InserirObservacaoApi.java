@@ -1,13 +1,10 @@
 package com.example.gabriel.aberturadechamados.api;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.HttpConnection;
-import com.example.gabriel.aberturadechamados.VisualizarChamadoActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,12 +30,12 @@ public class InserirObservacaoApi extends AsyncTask<Void, Void, String> {
 
         if (s != null){
             try {
+//                resgata o retorno da api
                 JSONObject jsonObject = new JSONObject(s);
                 boolean sucesso = false;
                 sucesso = jsonObject.getBoolean("Sucesso");
                 if (sucesso){
                     Toast.makeText(activity, "Observação adicionada!", Toast.LENGTH_SHORT).show();
-
                 } else {
                     Toast.makeText(activity, "Erro ao tentar adicionar a observacao!", Toast.LENGTH_SHORT).show();
                 }

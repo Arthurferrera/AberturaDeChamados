@@ -18,14 +18,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Abrir Chamado"
-                android:textSize="24sp"
-                android:textAlignment="center"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="Titulo:"
                 android:textSize="15sp"
                 android:textAlignment="textStart"

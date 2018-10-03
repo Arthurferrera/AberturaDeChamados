@@ -1,10 +1,7 @@
 <resources>
     <string name="app_name">Abertura de Chamados</string>
-    <string name="main_name">Lista de Chamados</string>
-    <string name="action_sair">Sair</string>
     <string name="title_activity_abrir_chamado">Abrir Chamado</string>
     <string name="title_activity_visualizar_chamado">Visualizar Chamado</string>
-    <string name="title_activity_login">Login</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuário</string>
     <string name="title_activity_visualizar_adm">Visualizar Chamado</string>
 
@@ -21,12 +18,9 @@
     <string name="title_activity_main_menu">SINCAESP - Chamados</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_navigation">Navigation header</string>
     <string name="action_sobre">Sobre</string>
     <string name="title_activity_main_menu_adm">SINCAESP - Chamados</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
     <string name="activity_pendentes">Pendentes</string>
     <string name="activity_resolvidos">Resolvidos</string>
+    <string name="activity_abrirChamado">Abrir Chamado</string>
 </resources>

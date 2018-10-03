@@ -58,28 +58,6 @@ public class MainMenuAdmActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_menu_adm, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -96,11 +74,9 @@ public class MainMenuAdmActivity extends AppCompatActivity
             Integer idUser = Integer.valueOf(preferencesConfig.readUsuarioId());
             String nivel = preferencesConfig.readNivelusuario();
             String url = API_URL + "deslogar.php?id="+idUser+"&nivel="+nivel;
-//            Toast.makeText(this, url, Toast.LENGTH_LONG).show();
-            new DeslogarApi(url, this);
+            new DeslogarApi(url,this).execute();
 //            TODO: continuar daqui, atualizar o status para deslogar e deslogar
         }
-//        setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

@@ -1,20 +1,14 @@
 package com.example.gabriel.aberturadechamados;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -23,43 +17,38 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gabriel.aberturadechamados.api.InserirObservacaoApi;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.DateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class VisualizarAdmActivity extends AppCompatActivity {
 
     TextView lbl_visualizar_titulo_chamado, lbl_visualizar_mensagem, lbl_visualizar_data_chamado, lbl_visualizar_status_chamado, lbl_solicitante, lbl_empresa, lbl_cnpj;
-    Integer idChamado;
     String titulo, mensagem, data, nivelUsuario, observacao, solicitante, empresa, cnpj, API_URL;
-    Integer status;
     SharedPreferencesConfig preferencesConfig;
-    Boolean statusChamado;
-    ObservacaoAdapter adapter;
-    ListView list_view_obs;
-    LinearLayout linear_obs;
-    FloatingActionButton fab;
-
-    View rootview;
-    EditText txt_observacao;
-    Switch sw_status;
     LayoutInflater layoutInflater;
+    ObservacaoAdapter adapter;
+    Integer idChamado, status;
+    FloatingActionButton fab;
+    EditText txt_observacao;
+    LinearLayout linear_obs;
+    ListView list_view_obs;
     ScrollView scrollView;
+    Boolean statusChamado;
+    Switch sw_status;
+    View rootview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizar_adm);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -82,12 +71,14 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         lbl_empresa = findViewById(R.id.lbl_empresa);
         lbl_cnpj = findViewById(R.id.lbl_cnpj);
 
+//        criando e setando o adapter na lista
         adapter = new ObservacaoAdapter(this);
         list_view_obs.setAdapter(adapter);
 
+//        inflando o layout que vai aparecer no alert
         layoutInflater = LayoutInflater.from(VisualizarAdmActivity.this);
         rootview = layoutInflater.inflate(R.layout.content_dialog_atualizar, null, false);
-
+//        finds dos elementos do alert
         txt_observacao = rootview.findViewById(R.id.txt_observacao);
         sw_status = rootview.findViewById(R.id.sw_status);
 
@@ -102,22 +93,28 @@ public class VisualizarAdmActivity extends AppCompatActivity {
                 builder.setTitle("AtualIzar chamado");
                 builder.setView(rootview);
 
-                builder.setCancelable(false).setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which){
-                        if (ValidarCampos()){
-                            SalvarObs();
-                            onResume();
-                            zerarAlert();
-                        }
+                builder.setCancelable(false)
+//                        ação do botão de enviar do alert
+                        .setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+//                                caso campos estejam preenhidos ele salva, caso contrário não
+                                if (ValidarCampos()){
+                                    SalvarObs();
+                                    txt_observacao.setError(null);
+                                } else {
+                                    ((ViewGroup)rootview.getParent()).removeView(rootview);
+                                    Toast.makeText(getApplicationContext(), "Resposta não enviada. Favor preencher os campos obrigatórios.", Toast.LENGTH_SHORT).show();
+                                }
 
-                    }
-                })
+                            }
+                }) //ação do botão cancelar do alertDialog
                         .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
                                 zerarAlert();
+                                txt_observacao.setError(null);
                             }
                         });
                 AlertDialog alertDialog = builder.create();
@@ -130,8 +127,10 @@ public class VisualizarAdmActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+//        limpando o adapter para não duplicar os registros
         adapter.clear();
 
+//        resgatando informações gravadas no celular
         nivelUsuario = preferencesConfig.readNivelusuario();
 
 //        setando a url da api
@@ -166,17 +165,15 @@ public class VisualizarAdmActivity extends AppCompatActivity {
                     cnpj = chamadoJson.getString("cnpj");
 
                     JSONArray observacaoJson = objeto.getJSONArray("obs");
-//                    Log.d("obsJson", ""+observacaoJson);
                     if (observacaoJson.length() == 0 || observacaoJson.equals(null)){
                         linear_obs.setVisibility(View.GONE);
                     } else {
-//                       JSONArray arrayObs = new JSONArray(observacaoJson);
                         for (int i =0; i < observacaoJson.length(); i++){
-
+//                            resgata todas as obsercações que um chamado  possui
                             JSONObject obsJson = observacaoJson.getJSONObject(i);
                             Chamado ch = new Chamado();
                             ch.setObservacao(obsJson.getString("observacao"));
-
+//                            resgatando a data e formatando-a
                             JSONObject dataObsJson = obsJson.getJSONObject("dataHora");
                             String dataTotal = dataObsJson.getString("date");
                             dataTotal = converterData(dataTotal);
@@ -212,6 +209,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         }.execute();
     }
 
+//    função que valida se os campos estão vazios
     private boolean ValidarCampos(){
         EditText campoComFoco = null;
         boolean isValid = true;
@@ -227,22 +225,29 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         return isValid;
     }
 
+//    funcção que salva uma observação de um chamado
     private void SalvarObs(){
+//            resgata a informação
             observacao = txt_observacao.getText().toString();
             statusChamado = sw_status.isChecked();
 
             try {
+//                encode para ficar no padrão de url
                 observacao = URLEncoder.encode(observacao, "UTF-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
 
+//            chamando a api e o arquivo da api
             String url = API_URL + "inserirObservacao.php?";
             String parametros = "observacao="+observacao+"&statusChamado="+statusChamado+"&idChamado="+idChamado;
             url += parametros;
             new InserirObservacaoApi(url, this).execute();
+            onResume();
+            zerarAlert();
     }
 
+//    função que converte a data para o padrão brasileiro
     public String converterData(String dataTotal){
 //      separa a data quando entre a data e a hora
         String[] data = dataTotal.split(" ");
@@ -257,6 +262,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         return dataCerta;
     }
 
+//    função que zera os campos de um alert
     public void zerarAlert(){
         ((ViewGroup)rootview.getParent()).removeView(rootview);
         txt_observacao.setText("");
