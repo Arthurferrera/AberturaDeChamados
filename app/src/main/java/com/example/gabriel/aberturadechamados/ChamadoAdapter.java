@@ -16,8 +16,10 @@ import java.util.Date;
 
 public class ChamadoAdapter extends ArrayAdapter<Chamado> {
 
+//    declarando elementos visuais, variaveis...
     ChamadoAdapter adapter;
 
+//    construtor
     public ChamadoAdapter(Context ctx) {
         super(ctx, 0,  new ArrayList<Chamado>());
         adapter = this;

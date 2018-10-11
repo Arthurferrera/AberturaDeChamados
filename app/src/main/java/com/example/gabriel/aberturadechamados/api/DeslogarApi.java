@@ -22,7 +22,6 @@ public class DeslogarApi extends AsyncTask<Void, Void, String> {
     private Activity activity ;
     private SharedPreferencesConfig preferencesConfig;
 
-
     public DeslogarApi(String url, Activity activity) {
         this.url = url;
         this.activity = activity;
@@ -32,8 +31,6 @@ public class DeslogarApi extends AsyncTask<Void, Void, String> {
     public String doInBackground(Void... voids) {
         return HttpConnection.get(url) ;
     }
-
-
 
     @Override
     public void onPostExecute(String s) {

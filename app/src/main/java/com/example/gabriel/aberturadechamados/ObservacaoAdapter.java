@@ -13,8 +13,10 @@ import java.util.ArrayList;
 
 public class ObservacaoAdapter extends ArrayAdapter<Chamado>{
 
+//    declarando elementos visuais, variaveis....
     ObservacaoAdapter adapter;
 
+//    construtor
     public ObservacaoAdapter(Context ctx) {
         super(ctx, 0, new ArrayList<Chamado>());
         adapter = this;

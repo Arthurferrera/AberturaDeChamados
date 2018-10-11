@@ -10,18 +10,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/scroll">-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_marginBottom="10dp"-->
-            <!--android:padding="16dp">-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -192,8 +180,6 @@
             android:paddingLeft="10dp"
             android:textSize="15sp" />
     </LinearLayout>
-        <!--</LinearLayout>-->
-    <!--</ScrollView>-->
 
     <LinearLayout
         android:id="@+id/linear_obs"
@@ -215,7 +201,6 @@
             android:layout_width="match_parent"
             android:layout_height="375dp"
             android:minHeight="30dp">
-            <!--TODO:Arrumar do listView-Scroll-->
         </ListView>
 
     </LinearLayout>

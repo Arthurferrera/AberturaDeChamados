@@ -20,6 +20,7 @@ import com.example.gabriel.aberturadechamados.api.DeslogarApi;
 public class MainMenuAdmActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+//    declarando elementos visuais, variaveis...
     Toolbar toolbar;
     private SharedPreferencesConfig preferencesConfig;
     String API_URL;
@@ -40,9 +41,12 @@ public class MainMenuAdmActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+//        instanciando o SharedPreferencesConfig
         preferencesConfig = new SharedPreferencesConfig(this);
+//        pegando o caminho padrao da api
         API_URL = getString(R.string.api_key);
 
+//        adicionando o primeiro fragment
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().add(R.id.frame_content_adm, new PendentesAdmFragment()).commit();
         }
@@ -64,6 +68,8 @@ public class MainMenuAdmActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
+//        acções para cada item do menu
         if (id == R.id.nav_pendentesAdm) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content_adm, new PendentesAdmFragment()).commit();
             toolbar.setTitle(getString(R.string.activity_pendentes));
@@ -75,7 +81,6 @@ public class MainMenuAdmActivity extends AppCompatActivity
             String nivel = preferencesConfig.readNivelusuario();
             String url = API_URL + "deslogar.php?id="+idUser+"&nivel="+nivel;
             new DeslogarApi(url,this).execute();
-//            TODO: continuar daqui, atualizar o status para deslogar e deslogar
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

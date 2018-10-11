@@ -16,6 +16,7 @@ import com.example.gabriel.aberturadechamados.api.DeslogarApi;
 public class MainMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+//    Declarando elementos visuais, variaveis...
     Toolbar toolbar;
     private SharedPreferencesConfig preferencesConfig;
     String API_URL;
@@ -36,9 +37,11 @@ public class MainMenuActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+//        instanciando o SharedPreferencesConfig
         preferencesConfig = new SharedPreferencesConfig(this);
+//        pegando o acaminho padrão da api
         API_URL = getString(R.string.api_key);
-
+//        adicionando o primeiro fragment
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().add(R.id.frame_content, new PendentesFragment()).commit();
         }
@@ -59,7 +62,7 @@ public class MainMenuActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+//        definindo ações para cada click de item do menu
         if (id == R.id.nav_pendentes) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new PendentesFragment()).commit();
             toolbar.setTitle(getString(R.string.activity_pendentes));

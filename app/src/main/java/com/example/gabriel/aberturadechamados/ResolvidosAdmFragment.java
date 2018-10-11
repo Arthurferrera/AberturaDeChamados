@@ -23,29 +23,32 @@ import java.util.ArrayList;
  */
 public class ResolvidosAdmFragment extends Fragment {
 
+//    declarando os elementos visuais, variaveis...
     ListView list_resolvidos_adm;
     ChamadoAdapterAdm adapter;
     String API_URL;
     int idUsuario;
     private SharedPreferencesConfig preferencesConfig;
 
-
     public ResolvidosAdmFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+//        inflando o layout do fragment
         View view = inflater.inflate(R.layout.fragment_resolvidos_adm, container, false);
-
+//        instanciando o SharedPreferencesConfig, para permitir resgatar infformações gravadas no celular
         preferencesConfig = new SharedPreferencesConfig(getActivity());
-
+//        resgatando o caminho padrao da url
         API_URL = getString(R.string.api_key);
 
+//        finds dos elementos
         list_resolvidos_adm = view.findViewById(R.id.list_resolvidos_adm);
 
+//        criando o adapter, setando na lista
+//        setando o click de item da lista
         adapter = new ChamadoAdapterAdm(getActivity());
         list_resolvidos_adm.setAdapter(adapter);
         list_resolvidos_adm.setOnItemClickListener(new ListView.OnItemClickListener() {
@@ -54,7 +57,6 @@ public class ResolvidosAdmFragment extends Fragment {
                 AbrirVisualizar(position);
             }
         });
-
 
         return view;
     }
@@ -110,12 +112,14 @@ public class ResolvidosAdmFragment extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+//                    adicionando toda a lista no adapter
                     adapter.addAll(lstChamados);
                 }
             }
         }.execute();
     }
 
+//    método que abre a tela de visualização dos detalhes do chamado
     public void AbrirVisualizar(int i) {
         Chamado item = adapter.getItem(i);
         Intent intencao = new Intent(getActivity()

@@ -13,8 +13,10 @@ import java.util.ArrayList;
 
 public class ChamadoAdapterAdm extends ArrayAdapter<Chamado> {
 
+//    declarando elementos visuais, variaveis
     ChamadoAdapterAdm adapterAdm;
 
+//    construtor
     public ChamadoAdapterAdm(@NonNull Context ctx) {
         super(ctx, 0, new ArrayList<Chamado>());
         adapterAdm = this;
@@ -32,11 +34,13 @@ public class ChamadoAdapterAdm extends ArrayAdapter<Chamado> {
 
         Chamado chamado = getItem(position);
 
+//        finds dos elementos
         TextView lbl_nome_empresa = v.findViewById(R.id.lbl_nome_empresa);
         TextView lbl_nome_usuario = v.findViewById(R.id.lbl_nome_usuario);
         TextView lbl_titulo_chamado_adm = v.findViewById(R.id.lbl_titulo_chamado_adm);
         TextView lbl_mensagem_chamado_adm = v.findViewById(R.id.lbl_mensagem_chamado_adm);
 
+//        setando o valor dos textsViews
         lbl_nome_empresa.setText(chamado.getNomeEmpresa());
         lbl_nome_usuario.setText(chamado.getNomeUsuario());
         lbl_titulo_chamado_adm.setText(chamado.getTitulo());

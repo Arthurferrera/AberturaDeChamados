@@ -21,10 +21,10 @@ import java.net.URLEncoder;
 
 public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
 
-    private String url;
+    private String url, API_URL;
     private Activity activity;
     private AlertDialog alerta;
-    String API_URL = activity.getString(R.string.api_key);
+
 
     public CadastrarUsuarioApi(String url, Activity activity){
         this.url = url;
@@ -73,6 +73,7 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
                                 if (sucesso) {
                                     String usuario = jsonObject.getString("usuario");
                                     String senha = jsonObject.getString("senha");
+                                    API_URL = activity.getString(R.string.api_key);
                                     try {
                                         AutenticacaoCadastro(usuario, senha);
                                     } catch (UnsupportedEncodingException e) {
@@ -90,7 +91,6 @@ public class CadastrarUsuarioApi extends AsyncTask<Void, Void, String> {
                                 alerta = builder.create();
                                 alerta.show();
                             }
-
                         }
                     }
                 }

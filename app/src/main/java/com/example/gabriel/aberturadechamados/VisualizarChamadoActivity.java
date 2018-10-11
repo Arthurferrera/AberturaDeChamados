@@ -41,6 +41,7 @@ import static com.example.gabriel.aberturadechamados.R.layout.content_dialog_atu
 
 public class VisualizarChamadoActivity extends AppCompatActivity {
 
+//    declarando os elementos
     TextView lbl_visualizar_titulo_chamado, lbl_visualizar_mensagem, lbl_visualizar_data_chamado, lbl_visualizar_status_chamado, lbl_visualizar_observacao;
     Integer idChamado;
     String titulo, mensagem, data, nivelUsuario, API_URL;
@@ -64,6 +65,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+//        pegando o endereço padrão da api
         API_URL = getString(R.string.api_key);
 
         preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
@@ -79,12 +81,14 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         list_view_obs = findViewById(R.id.list_view_obs);
         linear_obs = findViewById(R.id.linear_obs);
 
+//        criando e setando o adapter na lista
         adapter = new ObservacaoAdapter(this);
         list_view_obs.setAdapter(adapter);
 
+//        inflando o layout que está dentro do alertDialog
         layoutInflater = LayoutInflater.from(VisualizarChamadoActivity.this);
         rootview = layoutInflater.inflate(R.layout.content_dialog_atualizar, null, false);
-
+//        finds dos elementos que eestão no layout do alertDialog
         txt_observacao = rootview.findViewById(R.id.txt_observacao);
         sw_status = rootview.findViewById(R.id.sw_status);
 
@@ -96,8 +100,10 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+//        limpando o adapter para não gerar duplicidade
         adapter.clear();
 
+//        resgatando o nivel do usuario
         nivelUsuario = preferencesConfig.readNivelusuario();
 
 //        setando a url da api
@@ -128,6 +134,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                     data  = dataJson.getString("date");
                     status = chamadoJson.getInt("status");
 
+//                    pegando as observações de um chamado
                     JSONArray observacaoJson = objeto.getJSONArray("obs");
                     if (observacaoJson.length() == 0 || observacaoJson.equals(null)){
                         linear_obs.setVisibility(View.GONE);
@@ -146,7 +153,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                         }
                     }
 
-//                    setando os editText
+//                    setando os TextView
                     lbl_visualizar_titulo_chamado.setText(titulo);
                     lbl_visualizar_mensagem.setText(mensagem);
                     data = converterData(data);
@@ -164,6 +171,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
+//                adicionando toda a lista no adapter
                 adapter.addAll(listObsChamado);
             }
         }.execute();

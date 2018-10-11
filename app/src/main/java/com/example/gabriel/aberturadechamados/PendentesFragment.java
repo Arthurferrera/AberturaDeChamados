@@ -29,6 +29,7 @@ import java.util.ArrayList;
  */
 public class PendentesFragment extends Fragment {
 
+//    declarando elementos visuais, variaveis...
     ListView list_view_chamados;
     ChamadoAdapter adapter;
     String nomeUsuario, API_URL;
@@ -43,16 +44,15 @@ public class PendentesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+//        inflando o layout do fragment
         View view = inflater.inflate(R.layout.fragment_pendentes, container, false);
-
+//        instanciando o SharedPreferencesConfig, para permitir resgatar infformações gravadas no celular
         API_URL = getString(R.string.api_key);
 
 //        instanciando o SharedPreferencesConfig
         preferencesConfig = new SharedPreferencesConfig(getActivity());
 
 //        finds dos elementos
-        FloatingActionButton fab = view.findViewById(R.id.fab);
         list_view_chamados = view.findViewById(R.id.list_view_chamados);
 
 //        setando o adapter  e o click do item da lista
@@ -64,15 +64,6 @@ public class PendentesFragment extends Fragment {
                 AbrirVisualizar(position);
             }
         });
-
-////        ação do botão float
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intencao = new Intent(getActivity(), AbrirChamadoActivity.class);
-//                startActivity(intencao);
-//            }
-//        });
 
         return view;
     }

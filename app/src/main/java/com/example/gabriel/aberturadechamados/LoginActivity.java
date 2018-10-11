@@ -17,6 +17,7 @@ import java.net.URLEncoder;
 
 public class LoginActivity extends AppCompatActivity {
 
+//    declarando elementos visuais, variaveis
     EditText txt_usuario, txt_senha;
     TextView lbl_cadastro_usuario;
     Button btn_entrar;
@@ -29,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 //        não permite que o teclado apareça assim que a tela iniciar
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
+//        caminho padrao da api
         API_URL = getString(R.string.api_key);
 
 //        instanciando o SharedPreferencesConfig

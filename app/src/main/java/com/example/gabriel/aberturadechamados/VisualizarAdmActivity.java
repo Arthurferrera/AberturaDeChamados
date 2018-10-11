@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 
 public class VisualizarAdmActivity extends AppCompatActivity {
 
+//    declarando os elementos visuais, variaveis...
     TextView lbl_visualizar_titulo_chamado, lbl_visualizar_mensagem, lbl_visualizar_data_chamado, lbl_visualizar_status_chamado, lbl_solicitante, lbl_empresa, lbl_cnpj;
     String titulo, mensagem, data, nivelUsuario, observacao, solicitante, empresa, cnpj, API_URL;
     SharedPreferencesConfig preferencesConfig;
@@ -46,14 +48,16 @@ public class VisualizarAdmActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizar_adm);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+//        pegando o caminho padrao da api
         API_URL = getString(R.string.api_key);
 
+//        instaniando a preferencesConfig, onde está gravado algumas informações
         preferencesConfig = new SharedPreferencesConfig(getApplicationContext());
 
 //        pegando o intent
@@ -92,7 +96,6 @@ public class VisualizarAdmActivity extends AppCompatActivity {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(VisualizarAdmActivity.this);
                 builder.setTitle("AtualIzar chamado");
                 builder.setView(rootview);
-
                 builder.setCancelable(false)
 //                        ação do botão de enviar do alert
                         .setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
@@ -204,6 +207,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
+//                adicionando toda a lista no adapter
                 adapter.addAll(listObsChamado);
             }
         }.execute();
@@ -227,24 +231,24 @@ public class VisualizarAdmActivity extends AppCompatActivity {
 
 //    funcção que salva uma observação de um chamado
     private void SalvarObs(){
-//            resgata a informação
-            observacao = txt_observacao.getText().toString();
-            statusChamado = sw_status.isChecked();
+//        resgata a informação
+        observacao = txt_observacao.getText().toString();
+        statusChamado = sw_status.isChecked();
 
-            try {
-//                encode para ficar no padrão de url
-                observacao = URLEncoder.encode(observacao, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+        try {
+//            encode para ficar no padrão de url
+            observacao = URLEncoder.encode(observacao, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
 //            chamando a api e o arquivo da api
-            String url = API_URL + "inserirObservacao.php?";
-            String parametros = "observacao="+observacao+"&statusChamado="+statusChamado+"&idChamado="+idChamado;
-            url += parametros;
-            new InserirObservacaoApi(url, this).execute();
-            onResume();
-            zerarAlert();
+        String url = API_URL + "inserirObservacao.php?";
+        String parametros = "observacao="+observacao+"&statusChamado="+statusChamado+"&idChamado="+idChamado;
+        url += parametros;
+        new InserirObservacaoApi(url, this).execute();
+        onResume();
+        zerarAlert();
     }
 
 //    função que converte a data para o padrão brasileiro

@@ -24,6 +24,7 @@ import java.util.ArrayList;
  */
 public class PendentesAdmFragment extends Fragment {
 
+//    declarando elementos visuais, variaveis...
     ListView list_view_pendentes_adm;
     ChamadoAdapterAdm adapterAdm;
     String API_URL;
@@ -38,12 +39,10 @@ public class PendentesAdmFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+//        inflando o layout do fragment
         View view = inflater.inflate(R.layout.fragment_pendentes_adm, container, false);
 
-
-//        Toast.makeText(this, "Bem Vindo !", Toast.LENGTH_SHORT);
-
+//        resgatando o caminho padrao da url
         API_URL = getString(R.string.api_key);
 
 //        instanciando o SharedPreferencesConfig
@@ -123,6 +122,7 @@ public class PendentesAdmFragment extends Fragment {
         }.execute();
     }
 
+//    método que abre a tela de visualização do chamado
     public void AbrirVisualizar(int i) {
         Chamado item = adapterAdm.getItem(i);
         Intent intencao = new Intent(getActivity()

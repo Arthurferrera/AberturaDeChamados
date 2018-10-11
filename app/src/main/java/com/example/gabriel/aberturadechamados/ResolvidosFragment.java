@@ -26,6 +26,7 @@ import java.util.ArrayList;
  */
 public class ResolvidosFragment extends Fragment {
 
+//    declarando elementos visuais, variaveis...
     ListView list_view_resolvidos;
     ChamadoAdapter adapter;
     String API_URL;
@@ -41,14 +42,18 @@ public class ResolvidosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+//        inflando o layout do fragment
         View view = inflater.inflate(R.layout.fragment_resolvidos, container, false);
-
+//        instanciando o SharedPreferencesConfig, para permitir resgatar infformações gravadas no celular
         preferencesConfig = new SharedPreferencesConfig(getActivity());
-
+//        resgatando o caminho padrao da url
         API_URL = getString(R.string.api_key);
 
+//        finds dos elementos
         list_view_resolvidos = view.findViewById(R.id.list_view_resolvidos);
 
+//        criando o adapter, setando na lista
+//        setando o click de item da lista
         adapter = new ChamadoAdapter(getActivity());
         list_view_resolvidos.setAdapter(adapter);
         list_view_resolvidos.setOnItemClickListener(new ListView.OnItemClickListener() {
@@ -58,7 +63,7 @@ public class ResolvidosFragment extends Fragment {
             }
         });
 
-
+//        retornando a tela
         return view;
     }
 
