@@ -16,7 +16,7 @@
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo_apesp" />
 
     <!--<TextView-->
     <!--android:layout_width="match_parent"-->

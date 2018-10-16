@@ -19,98 +19,116 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_cnpj"
+                    android:inputType="number"
+                    android:maxLength="18"
+                    android:hint="CNPJ"
+                    android:backgroundTint="@color/preto"
+                    android:textCursorDrawable="@drawable/cursor"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CNPJ:"
-                />
+                android:layout_marginTop="10dp">
 
-            <EditText
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_razao_social"
+                    android:maxLength="70"
+                    android:inputType="text"
+                    android:backgroundTint="@color/preto"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:hint="Razão Social"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txt_cnpj"
-                android:inputType="number"
-                android:maxLength="18"
-                android:hint="Digite apenas números"
-                android:backgroundTint="@color/preto"
-                android:textCursorDrawable="@drawable/cursor"
-                />
+                android:layout_marginTop="10dp">
 
-            <TextView
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_nome"
+                    android:maxLength="60"
+                    android:inputType="text"
+                    android:backgroundTint="@color/preto"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:hint="Nome Completo"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Razão Social:"
-                />
+                android:layout_marginTop="10dp">
 
-            <EditText
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_usuario"
+                    android:inputType="text"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:maxLength="25"
+                    android:backgroundTint="@color/preto"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:hint="Nome de usuário (Usado para acessar sua conta)"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txt_razao_social"
-                android:maxLength="70"
-                android:inputType="text"
-                android:backgroundTint="@color/preto"
-                android:textCursorDrawable="@drawable/cursor"
-                />
+                android:layout_marginTop="10dp">
 
-            <TextView
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/txt_senha"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:backgroundTint="@color/preto"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:hint="Senha"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nome completo:"
-                />
+                android:layout_marginTop="10dp">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt_nome"
-                android:maxLength="60"
-                android:inputType="text"
-                android:backgroundTint="@color/preto"
-                android:textCursorDrawable="@drawable/cursor"
-                />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/txt_confirma_senha"
+                    android:inputType="textPassword"
+                    android:hint="Confirme a senha..."
+                    android:maxLength="20"
+                    android:backgroundTint="@color/preto"
+                    android:textCursorDrawable="@drawable/cursor"
+                    />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nome de usuário:"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt_usuario"
-                android:inputType="text"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:maxLength="25"
-                android:backgroundTint="@color/preto"
-                android:textCursorDrawable="@drawable/cursor"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Senha:"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/txt_senha"
-                android:inputType="textPassword"
-                android:maxLength="20"
-                android:backgroundTint="@color/preto"
-                android:textCursorDrawable="@drawable/cursor"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/txt_confirma_senha"
-                android:inputType="textPassword"
-                android:hint="Confirme a senha..."
-                android:maxLength="20"
-                android:backgroundTint="@color/preto"
-                android:textCursorDrawable="@drawable/cursor"
-                />
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:layout_width="wrap_content"
