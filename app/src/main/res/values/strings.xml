@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Abertura de Chamados</string>
+    <string name="app_name">APESP - Chamados</string>
     <string name="title_activity_abrir_chamado">Abrir Chamado</string>
     <string name="title_activity_visualizar_chamado">Visualizar Chamado</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuário</string>
@@ -15,11 +15,11 @@
     <!--URL da api, declarada aqui, para ser acessada de qualquer tela-->
     <string name="api_key">http://192.168.137.1/WebChamados/APIChamados/</string>
 
-    <string name="title_activity_main_menu">SINCAESP - Chamados</string>
+    <string name="title_activity_main_menu">APESP - Chamados</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_sobre">Sobre</string>
-    <string name="title_activity_main_menu_adm">SINCAESP - Chamados</string>
+    <string name="title_activity_main_menu_adm">APESP - Chamados</string>
     <string name="activity_pendentes">Pendentes</string>
     <string name="activity_resolvidos">Resolvidos</string>
     <string name="activity_abrirChamado">Abrir Chamado</string>

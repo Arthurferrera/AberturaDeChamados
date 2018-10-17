@@ -12,6 +12,7 @@
         android:roundIcon="@drawable/logosincaesp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".AbrirChamadoActivity"
             android:label="@string/title_activity_abrir_chamado"
@@ -21,6 +22,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.gabriel.aberturadechamados.MainMenuActivity" />
         </activity>
+
         <activity
             android:name=".VisualizarChamadoActivity"
             android:label="@string/title_activity_visualizar_chamado"
@@ -30,6 +32,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.gabriel.aberturadechamados.MainMenuActivity" />
         </activity>
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".CadastroUsuarioActivity"
             android:label="@string/title_activity_cadastro_usuario"
@@ -46,6 +50,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.gabriel.aberturadechamados.LoginActivity" />
         </activity>
+
         <activity
             android:name=".VisualizarAdmActivity"
             android:label="@string/title_activity_visualizar_adm"
@@ -55,14 +60,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.gabriel.aberturadechamados.MainMenuAdmActivity" />
         </activity>
+
         <activity
             android:name=".MainMenuActivity"
             android:label="@string/title_activity_main_menu"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".MainMenuAdmActivity"
             android:label="@string/title_activity_main_menu_adm"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
