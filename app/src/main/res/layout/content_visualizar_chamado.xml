@@ -10,38 +10,27 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:id="@+id/scrollChamado">-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Titulo:"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"
+        />
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="vertical"-->
-            <!--android:padding="16dp">-->
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Titulo:"
-                android:textSize="16sp"
-                android:gravity="center_vertical"
-                android:textStyle="bold"
-                android:layout_marginBottom="5dp"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:minHeight="30dp"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:textAlignment="gravity"
-                android:gravity="center_vertical"
-                android:textSize="16sp"
-                android:id="@+id/lbl_titulo_chamado"
-                android:layout_marginBottom="15dp"
-                />
+    <TextView
+        android:layout_width="match_parent"
+        android:minHeight="30dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:textAlignment="gravity"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:id="@+id/lbl_titulo_chamado"
+        android:layout_marginBottom="15dp"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -128,9 +117,8 @@
         <ListView
             android:id="@+id/list_view_obs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
+            android:layout_height="match_parent">
+        </ListView>
 
     </LinearLayout>
-        <!--</LinearLayout>-->
-    <!--</ScrollView>-->
 </LinearLayout>

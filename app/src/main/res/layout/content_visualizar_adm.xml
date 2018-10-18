@@ -199,9 +199,8 @@
         <ListView
             android:id="@+id/list_view_obs"
             android:layout_width="match_parent"
-            android:layout_height="375dp"
-            android:minHeight="30dp">
-        </ListView>
+            android:layout_height="match_parent"
+            android:minHeight="30dp"></ListView>
 
     </LinearLayout>
 </LinearLayout>

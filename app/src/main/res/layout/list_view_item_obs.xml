@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:minHeight="60dp"
+    android:minHeight="30dp"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:gravity="center_vertical">
@@ -22,10 +22,10 @@
             />
         <TextView
             android:layout_width="match_parent"
-            android:minHeight="30dp"
+            android:minHeight="15dp"
             android:layout_height="match_parent"
             android:paddingLeft="10dp"
-            android:text="teste mensagem observacao aqui teste mensagem observacao aqui teste mensagem observacao aqui teste mensagem observacao aqui teste mensagem observacao aqui este mensagem observacao aqui"
+            android:text="teste"
             android:textAlignment="gravity"
             android:gravity="center_vertical"
             android:id="@+id/lbl_observacao_item"
@@ -48,7 +48,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:minHeight="30dp"
+            android:minHeight="15dp"
             android:layout_height="match_parent"
             android:paddingLeft="10dp"
             android:text="10/10/2019 9:09:09:0"
