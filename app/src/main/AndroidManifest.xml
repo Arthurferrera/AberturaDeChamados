@@ -7,7 +7,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logoicon"
+        android:icon="@drawable/favicon"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logosincaesp"
         android:supportsRtl="true"

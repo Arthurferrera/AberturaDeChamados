@@ -103,6 +103,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which){
 //                                caso campos estejam preenhidos ele salva, caso contrário não
                                 if (ValidarCampos()){
+//                                    ((AlertDialog) alertDialog).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
                                     SalvarObs();
                                     txt_observacao.setError(null);
                                 } else {
