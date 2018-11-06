@@ -7,4 +7,7 @@
     <color name="verde">#009900</color>
     <color name="preto">#000000</color>
     <color name="vermelho">#ff0000</color>
+    <color name="cinza404">#edf0f4</color>
+    <color name="amarelo">#ffff00</color>
+    <color name="cinzaMenu">#898989</color>
 </resources>

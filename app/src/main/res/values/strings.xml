@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">APESP - Chamados</string>
+    <string name="app_name">APESP</string>
     <string name="title_activity_abrir_chamado">Abrir Chamado</string>
     <string name="title_activity_visualizar_chamado">Visualizar Chamado</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuário</string>
@@ -23,4 +23,5 @@
     <string name="activity_pendentes">Pendentes</string>
     <string name="activity_resolvidos">Resolvidos</string>
     <string name="activity_abrirChamado">Abrir Chamado</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

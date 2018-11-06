@@ -8,11 +8,12 @@
             android:id="@+id/nav_pendentesAdm"
             android:icon="@drawable/ic_pendentes"
             android:title="Pendentes"
-            android:checked="true"/>
+            />
         <item
             android:id="@+id/nav_resolvidosAdm"
             android:icon="@drawable/ic_resolvidos"
-            android:title="Resolvidos" />
+            android:title="Resolvidos"
+            />
     </group>
     <item android:title="">
         <menu>

@@ -2,53 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp"
     android:layout_gravity="center_vertical"
     android:gravity="center_horizontal"
     >
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/lbl_data_chamado_adm"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:minHeight="35dp"
+        android:text="10/10/10"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lbl_titulo_chamado_adm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/lbl_nome_empresa"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:text="Nome Empresa"
-            android:textAlignment="viewStart"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/lbl_nome_usuario"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:text="Nome Usuário"
-            android:textAlignment="viewStart" />
-
-        <TextView
-            android:id="@+id/lbl_titulo_chamado_adm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="35dp"
-            android:text="Titulo Chamado"
-            android:textAlignment="viewStart"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/lbl_mensagem_chamado_adm"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ellipsize="end"
-            android:fadeScrollbars="false"
-            android:lines="1"
-            android:maxLines="1"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
-            android:text="Decrição do chamado aqui!" />
-
-    </LinearLayout>
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:text="Titulo do Chamado"
+        android:textAlignment="viewStart" />
 
 </LinearLayout>

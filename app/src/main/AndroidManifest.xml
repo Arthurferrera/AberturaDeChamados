@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.gabriel.aberturadechamados">
+    package="com.toth.aberturadechamados"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,26 +16,16 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".AbrirChamadoActivity"
-            android:label="@string/title_activity_abrir_chamado"
-            android:parentActivityName=".MainMenuActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.gabriel.aberturadechamados.MainMenuActivity" />
-        </activity>
-
-        <activity
-            android:name=".VisualizarChamadoActivity"
+            android:name=".activity.VisualizarChamadoActivity"
             android:label="@string/title_activity_visualizar_chamado"
-            android:parentActivityName=".MainMenuActivity"
+            android:parentActivityName=".activity.MainMenuActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.gabriel.aberturadechamados.MainMenuActivity" />
+                android:value="com.toth.aberturadechamados.activity.MainMenuActivity" />
         </activity>
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,32 +34,32 @@
         </activity>
 
         <activity
-            android:name=".CadastroUsuarioActivity"
+            android:name=".activity.CadastroUsuarioActivity"
             android:label="@string/title_activity_cadastro_usuario"
-            android:parentActivityName=".LoginActivity"
+            android:parentActivityName=".activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.gabriel.aberturadechamados.LoginActivity" />
+                android:value="com.toth.aberturadechamados.activity.LoginActivity" />
         </activity>
 
         <activity
-            android:name=".VisualizarAdmActivity"
+            android:name=".activity.VisualizarAdmActivity"
             android:label="@string/title_activity_visualizar_adm"
-            android:parentActivityName=".MainMenuAdmActivity"
+            android:parentActivityName=".activity.MainMenuAdmActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.gabriel.aberturadechamados.MainMenuAdmActivity" />
+                android:value="com.toth.aberturadechamados.activity.MainMenuAdmActivity" />
         </activity>
 
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".activity.MainMenuActivity"
             android:label="@string/title_activity_main_menu"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".MainMenuAdmActivity"
+            android:name=".activity.MainMenuAdmActivity"
             android:label="@string/title_activity_main_menu_adm"
             android:theme="@style/AppTheme.NoActionBar">
 

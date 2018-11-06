@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".VisualizarAdmActivity"
+    tools:context=".activity.VisualizarAdmActivity"
     tools:showIn="@layout/activity_visualizar_adm"
     android:orientation="vertical"
     android:padding="16dp">
@@ -101,6 +101,30 @@
 
         <TextView
             android:id="@+id/lbl_titulo_chamado"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:textAlignment="gravity"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="Local:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lbl_local_visualizar_adm"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"

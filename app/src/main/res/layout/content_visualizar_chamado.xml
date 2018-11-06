@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".VisualizarChamadoActivity"
+    tools:context=".activity.VisualizarChamadoActivity"
     tools:showIn="@layout/activity_visualizar_chamado"
     android:orientation="vertical"
     android:padding="16dp">
@@ -43,6 +43,26 @@
 
     <TextView
         android:id="@+id/lbl_visualzar_mensagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_vertical"
+        android:minHeight="30dp"
+        android:paddingLeft="10dp"
+        android:textAlignment="gravity"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_vertical"
+        android:text="Local da Ocorrência"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lbl_visualizar_local"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"

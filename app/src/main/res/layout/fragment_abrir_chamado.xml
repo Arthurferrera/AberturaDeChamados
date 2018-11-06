@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AbrirChamadoFragment">
+    tools:context=".fragments.AbrirChamadoFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,6 +34,22 @@
             </android.support.design.widget.TextInputLayout>
 
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/txt_local"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/preto"
+                    android:hint="Local"
+                    android:maxLength="50"
+                    android:textCursorDrawable="@drawable/cursor" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -48,24 +64,23 @@
                     android:layout_marginTop="10dp"
                     android:backgroundTint="@color/preto"
                     android:gravity="top"
+                    android:hint="Descrição"
                     android:inputType="text|textMultiLine"
-                    android:textCursorDrawable="@drawable/cursor"
-                    android:hint="Descrição"/>
+                    android:scrollbars="vertical"
+                    android:textCursorDrawable="@drawable/cursor" />
 
             </android.support.design.widget.TextInputLayout>
 
 
-
             <Button
+                android:id="@+id/btn_abrir_chamado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Confirmar"
-                android:id="@+id/btn_abrir_chamado"
                 android:layout_gravity="end"
                 android:layout_marginTop="15dp"
                 android:backgroundTint="@color/vermelho"
-                android:textColor="@color/colorWhite"
-                />
+                android:text="Confirmar"
+                android:textColor="@color/colorWhite" />
 
         </LinearLayout>
     </ScrollView>
