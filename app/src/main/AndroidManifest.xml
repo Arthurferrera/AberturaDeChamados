@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.toth.aberturadechamados"
-    android:versionCode="1"
-    android:versionName="1.0">
+    android:versionCode="2"
+    android:versionName="1.1">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -14,7 +16,6 @@
         android:roundIcon="@drawable/logosincaesp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activity.VisualizarChamadoActivity"
             android:label="@string/title_activity_visualizar_chamado"
@@ -24,7 +25,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.toth.aberturadechamados.activity.MainMenuActivity" />
         </activity>
-
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.CadastroUsuarioActivity"
             android:label="@string/title_activity_cadastro_usuario"
@@ -42,7 +41,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.toth.aberturadechamados.activity.LoginActivity" />
         </activity>
-
         <activity
             android:name=".activity.VisualizarAdmActivity"
             android:label="@string/title_activity_visualizar_adm"
@@ -52,17 +50,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.toth.aberturadechamados.activity.MainMenuAdmActivity" />
         </activity>
-
         <activity
             android:name=".activity.MainMenuActivity"
             android:label="@string/title_activity_main_menu"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.MainMenuAdmActivity"
             android:label="@string/title_activity_main_menu_adm"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".SobreActivity"
+            android:label="@string/title_activity_sobre"
+            android:parentActivityName=".activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.toth.aberturadechamados.activity.LoginActivity" />
         </activity>
     </application>
 

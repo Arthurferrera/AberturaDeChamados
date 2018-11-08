@@ -1,12 +1,15 @@
 package com.toth.aberturadechamados.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.toth.aberturadechamados.R;
@@ -24,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_entrar;
     String usuario, senha, API_URL;
     private SharedPreferencesConfig preferencesConfig;
+    private ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
 
 //    método que faz a autenticação do usuario
     public void Autenticacao(View view) throws UnsupportedEncodingException {
+
 //        verificando se os campos estão vazios
         if(ValidarCampos()){
 //            resgatando os valores digitados
@@ -101,7 +106,6 @@ public class LoginActivity extends AppCompatActivity {
             usuario = URLEncoder.encode(usuario, "UTF-8");
             senha = URLEncoder.encode(senha, "UTF-8");
 
-//            Toast.makeText(this, usuario+" - "+senha, Toast.LENGTH_SHORT).show();
 //            setando parametros e url da API e instanciando a API
             String url = API_URL + "login.php?";
             String parametros = "usuario="+usuario+"&senha="+senha;

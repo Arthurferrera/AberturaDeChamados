@@ -6,17 +6,21 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_pendentesAdm"
-            android:icon="@drawable/ic_pendentes"
+            android:icon="@drawable/ic_pendentes_check"
             android:title="Pendentes"
             />
         <item
             android:id="@+id/nav_resolvidosAdm"
-            android:icon="@drawable/ic_resolvidos"
+            android:icon="@drawable/ic_resolvidos_check"
             android:title="Resolvidos"
             />
     </group>
-    <item android:title="">
+    <item android:title="Informações">
         <menu>
+            <item
+                android:id="@+id/nav_sobreAdm"
+                android:icon="@drawable/ic_info_black_24dp"
+                android:title="Sobre o App" />
             <item
                 android:id="@+id/nav_sairAdm"
                 android:icon="@drawable/ic_exit"

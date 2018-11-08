@@ -2,6 +2,7 @@ package com.toth.aberturadechamados.api;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
     private Activity activity;
     private SharedPreferencesConfig preferencesConfig;
     private  AlertDialog alerta;
+    private ProgressDialog progress;
 
 //    construtor
     public LoginApi(String url, Activity activity) {
@@ -39,6 +41,14 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
+//        código da barra de progresso enquanto faz o login
+        progress = new ProgressDialog(activity);
+        progress.setTitle("Entrando");
+        progress.setMessage("Verificando informações...");
+        progress.setCancelable(false);
+        progress.setIndeterminate(true);
+        progress.show();
+
 //        instanciando as preferencias salvas
         preferencesConfig = new SharedPreferencesConfig(activity.getApplicationContext());
 
@@ -49,6 +59,7 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
                 boolean login = jsonObject.getBoolean("login");
 //                verificando se o login está valido
                 if (login) {
+//                    progress.dismiss();
 //                    resgatando o objeto do usuario
                     JSONObject usuarioJson = jsonObject.getJSONObject("usuario");
                     String nomeUsuario = usuarioJson.getString("nome");
@@ -77,8 +88,10 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
                         Toast.makeText(activity, "Tipo de usuário não tem permissão para acessar o aplicativo, ou não está cadastrado", Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    progress.dismiss();
                     boolean logado = jsonObject.getBoolean("logado");
                     if (logado){
+                        progress.dismiss();
 //                    caso o login ja esteja ativo, mostra uma mensagem de aviso
                         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                         builder.setTitle("Aviso!");
@@ -87,6 +100,7 @@ public class LoginApi extends AsyncTask<Void, Void, String> {
                         alerta = builder.create();
                         alerta.show();
                     } else {
+                        progress.dismiss();
 //                    caso o login não for valido, mostra uma mensagem
                         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                         builder.setTitle("Erro!");

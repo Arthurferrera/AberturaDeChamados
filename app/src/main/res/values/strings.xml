@@ -24,4 +24,13 @@
     <string name="activity_resolvidos">Resolvidos</string>
     <string name="activity_abrirChamado">Abrir Chamado</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_sobre">Sobre</string>
+
+    <!--Texto que contém as informações da página sobre-->
+    <string name="sobre_body">
+        O aplicativo APESP, tem foco na otimização do processo de solução
+        para os muitos problemas que diariamente prejudicam o andamento
+        da comercialização, da carga e descarga, do transito interno, da limpeza,
+        da segurança entre outros.
+    </string>
 </resources>

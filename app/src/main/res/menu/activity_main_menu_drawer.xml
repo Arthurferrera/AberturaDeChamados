@@ -18,8 +18,12 @@
             android:icon="@drawable/ic_abrir_chamado"
             android:title="Abrir Chamado" />
     </group>
-    <item android:title="">
+    <item android:title="Informações">
         <menu>
+            <item
+                android:id="@+id/nav_sobre"
+                android:icon="@drawable/ic_info_black_24dp"
+                android:title="Sobre o App" />
             <item
                 android:id="@+id/nav_sair"
                 android:icon="@drawable/ic_exit"

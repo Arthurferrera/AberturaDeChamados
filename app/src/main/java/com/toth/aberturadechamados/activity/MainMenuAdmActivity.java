@@ -2,6 +2,7 @@ package com.toth.aberturadechamados.activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -21,8 +22,11 @@ import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.toth.aberturadechamados.BuildConfig;
 import com.toth.aberturadechamados.R;
+import com.toth.aberturadechamados.SobreActivity;
 import com.toth.aberturadechamados.api.DeslogarApi;
 import com.toth.aberturadechamados.fragments.EmpresasFragment;
 import com.toth.aberturadechamados.model.SharedPreferencesConfig;
@@ -129,6 +133,8 @@ public class MainMenuAdmActivity extends AppCompatActivity
             fragment.setArguments(bundle);
             fm.beginTransaction().replace(R.id.frame_content_adm, fragment).commit();
             toolbar.setTitle("Empresas");
+        } else if (id == R.id.nav_sobreAdm){
+            startActivity(new Intent(this, SobreActivity.class));
         } else if (id == R.id.nav_sairAdm) {
             Integer idUser = Integer.valueOf(preferencesConfig.readUsuarioId());
             String nivel = preferencesConfig.readNivelusuario();

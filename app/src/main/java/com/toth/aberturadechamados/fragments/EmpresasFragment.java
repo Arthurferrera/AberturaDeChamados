@@ -89,7 +89,7 @@ public class EmpresasFragment extends Fragment {
             @Override
             protected String doInBackground(Void... voids) {
                 String json = "";
-                final String url = API_URL + "empresas.php";
+                final String url = API_URL + "empresas1.php?status="+status;
                 json = HttpConnection.get(url);
                 return json;
             }

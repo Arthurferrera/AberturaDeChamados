@@ -1,5 +1,6 @@
 package com.toth.aberturadechamados.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 
 import com.toth.aberturadechamados.R;
+import com.toth.aberturadechamados.SobreActivity;
 import com.toth.aberturadechamados.api.DeslogarApi;
 import com.toth.aberturadechamados.fragments.AbrirChamadoFragment;
 import com.toth.aberturadechamados.fragments.PendentesFragment;
@@ -108,6 +110,8 @@ public class MainMenuActivity extends AppCompatActivity
             setTextColorForMenuItem(item, R.color.preto);
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new AbrirChamadoFragment()).commit();
             toolbar.setTitle(getString(R.string.activity_abrirChamado));
+        } else if (id == R.id.nav_sobre){
+            startActivity(new Intent(this, SobreActivity.class));
         } else if (id == R.id.nav_sair) {
             Integer idUser = Integer.valueOf(preferencesConfig.readUsuarioId());
             String nivel = preferencesConfig.readNivelusuario();
