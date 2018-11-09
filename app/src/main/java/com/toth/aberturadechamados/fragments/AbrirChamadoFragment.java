@@ -1,18 +1,35 @@
 package com.toth.aberturadechamados.fragments;
 
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+import com.toth.aberturadechamados.api.UploadFotoApi;
+import com.toth.aberturadechamados.model.ImageFilePath;
 import com.toth.aberturadechamados.R;
 import com.toth.aberturadechamados.model.SharedPreferencesConfig;
 import com.toth.aberturadechamados.api.InserirChamadoApi;
 
+import java.io.File;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Calendar;
@@ -31,6 +48,29 @@ public class AbrirChamadoFragment extends Fragment {
     String dataAberturaChamado, API_URL;
     int idUsuario;
     private SharedPreferencesConfig preferencesConfig;
+
+    final int REQUEST_PERMISSION = 101;
+    final int SELECT_PICTURE = 1;
+
+    Bitmap foto1, foto2, foto3;
+    StringBuffer nomeImagem = new StringBuffer();
+    ImageView img_1, img_2, img_3;
+    ImageView[] vetorImg;
+    String pathFoto1, getPathFoto2, getPathFoto3;
+    String[] listaPaths;
+    int posicaoImg = 0;
+
+    View.OnClickListener clickImageView = new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            if (verificarPermissoes()){
+                posicaoImg = Integer.parseInt(v.getTag().toString());
+                capturarImagem();
+            } else {
+                solicitarPermissoes();
+            }
+        }
+    };
 
     public AbrirChamadoFragment() {
         // Required empty public constructor
@@ -53,6 +93,13 @@ public class AbrirChamadoFragment extends Fragment {
         txt_mensagem = view.findViewById(R.id.txt_mensagem);
         txt_local = view.findViewById(R.id.txt_local);
         btn_abrir_chamado = view.findViewById(R.id.btn_abrir_chamado);
+        img_1 = view.findViewById(R.id.img_1);
+        img_2 = view.findViewById(R.id.img_2);
+        img_3 = view.findViewById(R.id.img_3);
+
+        img_1.setOnClickListener(clickImageView);
+        img_2.setOnClickListener(clickImageView);
+        img_3.setOnClickListener(clickImageView);
 
 //        click do botão
         btn_abrir_chamado.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +115,119 @@ public class AbrirChamadoFragment extends Fragment {
         return view;
     }
 
-//    método que valida se os campos estão vazios
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == REQUEST_PERMISSION){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                capturarImagem();
+            } else {
+//                permissão negada
+            }
+        }
+    }
+
+    void solicitarPermissoes(){
+        String[] permissoes = new String[1];
+        permissoes[0] = Manifest.permission.READ_EXTERNAL_STORAGE;
+        ActivityCompat.requestPermissions(getActivity(), permissoes, REQUEST_PERMISSION);
+    }
+
+    boolean verificarPermissoes(){
+        if (ContextCompat.checkSelfPermission(getContext(),
+                android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+            return false;
+        }
+        return true;
+    }
+
+    private void capturarImagem(){
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, SELECT_PICTURE);
+//        Intent pickGaleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//
+//        String pickTitle = "Selecione uma imagem";
+//
+//        Intent chooserIntent = Intent.createChooser(pickGaleryIntent, pickTitle);
+//
+//        if (chooserIntent.resolveActivity(getActivity().getPackageManager()) != null){
+//            startActivityForResult(chooserIntent, SELECT_PICTURE);
+//        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if (requestCode == SELECT_PICTURE ){
+
+            if(resultCode == getActivity().RESULT_OK){
+                //selecionou alguma coisa
+
+                try {
+//                    pegando a img em binario
+                    InputStream inp = getActivity().getContentResolver()
+                            .openInputStream(data.getData());
+
+                    switch (posicaoImg){
+                        case 0:
+                            foto1 = BitmapFactory.decodeStream(inp);
+                            img_1.setImageBitmap(foto1);
+                            break;
+                        case 1:
+                            foto2 = BitmapFactory.decodeStream(inp);
+                            img_2.setImageBitmap(foto2);
+                            break;
+                        case 2:
+                            foto3 = BitmapFactory.decodeStream(inp);
+                            img_3.setImageBitmap(foto3);
+                            break;
+                        default:
+//                        default
+                            break;
+                    }
+                    String url = API_URL+"upload_imagem.php";
+                    nomeImagem.setLength(0); //limpando o atringBuffer
+                    new UploadFotoApi(getActivity(), nomeImagem, url).execute(foto1);
+                    pathFoto1 = API_URL="img/";
+                    Toast.makeText(getActivity(), pathFoto1, Toast.LENGTH_SHORT).show();
+                    listaPaths = new String[]{pathFoto1, getPathFoto2, getPathFoto3};
+                } catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+//        if (resultCode ==  getActivity().RESULT_OK){
+//            if (requestCode == SELECT_PICTURE){
+//                Uri imgUri = data.getData();
+//                String realPath = ImageFilePath.getPath(getActivity(), data.getData());
+//                Picasso.get().load(new File(realPath)).into(vetorImg[posicaoImg]);
+//                switch (posicaoImg){
+//                    case 0:
+//                        pathFoto1 = realPath;
+//                        break;
+//                    case 1:
+//                        getPathFoto2 = realPath;
+//                        break;
+//                    case 2:
+//                        getPathFoto3 = realPath;
+//                        break;
+//                    default:
+////                        default
+//                        break;
+//                }
+//                listaPaths = new String[]{pathFoto1, getPathFoto2, getPathFoto3};
+//            }
+//        }
+    }
+
+    //    método que valida se os campos estão vazios
     private boolean ValidarCampos(){
         EditText campoComFoco = null;
         boolean isValid = true;
@@ -109,6 +268,7 @@ public class AbrirChamadoFragment extends Fragment {
             titulo = txt_titulo.getText().toString();
             mensagem = txt_mensagem.getText().toString();
             local = txt_local.getText().toString();
+            String caminhoFoto = "img/"+nomeImagem.toString();
 
 //            pegando o idUsuario que está gravado em um tipo de 'sessão'
             idUsuario = Integer.parseInt(preferencesConfig.readUsuarioId());
@@ -125,7 +285,7 @@ public class AbrirChamadoFragment extends Fragment {
 
 //            chamadno o arquivo da api, passando a url
             String url = API_URL + "inserir.php?";
-            String parametros = "titulo="+titulo+"&mensagem="+mensagem+"&local="+local+"&status=0&idUsuario="+idUsuario;
+            String parametros = "titulo="+titulo+"&mensagem="+mensagem+"&local="+local+"&status=0&idUsuario="+idUsuario+"&imagem="+caminhoFoto;
             url += parametros;
             new InserirChamadoApi(url, getActivity()).execute();
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new PendentesFragment()).commit();

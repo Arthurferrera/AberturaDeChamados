@@ -13,7 +13,8 @@
     <string name="nivel_usuario">com.example.gabriel.aberturachamados_nivel_usuario</string>
 
     <!--URL da api, declarada aqui, para ser acessada de qualquer tela-->
-    <string name="api_key">http://www.demarchicompany.com.br/webchamados/APIChamados/</string>
+    <!--<string name="api_key">http://www.demarchicompany.com.br/webchamados/APIChamados/</string>-->
+    <string name="api_key">http://192.168.2.122/WebChamadosServ/APIChamados/</string>
 
     <string name="title_activity_main_menu">APESP - Chamados</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -32,5 +33,9 @@
         para os muitos problemas que diariamente prejudicam o andamento
         da comercialização, da carga e descarga, do transito interno, da limpeza,
         da segurança entre outros.
+    </string>
+
+    <string name="aviso_cadastro">
+         Certifique-se de que todas as informações estão corretas, após ser enviado não terá como alterá-lo
     </string>
 </resources>
