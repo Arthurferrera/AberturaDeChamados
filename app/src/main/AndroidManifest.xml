@@ -59,7 +59,7 @@
             android:label="@string/title_activity_main_menu_adm"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".SobreActivity"
+            android:name=".activity.SobreActivity"
             android:label="@string/title_activity_sobre"
             android:parentActivityName=".activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">

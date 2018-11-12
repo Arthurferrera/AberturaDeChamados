@@ -194,7 +194,7 @@ public class AbrirChamadoFragment extends Fragment {
                     String url = API_URL+"upload_imagem.php";
                     nomeImagem.setLength(0); //limpando o atringBuffer
                     new UploadFotoApi(getActivity(), nomeImagem, url).execute(foto1);
-                    pathFoto1 = API_URL="img/";
+                    pathFoto1 = API_URL+"img/";
                     Toast.makeText(getActivity(), pathFoto1, Toast.LENGTH_SHORT).show();
                     listaPaths = new String[]{pathFoto1, getPathFoto2, getPathFoto3};
                 } catch (Exception ex){

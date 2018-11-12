@@ -15,7 +15,6 @@ import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 
 import com.toth.aberturadechamados.R;
-import com.toth.aberturadechamados.SobreActivity;
 import com.toth.aberturadechamados.api.DeslogarApi;
 import com.toth.aberturadechamados.fragments.AbrirChamadoFragment;
 import com.toth.aberturadechamados.fragments.PendentesFragment;

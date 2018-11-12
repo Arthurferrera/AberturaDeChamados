@@ -14,7 +14,7 @@
 
     <!--URL da api, declarada aqui, para ser acessada de qualquer tela-->
     <!--<string name="api_key">http://www.demarchicompany.com.br/webchamados/APIChamados/</string>-->
-    <string name="api_key">http://192.168.2.122/WebChamadosServ/APIChamados/</string>
+    <string name="api_key">http://192.168.2.128/WebChamadosServ/APIChamados/</string>
 
     <string name="title_activity_main_menu">APESP - Chamados</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
