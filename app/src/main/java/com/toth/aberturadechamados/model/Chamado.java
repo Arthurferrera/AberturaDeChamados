@@ -11,6 +11,7 @@ public class Chamado {
     private String nomeEmpresa;
     private String observacao;
     private String dataObservacao;
+    private String imagem;
     private int idUsuarioChamado;
 
     public String getTitulo() {
@@ -80,4 +81,8 @@ public class Chamado {
     public int getIdUsuarioChamado() { return idUsuarioChamado; }
 
     public void setIdUsuarioChamado(int idUsuarioChamado) { this.idUsuarioChamado = idUsuarioChamado; }
+
+    public String getImagem() { return imagem; }
+
+    public void setImagem(String imagem) { this.imagem = imagem; }
 }

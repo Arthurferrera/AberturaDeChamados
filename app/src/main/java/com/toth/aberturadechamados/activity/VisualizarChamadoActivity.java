@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.toth.aberturadechamados.R;
 import com.toth.aberturadechamados.adapter.ObservacaoAdapter;
+import com.toth.aberturadechamados.adapter.ViewPagerAdapter;
 import com.toth.aberturadechamados.model.Chamado;
 import com.toth.aberturadechamados.model.HttpConnection;
 import com.toth.aberturadechamados.model.SharedPreferencesConfig;
@@ -29,6 +31,9 @@ import java.util.ArrayList;
 
 public class VisualizarChamadoActivity extends AppCompatActivity {
 
+    private Integer[] imagensFotos = {R.drawable.logo_apesp, R.drawable.logo, R.drawable.favicon,
+            R.drawable.teste1, R.drawable.teste};
+
 //    declarando os elementos
     TextView lbl_visualizar_titulo_chamado, lbl_visualizar_mensagem, lbl_visualizar_data_chamado, lbl_visualizar_status_chamado, lbl_visualizar_local;
     Integer idChamado;
@@ -37,13 +42,15 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
     SharedPreferencesConfig preferencesConfig;
     ObservacaoAdapter adapter;
     ListView list_view_obs;
-    LinearLayout linear_obs;
+    LinearLayout linear_obs, linear_img;
     ScrollView scroll;
-
+    ViewPager viewPager;
     View rootview;
     EditText txt_observacao;
     Switch sw_status;
     LayoutInflater layoutInflater;
+    ViewPagerAdapter viewPagerAdapter;
+    String[] arrayImagens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +76,9 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         lbl_visualizar_status_chamado = findViewById(R.id.lbl_visualizar_status_chamado);
         list_view_obs = findViewById(R.id.list_view_obs);
         linear_obs = findViewById(R.id.linear_obs);
+        linear_img = findViewById(R.id.linear_img);
         lbl_visualizar_local = findViewById(R.id.lbl_visualizar_local);
+        viewPager = findViewById(R.id.viewPager);
 
 //        criando e setando o adapter na lista
         adapter = new ObservacaoAdapter(this);
@@ -84,12 +93,16 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
 
 //        resgatando os parametros passados pelo intent
         idChamado = intent.getIntExtra("idChamado", 0);
+
+//        viewPager = new ViewPager(this);
+////        viewPagerAdapter = new ViewPagerAdapter(this, imagensFotos);
+//        viewPager.setAdapter(new ViewPagerAdapter(this, imagensFotos));
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
 //        limpando o adapter para não gerar duplicidade
         adapter.clear();
 
@@ -113,7 +126,10 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
+
+                viewPager.setAdapter(viewPagerAdapter);
                 ArrayList<Chamado> listObsChamado = new ArrayList<>();
+                //ArrayList<Chamado> listFotosChamado = new ArrayList<>();
                 try {
 //                    resgatando o objeto retornado da api,
 //                    e setando as variaveis com os valores obtidos dele
@@ -146,6 +162,19 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                         }
                     }
 
+                    //                    pegando as observações de um chamado
+                    JSONArray fotosArray = objeto.getJSONArray("fotos");
+                    if (fotosArray.length() == 0 || fotosArray.equals(null)){
+                        linear_img.setVisibility(View.GONE);
+                    } else {
+                        for (int i =0; i < observacaoJson.length(); i++){
+                            JSONObject fotoJson = fotosArray.getJSONObject(i);
+                            Chamado ch = new Chamado();
+                            ch.setImagem(fotoJson.getString("caminhoFoto"));
+                            arrayImagens = new String[]{fotoJson.getString("caminhoFoto")};
+                        }
+                    }
+
 //                    setando os TextView
                     lbl_visualizar_titulo_chamado.setText(titulo);
                     lbl_visualizar_mensagem.setText(mensagem);
@@ -167,8 +196,10 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                 }
 //                adicionando toda a lista no adapter
                 adapter.addAll(listObsChamado);
+                viewPagerAdapter = new ViewPagerAdapter(VisualizarChamadoActivity.this, arrayImagens);
             }
         }.execute();
+
     }
 
 //    método que converte a data para o padrão brasileiro
