@@ -15,8 +15,10 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.toth.aberturadechamados.R;
+import com.toth.aberturadechamados.adapter.AdapterImg;
 import com.toth.aberturadechamados.adapter.ObservacaoAdapter;
 import com.toth.aberturadechamados.adapter.ViewPagerAdapter;
 import com.toth.aberturadechamados.model.Chamado;
@@ -31,10 +33,9 @@ import java.util.ArrayList;
 
 public class VisualizarChamadoActivity extends AppCompatActivity {
 
-    private Integer[] imagensFotos = {R.drawable.logo_apesp, R.drawable.logo, R.drawable.favicon,
-            R.drawable.teste1, R.drawable.teste};
+    private int[] imagensFotos = {R.drawable.logo_apesp, R.drawable.aaa, R.drawable.logo, R.drawable.favicon};
 
-//    declarando os elementos
+    //    declarando os elementos
     TextView lbl_visualizar_titulo_chamado, lbl_visualizar_mensagem, lbl_visualizar_data_chamado, lbl_visualizar_status_chamado, lbl_visualizar_local;
     Integer idChamado;
     String titulo, mensagem, data, nivelUsuario, API_URL, local;
@@ -49,7 +50,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
     EditText txt_observacao;
     Switch sw_status;
     LayoutInflater layoutInflater;
-    ViewPagerAdapter viewPagerAdapter;
+    AdapterImg viewPagerAdapter;
     String[] arrayImagens;
 
     @Override
@@ -59,6 +60,11 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        viewPager = findViewById(R.id.viewPager);
+        LinearLayout.LayoutParams lp =  new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        viewPager.setLayoutParams(lp);
+        viewPager.setAdapter(new AdapterImg(this, imagensFotos));
 
 //        pegando o endereço padrão da api
         API_URL = getString(R.string.api_key);
@@ -78,7 +84,6 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         linear_obs = findViewById(R.id.linear_obs);
         linear_img = findViewById(R.id.linear_img);
         lbl_visualizar_local = findViewById(R.id.lbl_visualizar_local);
-        viewPager = findViewById(R.id.viewPager);
 
 //        criando e setando o adapter na lista
         adapter = new ObservacaoAdapter(this);
@@ -95,7 +100,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         idChamado = intent.getIntExtra("idChamado", 0);
 
 //        viewPager = new ViewPager(this);
-////        viewPagerAdapter = new ViewPagerAdapter(this, imagensFotos);
+//        viewPagerAdapter = new ViewPagerAdapter(this, imagensFotos);
 //        viewPager.setAdapter(new ViewPagerAdapter(this, imagensFotos));
 
     }
@@ -110,7 +115,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         nivelUsuario = preferencesConfig.readNivelusuario();
 
 //        setando a url da api
-        final String url = API_URL + "selecionarumChamado.php?id="+idChamado;
+        final String url = API_URL + "selecionarUmChamado.php?id="+idChamado;
 
         new AsyncTask<Void, Void, Void>(){
             String retorno = "";
@@ -127,9 +132,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
 
-                viewPager.setAdapter(viewPagerAdapter);
                 ArrayList<Chamado> listObsChamado = new ArrayList<>();
-                //ArrayList<Chamado> listFotosChamado = new ArrayList<>();
                 try {
 //                    resgatando o objeto retornado da api,
 //                    e setando as variaveis com os valores obtidos dele
@@ -138,10 +141,10 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                     titulo = chamadoJson.optString("titulo");
                     titulo = titulo.trim(); //TIIRA OS ESPAÇOS INUTEIS
                     mensagem = chamadoJson.optString("mensagem");
-                    JSONObject dataJson = chamadoJson.getJSONObject("data");
-                    data  = dataJson.getString("date");
                     status = chamadoJson.getInt("status");
                     local = chamadoJson.getString("local");
+                    JSONObject dataJson = chamadoJson.getJSONObject("data");
+                    data  = dataJson.getString("date");
 
 //                    pegando as observações de um chamado
                     JSONArray observacaoJson = objeto.getJSONArray("obs");
@@ -149,7 +152,6 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                         linear_obs.setVisibility(View.GONE);
                     } else {
                         for (int i =0; i < observacaoJson.length(); i++){
-
                             JSONObject obsJson = observacaoJson.getJSONObject(i);
                             Chamado ch = new Chamado();
                             ch.setObservacao(obsJson.getString("observacao"));
@@ -162,16 +164,17 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                         }
                     }
 
-                    //                    pegando as observações de um chamado
+//                    pegando as fotos de um chamado
                     JSONArray fotosArray = objeto.getJSONArray("fotos");
                     if (fotosArray.length() == 0 || fotosArray.equals(null)){
                         linear_img.setVisibility(View.GONE);
                     } else {
-                        for (int i =0; i < observacaoJson.length(); i++){
+                        for (int i =0; i < fotosArray.length(); i++){
                             JSONObject fotoJson = fotosArray.getJSONObject(i);
                             Chamado ch = new Chamado();
                             ch.setImagem(fotoJson.getString("caminhoFoto"));
                             arrayImagens = new String[]{fotoJson.getString("caminhoFoto")};
+
                         }
                     }
 
@@ -196,7 +199,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                 }
 //                adicionando toda a lista no adapter
                 adapter.addAll(listObsChamado);
-                viewPagerAdapter = new ViewPagerAdapter(VisualizarChamadoActivity.this, arrayImagens);
+//                viewPagerAdapter = new AdapterImg(VisualizarChamadoActivity.this, arrayImagens);
             }
         }.execute();
 

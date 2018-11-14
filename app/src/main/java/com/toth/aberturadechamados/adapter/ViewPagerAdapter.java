@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.toth.aberturadechamados.R;
@@ -25,19 +26,18 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private String[] imagens;
-//    private int idChamado;
-//    private Integer[] imagens;
+    private ArrayList<String> imagens;
+//    private int[] imagens;
     private String API_URL;
 
-    public ViewPagerAdapter(Context context, String[] imagens) {
+    public ViewPagerAdapter(Context context, ArrayList<String> imagens) {
         this.context = context;
         this.imagens = imagens;
     }
 
     @Override
     public int getCount() {
-        return imagens.length;
+        return imagens.size();
     }
 
     @Override
@@ -48,35 +48,37 @@ public class ViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
 
-        API_URL = context.getString(R.string.api_key);
+//        API_URL = context.getString(R.string.api_key);
+//
+//        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View view = layoutInflater.inflate(R.layout.viewpager_layout, null);
+//        ImageView imageView = view.findViewById(R.id.imageViewPager);
+//
+        String url = "http://192.168.2.128/WebChamadosServ/APIChamados/img/5be97b5501760.jpg";
+//        Picasso.get().load(API_URL+imagens[position]).into(imageView);
+//
+//        ViewPager vp = (ViewPager) container;
+//        vp.addView(view, 0);
+//        return view;
 
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.viewpager_layout, null);
-        ImageView imageView = view.findViewById(R.id.imageViewPager);
-        Picasso.get().load(API_URL+imagens[position]).into(imageView);
+        LinearLayout ll = new LinearLayout(context);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        ll.setLayoutParams(lp);
+        container.addView(ll);
 
-        ViewPager vp = (ViewPager) container;
-        vp.addView(view, 0);
-        return view;
+        ImageView iv = new ImageView(context);
+//        iv.setImageResource(imagens[position]);
+        Picasso.get().load(API_URL+imagens.get(position)).into(iv);
+        ll.addView(iv);
 
-//        LinearLayout li = new LinearLayout(context);
-//        li.setOrientation(LinearLayout.VERTICAL);
-//        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-//        li.setLayoutParams(lp);
-//        container.addView(li);
-//
-//        ImageView iv = new ImageView(context);
-////        iv.setImageResource(imagens[position]);
-//        Picasso.get().load(imagens[position]).into(iv);
-//        li.addView(iv);
-//
-//        TextView tx = new TextView(context);
-//        tx.setText("Foto:"+(position+1));
-//        li.addView(tx);
-//
-//        Log.d("Script", "Build foto "+(position+1));
-//
-//        return li;
+        TextView tv = new TextView(context);
+        tv.setText("Carro "+(position +1));
+        ll.addView(tv);
+
+        Log.i("Script", "Build: Carro: "+(position + 1));
+
+        return(tv);
     }
 
     @Override
@@ -91,4 +93,5 @@ public class ViewPagerAdapter extends PagerAdapter {
 //        Log.d("Script", "Destroy foto "+(position+1));
 //        container.removeView((View)object);
 //    }
+
 }
