@@ -72,13 +72,13 @@ public class ViewPagerAdapter extends PagerAdapter {
         Picasso.get().load(API_URL+imagens.get(position)).into(iv);
         ll.addView(iv);
 
-        TextView tv = new TextView(context);
-        tv.setText("Carro "+(position +1));
-        ll.addView(tv);
+//        TextView tv = new TextView(context);
+//        tv.setText("Carro "+(position +1));
+//        ll.addView(tv);
 
         Log.i("Script", "Build: Carro: "+(position + 1));
 
-        return(tv);
+        return(iv);
     }
 
     @Override

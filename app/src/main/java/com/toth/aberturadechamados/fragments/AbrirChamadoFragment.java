@@ -56,7 +56,7 @@ public class AbrirChamadoFragment extends Fragment {
     StringBuffer nomeImagem = new StringBuffer();
     ImageView img_1, img_2, img_3;
     ImageView[] vetorImg;
-    String pathFoto1, getPathFoto2, getPathFoto3;
+    String pathFoto1, pathFoto2, pathFoto3;
     String[] listaPaths;
     int posicaoImg = 0;
 
@@ -178,14 +178,20 @@ public class AbrirChamadoFragment extends Fragment {
                         case 0:
                             foto1 = BitmapFactory.decodeStream(inp);
                             img_1.setImageBitmap(foto1);
+                            pathFoto1 = API_URL+"img/"+nomeImagem.toString();
+                            //Toast.makeText(getActivity(), pathFoto1, Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
                             foto2 = BitmapFactory.decodeStream(inp);
                             img_2.setImageBitmap(foto2);
+                            pathFoto2 = API_URL+"img/"+nomeImagem.toString();
+                            //Toast.makeText(getActivity(), pathFoto2, Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
                             foto3 = BitmapFactory.decodeStream(inp);
                             img_3.setImageBitmap(foto3);
+                            pathFoto3 = API_URL+"img/"+nomeImagem.toString();
+                            //Toast.makeText(getActivity(), pathFoto3, Toast.LENGTH_SHORT).show();
                             break;
                         default:
 //                        default
@@ -194,9 +200,7 @@ public class AbrirChamadoFragment extends Fragment {
                     String url = API_URL+"upload_imagem.php";
                     nomeImagem.setLength(0); //limpando o atringBuffer
                     new UploadFotoApi(getActivity(), nomeImagem, url).execute(foto1);
-                    pathFoto1 = API_URL+"img/";
-                    Toast.makeText(getActivity(), pathFoto1, Toast.LENGTH_SHORT).show();
-                    listaPaths = new String[]{pathFoto1, getPathFoto2, getPathFoto3};
+//                    listaPaths = new String[]{pathFoto1, pathFoto2, pathFoto3};
                 } catch (Exception ex){
                     ex.printStackTrace();
                 }
@@ -227,7 +231,7 @@ public class AbrirChamadoFragment extends Fragment {
 //        }
     }
 
-    //    método que valida se os campos estão vazios
+//    método que valida se os campos estão vazios
     private boolean ValidarCampos(){
         EditText campoComFoco = null;
         boolean isValid = true;
@@ -258,6 +262,15 @@ public class AbrirChamadoFragment extends Fragment {
         if(campoComFoco != null){
             campoComFoco.requestFocus();
         }
+//        if (pathFoto1 == null){
+//            pathFoto1 = "";
+//        }
+//        if (pathFoto2 == null){
+//            pathFoto2 = "";
+//        }
+//        if (pathFoto3 == null){
+//            pathFoto3 = "";
+//        }
         return isValid;
     }
 
@@ -268,7 +281,10 @@ public class AbrirChamadoFragment extends Fragment {
             titulo = txt_titulo.getText().toString();
             mensagem = txt_mensagem.getText().toString();
             local = txt_local.getText().toString();
-            String caminhoFoto = "img/"+nomeImagem.toString();
+
+//            String caminhoFoto1 = "img/"+nomeImagem.toString();
+//            String caminhoFoto2 = "img/"+nomeImagem.toString();
+//            String caminhoFoto3 = "img/"+nomeImagem.toString();
 
 //            pegando o idUsuario que está gravado em um tipo de 'sessão'
             idUsuario = Integer.parseInt(preferencesConfig.readUsuarioId());
@@ -285,7 +301,7 @@ public class AbrirChamadoFragment extends Fragment {
 
 //            chamadno o arquivo da api, passando a url
             String url = API_URL + "inserir.php?";
-            String parametros = "titulo="+titulo+"&mensagem="+mensagem+"&local="+local+"&status=0&idUsuario="+idUsuario+"&imagem="+caminhoFoto;
+            String parametros = "titulo="+titulo+"&mensagem="+mensagem+"&local="+local+"&status=0&idUsuario="+idUsuario+"&imagem1="+pathFoto1+"&imagem2="+pathFoto2+"&imagem3="+pathFoto3;
             url += parametros;
             new InserirChamadoApi(url, getActivity()).execute();
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new PendentesFragment()).commit();

@@ -2,11 +2,13 @@ package com.toth.aberturadechamados.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -53,6 +55,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
     AdapterImg viewPagerAdapter;
     String[] arrayImagens;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +67,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         LinearLayout.LayoutParams lp =  new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         viewPager.setLayoutParams(lp);
-        viewPager.setAdapter(new AdapterImg(this, imagensFotos));
+//        viewPager.setAdapter(new AdapterImg(this, imagensFotos));
 
 //        pegando o endereço padrão da api
         API_URL = getString(R.string.api_key);
@@ -174,6 +177,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                             Chamado ch = new Chamado();
                             ch.setImagem(fotoJson.getString("caminhoFoto"));
                             arrayImagens = new String[]{fotoJson.getString("caminhoFoto")};
+//                            Log.d("Imagens", arrayImagens+"");
 
                         }
                     }
@@ -199,7 +203,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                 }
 //                adicionando toda a lista no adapter
                 adapter.addAll(listObsChamado);
-//                viewPagerAdapter = new AdapterImg(VisualizarChamadoActivity.this, arrayImagens);
+                viewPagerAdapter = new AdapterImg(getApplicationContext(), "img/5be97b5501760.jpg");
             }
         }.execute();
 

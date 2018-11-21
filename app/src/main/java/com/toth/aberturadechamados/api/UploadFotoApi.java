@@ -52,6 +52,6 @@ public class UploadFotoApi extends AsyncTask<Bitmap, Void, String> {
         progress.dismiss();
         nomeImagem.append(s);
 
-        Log.d("doInBackground", s);
+        //Log.d("doInBackground", s);
     }
 }
