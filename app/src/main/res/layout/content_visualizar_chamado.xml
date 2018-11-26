@@ -128,16 +128,26 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                android:id="@+id/linear_img">
+                android:id="@+id/linear_img"
+                android:onClick="AbrirFotos"
+                android:textAlignment="center"
+                android:background="@color/cinza404">
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/viewPager"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </android.support.v4.view.ViewPager>
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Visualizar Evidências..."
+                    android:textAlignment="center" />
+
+                <!--<android.support.v4.view.ViewPager-->
+                    <!--android:id="@+id/viewPager"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
+                <!--</android.support.v4.view.ViewPager>-->
 
             </LinearLayout>
 

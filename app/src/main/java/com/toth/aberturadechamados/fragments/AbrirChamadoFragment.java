@@ -52,13 +52,12 @@ public class AbrirChamadoFragment extends Fragment {
     final int REQUEST_PERMISSION = 101;
     final int SELECT_PICTURE = 1;
 
-    Bitmap foto1, foto2, foto3;
+    Bitmap foto1, foto2, foto3, foto;
     StringBuffer nomeImagem = new StringBuffer();
     ImageView img_1, img_2, img_3;
-    ImageView[] vetorImg;
     String pathFoto1, pathFoto2, pathFoto3;
-    String[] listaPaths;
     int posicaoImg = 0;
+//    String[] listaPaths;
 
     View.OnClickListener clickImageView = new View.OnClickListener(){
         @Override
@@ -163,12 +162,9 @@ public class AbrirChamadoFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
         if (requestCode == SELECT_PICTURE ){
-
             if(resultCode == getActivity().RESULT_OK){
                 //selecionou alguma coisa
-
                 try {
 //                    pegando a img em binario
                     InputStream inp = getActivity().getContentResolver()
@@ -178,57 +174,47 @@ public class AbrirChamadoFragment extends Fragment {
                         case 0:
                             foto1 = BitmapFactory.decodeStream(inp);
                             img_1.setImageBitmap(foto1);
-                            pathFoto1 = API_URL+"img/"+nomeImagem.toString();
-                            //Toast.makeText(getActivity(), pathFoto1, Toast.LENGTH_SHORT).show();
+                            foto = foto1;
+//                            pathFoto1 = API_URL+"img/"+nomeImagem.toString();
                             break;
                         case 1:
                             foto2 = BitmapFactory.decodeStream(inp);
                             img_2.setImageBitmap(foto2);
-                            pathFoto2 = API_URL+"img/"+nomeImagem.toString();
-                            //Toast.makeText(getActivity(), pathFoto2, Toast.LENGTH_SHORT).show();
+                            foto = foto2;
+//                            pathFoto2 = API_URL+"img/"+nomeImagem.toString();
                             break;
                         case 2:
                             foto3 = BitmapFactory.decodeStream(inp);
                             img_3.setImageBitmap(foto3);
-                            pathFoto3 = API_URL+"img/"+nomeImagem.toString();
-                            //Toast.makeText(getActivity(), pathFoto3, Toast.LENGTH_SHORT).show();
+                            foto = foto3;
+//                            pathFoto3 = API_URL+"img/"+nomeImagem.toString();
                             break;
                         default:
 //                        default
                             break;
                     }
+
                     String url = API_URL+"upload_imagem.php";
                     nomeImagem.setLength(0); //limpando o atringBuffer
-                    new UploadFotoApi(getActivity(), nomeImagem, url).execute(foto1);
+                    new UploadFotoApi(getActivity(), nomeImagem, url).execute(foto);
+                    switch (posicaoImg){
+                        case 0:
+                            pathFoto1 = API_URL+"img/"+nomeImagem.toString();
+                            break;
+                        case 1:
+                            pathFoto2 = API_URL+"img/"+nomeImagem.toString();
+                            break;
+                        case 2:
+                            pathFoto3 = API_URL+"img/"+nomeImagem.toString();
+                            break;
+                    }
+
 //                    listaPaths = new String[]{pathFoto1, pathFoto2, pathFoto3};
                 } catch (Exception ex){
                     ex.printStackTrace();
                 }
             }
         }
-
-//        if (resultCode ==  getActivity().RESULT_OK){
-//            if (requestCode == SELECT_PICTURE){
-//                Uri imgUri = data.getData();
-//                String realPath = ImageFilePath.getPath(getActivity(), data.getData());
-//                Picasso.get().load(new File(realPath)).into(vetorImg[posicaoImg]);
-//                switch (posicaoImg){
-//                    case 0:
-//                        pathFoto1 = realPath;
-//                        break;
-//                    case 1:
-//                        getPathFoto2 = realPath;
-//                        break;
-//                    case 2:
-//                        getPathFoto3 = realPath;
-//                        break;
-//                    default:
-////                        default
-//                        break;
-//                }
-//                listaPaths = new String[]{pathFoto1, getPathFoto2, getPathFoto3};
-//            }
-//        }
     }
 
 //    método que valida se os campos estão vazios
@@ -262,15 +248,15 @@ public class AbrirChamadoFragment extends Fragment {
         if(campoComFoco != null){
             campoComFoco.requestFocus();
         }
-//        if (pathFoto1 == null){
-//            pathFoto1 = "";
-//        }
-//        if (pathFoto2 == null){
-//            pathFoto2 = "";
-//        }
-//        if (pathFoto3 == null){
-//            pathFoto3 = "";
-//        }
+        if (pathFoto1 == null){
+            pathFoto1 = "";
+        }
+        if (pathFoto2 == null){
+            pathFoto2 = "";
+        }
+        if (pathFoto3 == null){
+            pathFoto3 = "";
+        }
         return isValid;
     }
 
@@ -282,9 +268,9 @@ public class AbrirChamadoFragment extends Fragment {
             mensagem = txt_mensagem.getText().toString();
             local = txt_local.getText().toString();
 
-//            String caminhoFoto1 = "img/"+nomeImagem.toString();
-//            String caminhoFoto2 = "img/"+nomeImagem.toString();
-//            String caminhoFoto3 = "img/"+nomeImagem.toString();
+//            String caminhoFoto1 = listaPaths[0];
+//            String caminhoFoto2 = listaPaths[1];
+//            String caminhoFoto3 = listaPaths[2];
 
 //            pegando o idUsuario que está gravado em um tipo de 'sessão'
             idUsuario = Integer.parseInt(preferencesConfig.readUsuarioId());

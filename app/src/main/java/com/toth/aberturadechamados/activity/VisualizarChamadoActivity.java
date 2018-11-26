@@ -1,8 +1,6 @@
 package com.toth.aberturadechamados.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -17,12 +15,10 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.toth.aberturadechamados.R;
 import com.toth.aberturadechamados.adapter.AdapterImg;
 import com.toth.aberturadechamados.adapter.ObservacaoAdapter;
-import com.toth.aberturadechamados.adapter.ViewPagerAdapter;
 import com.toth.aberturadechamados.model.Chamado;
 import com.toth.aberturadechamados.model.HttpConnection;
 import com.toth.aberturadechamados.model.SharedPreferencesConfig;
@@ -35,10 +31,9 @@ import java.util.ArrayList;
 
 public class VisualizarChamadoActivity extends AppCompatActivity {
 
-    private int[] imagensFotos = {R.drawable.logo_apesp, R.drawable.aaa, R.drawable.logo, R.drawable.favicon};
-
     //    declarando os elementos
-    TextView lbl_visualizar_titulo_chamado, lbl_visualizar_mensagem, lbl_visualizar_data_chamado, lbl_visualizar_status_chamado, lbl_visualizar_local;
+    TextView lbl_visualizar_titulo_chamado, lbl_visualizar_mensagem, lbl_visualizar_data_chamado,
+            lbl_visualizar_status_chamado, lbl_visualizar_local;
     Integer idChamado;
     String titulo, mensagem, data, nivelUsuario, API_URL, local;
     Integer status;
@@ -46,14 +41,11 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
     ObservacaoAdapter adapter;
     ListView list_view_obs;
     LinearLayout linear_obs, linear_img;
-    ScrollView scroll;
-    ViewPager viewPager;
     View rootview;
     EditText txt_observacao;
     Switch sw_status;
     LayoutInflater layoutInflater;
-    AdapterImg viewPagerAdapter;
-    String[] arrayImagens;
+    ArrayList<String> arrayImagens = new ArrayList<>();
 
 
     @Override
@@ -63,11 +55,6 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        viewPager = findViewById(R.id.viewPager);
-        LinearLayout.LayoutParams lp =  new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        viewPager.setLayoutParams(lp);
-//        viewPager.setAdapter(new AdapterImg(this, imagensFotos));
 
 //        pegando o endereço padrão da api
         API_URL = getString(R.string.api_key);
@@ -101,10 +88,6 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
 
 //        resgatando os parametros passados pelo intent
         idChamado = intent.getIntExtra("idChamado", 0);
-
-//        viewPager = new ViewPager(this);
-//        viewPagerAdapter = new ViewPagerAdapter(this, imagensFotos);
-//        viewPager.setAdapter(new ViewPagerAdapter(this, imagensFotos));
 
     }
 
@@ -176,8 +159,9 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                             JSONObject fotoJson = fotosArray.getJSONObject(i);
                             Chamado ch = new Chamado();
                             ch.setImagem(fotoJson.getString("caminhoFoto"));
-                            arrayImagens = new String[]{fotoJson.getString("caminhoFoto")};
-//                            Log.d("Imagens", arrayImagens+"");
+//                            arrayImagens = new String[]{fotoJson.getString("caminhoFoto")};
+                            arrayImagens.add(fotoJson.getString("caminhoFoto"));
+                            Log.d("Imagens", arrayImagens.get(0));
 
                         }
                     }
@@ -203,7 +187,6 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                 }
 //                adicionando toda a lista no adapter
                 adapter.addAll(listObsChamado);
-                viewPagerAdapter = new AdapterImg(getApplicationContext(), "img/5be97b5501760.jpg");
             }
         }.execute();
 
@@ -226,5 +209,11 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         String dataCerta = dataConvertida+" "+horaConvertida;
 
         return dataCerta;
+    }
+
+    public void AbrirFotos(View view) {
+        Intent intent = new Intent(this, FotosActivity.class);
+        intent.putStringArrayListExtra("imgs", arrayImagens);
+        startActivity(intent);
     }
 }

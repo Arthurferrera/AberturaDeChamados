@@ -13,101 +13,70 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.toth.aberturadechamados.R;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class AdapterImg extends PagerAdapter {
 
     private Context context;
-    private LayoutInflater layoutInflater;
-//    private int[] imgs;
-    private String imgs;
-    private String API_URL;
+    private ArrayList<String> imgs;
+//    private int[] imgs = new int[]{R.drawable.logo_apesp, R.drawable.logo, R.drawable.favicon};;
 
-    public AdapterImg(Context context, String imgs){
+    public AdapterImg(Context context, ArrayList<String> imgs){
         this.context = context;
         this.imgs = imgs;
     }
 
     @Override
     public int getCount() {
-        return Integer.parseInt(imgs);
+        return imgs.size();
     }
 
     @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object obj) {
-        return view == obj;
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        return view == object;
     }
 
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
-        API_URL = context.getString(R.string.api_key);
-        String image_url = "http://resoltecksolucoes.com.br/wp-content/uploads/2018/02/cropped-logomarca-01-teste.png";
+        ImageView imageView = new ImageView(context);
+        imageView.setScaleType(ImageView.ScaleType.CENTER);
+//        imageView.setImageResource(imgs[position]);
 
-                layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.viewpager_layout, null);
-        ImageView imageView = view.findViewById(R.id.imageViewPager);
+        String imagens = imgs.get(position);
 
-        String url = "http://resoltecksolucoes.com.br/wp-content/uploads/2018/02/cropped-logomarca-01-teste.png";
+//        Picasso.get().load(imgs[position]).resize(650, 950).onlyScaleDown()
+//                .error(R.drawable.aaa).into(imageView);
 
-        Picasso.get().load(url).resize(70, 70).centerCrop().into(imageView);
+//        REDIMENSIONA A IMAGEM, MAS PERDE A PROPORÇÃO
+//        Picasso.get().load(imgs[position]).resize(650, 950).into(imageView);
 
-        ViewPager vp = (ViewPager) container;
-        vp.addView(view, 0);
-        return view;
+//        A IMAGEM SÓ SERÁ REDIMENSIONADA SE FOR MAIOR QUE O TAMANHO SELECIONADO
+//        Picasso.get().load(imgs[position]).resize(650, 950).onlyScaleDown().into(imageView);
 
-//        LinearLayout ll = new LinearLayout(context);
-//        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-//        ll.setOrientation(LinearLayout.VERTICAL);
-//        ll.setLayoutParams(lp);
-//        container.addView(ll);
-//
-//        ImageView iv = new ImageView(context);
-////        iv.setImageResource(imgs[position]);
-//
-////        Obter as dimensões do componente na tela
-//        File file = new File(API_URL+imgs[position]);
-//        int targetW = iv.getWidth();
-//        int targetH = iv.getHeight();
-//        Log.d("Imagens", file+"");
-//
-////        Obter as dimensões do bitmap
-//        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-//
-//        bmOptions.inJustDecodeBounds = true;
-//
-//        BitmapFactory.decodeFile(file.getAbsolutePath(), bmOptions);
-//
-//        int photoW = bmOptions.outWidth;
-//        int photoH = bmOptions.outHeight;
-//
-////        Determinar o quanto é necessario diminuir a imagem
-//        int scaleFactor = 1;
-//        if ((targetW > 0) || (targetH > 0)) {
-//            scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-//        }
-//
-////        Decodifica o arquivo de imagem em um Bitmap dimensionando para preencher o
-////        ImagemView
-//        bmOptions.inJustDecodeBounds = false;
-//        bmOptions.inSampleSize = scaleFactor;
-//
-//        Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), bmOptions);
-//
-//        Picasso.get().load(API_URL+imgs[position]).error(R.drawable.favicon).resize(10,10).centerCrop().into(iv);
-////        iv.setImageBitmap();
-//        ll.addView(iv);
-//
-//        return(ll);
+//        PREENCHE TODA A IMAGEVIEW QUE DESEJA, MAS CORTA OS EXCESSOS
+//        Picasso.get().load(imgs[position]).resize(650, 950).centerCrop().into(imageView);
+
+//        DIMENSIONA A IMAGEM COM OS TAMANHOS SOLCITADOS OU MENORES QUE O IMAGEVIEW, MANTENDO A PROPORÇÃO DA IMAGEM
+        Picasso.get().load(imagens).resize(700, 1000).error(R.drawable.cloud_error).centerInside().into(imageView);
+
+//        DIMENSIONA A IMAGEM COM OS TAMANHOS SOLCITADOS OU MENORES QUE O IMAGEVIEW, MANTENDO A PROPORÇÃO DA IMAGEM
+//        Picasso.get().load(imgs[position]).fit().error(R.drawable.favicon).into(imageView);
+
+
+        container.addView(imageView,0);
+        return imageView;
     }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((View) object);
+        container.removeView((ImageView) object);
     }
 }

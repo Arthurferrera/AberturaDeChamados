@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Base64;
-import android.util.Log;
 
 import com.toth.aberturadechamados.model.HttpConnection;
 import com.toth.aberturadechamados.model.ImageHelper;
@@ -51,7 +50,5 @@ public class UploadFotoApi extends AsyncTask<Bitmap, Void, String> {
         super.onPostExecute(s);
         progress.dismiss();
         nomeImagem.append(s);
-
-        //Log.d("doInBackground", s);
     }
 }
