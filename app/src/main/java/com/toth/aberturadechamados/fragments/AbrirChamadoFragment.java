@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,24 +42,22 @@ import java.util.Calendar;
 public class AbrirChamadoFragment extends Fragment {
 
 //    declarando atributos, elemenntos...
+    StringBuffer nomeImagem = new StringBuffer();
+    private SharedPreferencesConfig preferencesConfig;
     EditText txt_titulo, txt_mensagem, txt_local;
     Button btn_abrir_chamado;
     String titulo,mensagem,local;
     Boolean status;
     String dataAberturaChamado, API_URL;
     int idUsuario;
-    private SharedPreferencesConfig preferencesConfig;
-
     final int REQUEST_PERMISSION = 101;
     final int SELECT_PICTURE = 1;
-
     Bitmap foto1, foto2, foto3, foto;
-    StringBuffer nomeImagem = new StringBuffer();
     ImageView img_1, img_2, img_3;
     String pathFoto1, pathFoto2, pathFoto3;
     int posicaoImg = 0;
-//    String[] listaPaths;
 
+//    click que abre a galeria e retorna a imagem selecionada
     View.OnClickListener clickImageView = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
@@ -96,6 +95,7 @@ public class AbrirChamadoFragment extends Fragment {
         img_2 = view.findViewById(R.id.img_2);
         img_3 = view.findViewById(R.id.img_3);
 
+//        setando o click das ImageView's
         img_1.setOnClickListener(clickImageView);
         img_2.setOnClickListener(clickImageView);
         img_3.setOnClickListener(clickImageView);
@@ -114,6 +114,7 @@ public class AbrirChamadoFragment extends Fragment {
         return view;
     }
 
+//    método que requisita a permissão para acessar a galeria
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -127,12 +128,14 @@ public class AbrirChamadoFragment extends Fragment {
         }
     }
 
+//    solicita as permissões necessárias
     void solicitarPermissoes(){
         String[] permissoes = new String[1];
         permissoes[0] = Manifest.permission.READ_EXTERNAL_STORAGE;
         ActivityCompat.requestPermissions(getActivity(), permissoes, REQUEST_PERMISSION);
     }
 
+//    verifica se as permissões foram dadas
     boolean verificarPermissoes(){
         if (ContextCompat.checkSelfPermission(getContext(),
                 android.Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -142,6 +145,7 @@ public class AbrirChamadoFragment extends Fragment {
         return true;
     }
 
+//    método que captura a imagem
     private void capturarImagem(){
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -158,13 +162,15 @@ public class AbrirChamadoFragment extends Fragment {
 //        }
     }
 
+
+//    método que manipula o retorno da GALERIA/CAMERA
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == SELECT_PICTURE ){
             if(resultCode == getActivity().RESULT_OK){
-                //selecionou alguma coisa
+//                selecionou alguma coisa
                 try {
 //                    pegando a img em binario
                     InputStream inp = getActivity().getContentResolver()
@@ -175,19 +181,16 @@ public class AbrirChamadoFragment extends Fragment {
                             foto1 = BitmapFactory.decodeStream(inp);
                             img_1.setImageBitmap(foto1);
                             foto = foto1;
-//                            pathFoto1 = API_URL+"img/"+nomeImagem.toString();
                             break;
                         case 1:
                             foto2 = BitmapFactory.decodeStream(inp);
                             img_2.setImageBitmap(foto2);
                             foto = foto2;
-//                            pathFoto2 = API_URL+"img/"+nomeImagem.toString();
                             break;
                         case 2:
                             foto3 = BitmapFactory.decodeStream(inp);
                             img_3.setImageBitmap(foto3);
                             foto = foto3;
-//                            pathFoto3 = API_URL+"img/"+nomeImagem.toString();
                             break;
                         default:
 //                        default
@@ -197,19 +200,18 @@ public class AbrirChamadoFragment extends Fragment {
                     String url = API_URL+"upload_imagem.php";
                     nomeImagem.setLength(0); //limpando o atringBuffer
                     new UploadFotoApi(getActivity(), nomeImagem, url).execute(foto);
+                    Log.d("onActivityResult", String.valueOf(foto));
                     switch (posicaoImg){
                         case 0:
-                            pathFoto1 = API_URL+"img/"+nomeImagem.toString();
+                            pathFoto1 = "APIChamados/img/"+nomeImagem.toString();
                             break;
                         case 1:
-                            pathFoto2 = API_URL+"img/"+nomeImagem.toString();
+                            pathFoto2 = "APIChamados/img/"+nomeImagem.toString();
                             break;
                         case 2:
-                            pathFoto3 = API_URL+"img/"+nomeImagem.toString();
+                            pathFoto3 = "APIChamados/img/"+nomeImagem.toString();
                             break;
                     }
-
-//                    listaPaths = new String[]{pathFoto1, pathFoto2, pathFoto3};
                 } catch (Exception ex){
                     ex.printStackTrace();
                 }

@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,12 +47,13 @@ public class VisualizarAdmActivity extends AppCompatActivity {
     Integer idChamado, status;
     FloatingActionButton fab;
     EditText txt_observacao;
-    LinearLayout linear_obs;
+    LinearLayout linear_obs, linear_img;
     ListView list_view_obs;
     ScrollView scrollView;
     Boolean statusChamado;
     Switch sw_status;
     View rootview;
+    ArrayList<String> arrayImagens = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,7 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         lbl_solicitante = findViewById(R.id.lbl_solicitante);
         lbl_empresa = findViewById(R.id.lbl_empresa);
         lbl_cnpj = findViewById(R.id.lbl_cnpj);
+        linear_img = findViewById(R.id.linear_img);
         lbl_local_visualizar_adm = findViewById(R.id.lbl_local_visualizar_adm);
 
 //        criando e setando o adapter na lista
@@ -197,6 +200,22 @@ public class VisualizarAdmActivity extends AppCompatActivity {
                         }
                     }
 
+//                    pegando as fotos de um chamado
+                    JSONArray fotosArray = objeto.getJSONArray("fotos");
+                    if (fotosArray.length() == 0 || fotosArray.equals(null)){
+                        linear_img.setVisibility(View.GONE);
+                    } else {
+                        for (int i =0; i < fotosArray.length(); i++){
+                            JSONObject fotoJson = fotosArray.getJSONObject(i);
+                            Chamado ch = new Chamado();
+                            ch.setImagem(fotoJson.getString("caminhoFoto"));
+//                            arrayImagens = new String[]{fotoJson.getString("caminhoFoto")};
+                            arrayImagens.add(fotoJson.getString("caminhoFoto"));
+                            Log.d("Imagens", arrayImagens.get(0));
+
+                        }
+                    }
+
 //                    setando os editText
                     lbl_visualizar_titulo_chamado.setText(titulo);
                     lbl_visualizar_mensagem.setText(mensagem);
@@ -285,4 +304,10 @@ public class VisualizarAdmActivity extends AppCompatActivity {
         txt_observacao.setText("");
         sw_status.setChecked(false);
     }
+    public void AbrirFotos(View view) {
+        Intent intent = new Intent(this, FotosActivity.class);
+        intent.putStringArrayListExtra("imgs", arrayImagens);
+        startActivity(intent);
+    }
+
 }

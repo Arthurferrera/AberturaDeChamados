@@ -48,4 +48,11 @@ public class FotosActivity extends AppCompatActivity {
 //            }
 //        });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        viewPager.setSaveEnabled(false);
+        finish();
+    }
 }

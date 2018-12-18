@@ -10,12 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.toth.aberturadechamados.R;
 import com.toth.aberturadechamados.adapter.AdapterImg;
 import com.toth.aberturadechamados.adapter.ObservacaoAdapter;
@@ -46,6 +48,7 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
     Switch sw_status;
     LayoutInflater layoutInflater;
     ArrayList<String> arrayImagens = new ArrayList<>();
+    ImageView img_ver1, img_ver2, img_ver3;
 
 
     @Override
@@ -74,6 +77,9 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
         linear_obs = findViewById(R.id.linear_obs);
         linear_img = findViewById(R.id.linear_img);
         lbl_visualizar_local = findViewById(R.id.lbl_visualizar_local);
+        img_ver1 = findViewById(R.id.img_ver1);
+        img_ver2 = findViewById(R.id.img_ver2);
+        img_ver3 = findViewById(R.id.img_ver3);
 
 //        criando e setando o adapter na lista
         adapter = new ObservacaoAdapter(this);
@@ -88,7 +94,6 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
 
 //        resgatando os parametros passados pelo intent
         idChamado = intent.getIntExtra("idChamado", 0);
-
     }
 
     @Override
@@ -162,7 +167,15 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
 //                            arrayImagens = new String[]{fotoJson.getString("caminhoFoto")};
                             arrayImagens.add(fotoJson.getString("caminhoFoto"));
                             Log.d("Imagens", arrayImagens.get(0));
-
+                            ImageView imgview = null;
+                            if (i == 0){
+                                imgview = img_ver1;
+                            } else if (i == 1){
+                                imgview = img_ver2;
+                            } else if (i == 2){
+                                imgview = img_ver3;
+                            }
+                            Picasso.get().load("http://192.168.137.1/WebChamadosServ//"+arrayImagens.get(i)).resize(100, 100).error(R.drawable.cloud_error).centerInside().into(imgview);
                         }
                     }
 
@@ -189,7 +202,6 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
                 adapter.addAll(listObsChamado);
             }
         }.execute();
-
     }
 
 //    método que converte a data para o padrão brasileiro
@@ -207,7 +219,6 @@ public class VisualizarChamadoActivity extends AppCompatActivity {
 
 //       concatenando data e hora para ser mostrado
         String dataCerta = dataConvertida+" "+horaConvertida;
-
         return dataCerta;
     }
 

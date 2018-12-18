@@ -205,6 +205,31 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linear_img"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza404"
+        android:onClick="AbrirFotos"
+        android:orientation="horizontal"
+        android:textAlignment="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="Visualizar Evidências..."
+            android:textAlignment="center" />
+
+        <!--<android.support.v4.view.ViewPager-->
+        <!--android:id="@+id/viewPager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--</android.support.v4.view.ViewPager>-->
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linear_obs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -50,8 +50,9 @@ public class AdapterImg extends PagerAdapter {
         imageView.setScaleType(ImageView.ScaleType.CENTER);
 //        imageView.setImageResource(imgs[position]);
 
-        String imagens = imgs.get(position);
 
+        String imagens = imgs.get(position);
+        String url = "http://192.168.137.1/WebChamadosServ/"+imagens;
 //        Picasso.get().load(imgs[position]).resize(650, 950).onlyScaleDown()
 //                .error(R.drawable.aaa).into(imageView);
 
@@ -65,7 +66,7 @@ public class AdapterImg extends PagerAdapter {
 //        Picasso.get().load(imgs[position]).resize(650, 950).centerCrop().into(imageView);
 
 //        DIMENSIONA A IMAGEM COM OS TAMANHOS SOLCITADOS OU MENORES QUE O IMAGEVIEW, MANTENDO A PROPORÇÃO DA IMAGEM
-        Picasso.get().load(imagens).resize(700, 1000).error(R.drawable.cloud_error).centerInside().into(imageView);
+        Picasso.get().load(url).resize(700, 1000).error(R.drawable.cloud_error).centerInside().into(imageView);
 
 //        DIMENSIONA A IMAGEM COM OS TAMANHOS SOLCITADOS OU MENORES QUE O IMAGEVIEW, MANTENDO A PROPORÇÃO DA IMAGEM
 //        Picasso.get().load(imgs[position]).fit().error(R.drawable.favicon).into(imageView);
